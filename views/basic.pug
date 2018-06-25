@@ -1,0 +1,96 @@
+doctype html
+html
+    head
+        title PanamaTrips!
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1")
+        link(rel="stylesheet", href="/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/css/basic.css")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+        block header
+    body
+        div(class="d-flex flex-column")
+            nav(class="navbar navbar-expand-lg navbar-dark shadow barra")
+                .container
+                    a(href="#", class="navbar-brand")
+                        img(src="/css/Logo-Pepsi-png.png", alt="Logo", width="40px",  height="50px") 
+                        span.ml-1 PanamaTrips
+                    button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#barra", aria-controls="barra", aria-expanded="false", aria-label="Toggle navigation")
+                        span(class="navbar-toggler-icon")
+                    div(class="collapse navbar-collapse", id="barra")
+                        ul(class="navbar-nav mr-auto")
+                            li(class="nav-item active")
+                                a(href="#", class="nav-link")
+                                    i(class="fa fa-home") 
+                                        span.ml-1 Inicio      
+                            li(class="nav-item dropdown")
+                                a(href="#", class="nav-link dropdown-toggle", id="navbarDropdownMenuLink", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                                    i(class="fa fa-tag") 
+                                        span.ml-1 Ofertas
+                                div(class='dropdown-menu', aria-labelledby="navbarDropdownMenuLink")
+                                    a(class='dropdown-item', href="/ofertas") Todas las provincias
+                                    div.dropdown-divider
+                                    a(class='dropdown-item', href='#') Bocas del Toro        
+                                    a(class='dropdown-item', href='#') Coclé        
+                                    a(class='dropdown-item', href='#') Colón        
+                                    a(class='dropdown-item', href='#') Chiriquí        
+                                    a(class='dropdown-item', href='#') Darién      
+                                    a(class='dropdown-item', href='#') Herrera        
+                                    a(class='dropdown-item', href='#') Los Santos       
+                                    a(class='dropdown-item', href='#') Panamá        
+                                    a(class='dropdown-item', href='#') Veraguas        
+                                    a(class='dropdown-item', href='#') Comarcas
+                            li(class="nav-item")
+                                a(href="#", class="nav-link")
+                                    i(class="fa fa-plane") 
+                                        span.ml-1 Actividades
+                            li(class="nav-item")
+                                a(href="#", class="nav-link")
+                                    i(class="fa fa-users") 
+                                        span.ml-1 Sobre Nosotros
+                        a(href='#', class="btn btn-primary rounded") Iniciar Sesión
+                        a(href='/registro', class="btn btn-info ml-2 rounded") Registrate
+
+            div(class="container-fluid no-padding")
+            block content
+
+            footer(class="page-footer pie font-small pt-4")
+                div(class="container text-center text-md-left")
+                    .row
+                        div(class="col-md-6 mt-md-0 mt-3")
+                            h5.text-uppercase PanamaTrips!
+                            p 
+                            |Direccion de las oficinas: UTP <br>
+                            |Correo: panamatrips@gob.pa <br>
+                            |Telefonos: 230-0000 <br>
+                        hr(class="clearfix w-100 d-md-none pb-3")
+                        div(class="col-md-6 mb-md-0 mb-3")
+                            h5.text-uppercase Empresa
+                            ul.list
+                                li 
+                                    a(href="#") Terminos y Condiciones
+                                li 
+                                    a(href="#") Sobre Nosotros
+                .container
+                    div(class="row mt-4")
+                        div(class="col-sm-12")
+                            div(class="d-flex justify-content-center")
+                                h5 ¡Nuestras redes sociales!
+                        div(class="col-sm-12")
+                            div(class="mb-4 d-flex justify-content-center")
+                                a(class="fb-ic")
+                                    i(class="fa fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x")
+                                a(class="tw-ic")
+                                    i(class="fa fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x")
+                                a(class="li-ic")
+                                    i(class="fa fa-linkedin fa-lg white-text mr-md-5 mr-3 fa-2x")
+                                a(class="ins-ic")
+                                    i(class="fa fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x") 
+                div(class="footer-copyright text-center py-1")
+                    p @2018 Copyright:
+                    a(href="#") PanamaTrips.com
+                script(src="/jquery/dist/jquery.min.js")
+                script(src="/bootstrap/dist/js/bootstrap.min.js")
+                block scripts 
+

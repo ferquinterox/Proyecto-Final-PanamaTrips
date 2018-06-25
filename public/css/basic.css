@@ -1,0 +1,35 @@
+body {
+    min-height: 100vh; 
+}
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+.flex-grow {
+     flex: 1;
+}
+.barra{
+    background: linear-gradient(to right,  rgb(104, 104, 226), #00d323);
+}
+.barra ul li{
+    font-size: 19px;
+}
+.barra ul li span{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.dropdown-item{
+    background: linear-gradient(to right, #00d323,  rgb(104, 104, 226));
+}
+.dropdown-menu{
+    background: linear-gradient(to right, #00d323,  rgb(104, 104, 226));
+}
+.dropdown-item{
+    color: white;
+}
+.pie{
+    background: linear-gradient(to left, #001d4c, #004c00);
+    color: white;
+}
+.pie h5{
+    font-style: oblique;
+}

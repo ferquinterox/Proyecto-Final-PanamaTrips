@@ -1,0 +1,5 @@
+#Quitamos el directorio de node modules porque eso se instala aparte
+node_modules/
+
+#Quitamos tambien lo de bower
+bower_components/

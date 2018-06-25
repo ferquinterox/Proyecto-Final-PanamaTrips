@@ -1,0 +1,27 @@
+{
+  "name": "express_1",
+  "description": "Esta es una practica de express",
+  "main": "index.js",
+  "authors": [
+    "Fernando"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "git",
+    "express"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1"
+  }
+}

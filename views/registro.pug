@@ -1,0 +1,65 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/registro.css")
+block content
+    .container.mt-3
+        .row
+            div(class='col-sm-12')
+                h3 ¡Se parte de nuestra comunidad de viajeros!
+            div(class='d-none d-lg-block col-lg-4 col-xl-3')
+                img(src="/css/bocas-toro-panama.jpg", alt="logo", height="250", width='100%', class='mb-2 rounded-circle shadow')
+                img(src="/css/bocas-toro-panama.jpg", alt="logo", height="250", width='100%', class='rounded-circle shadow')
+            div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
+                .card.shadow-lg.mb-3
+                    .card-header 
+                        span(class='fa fa-users fa-1x') ¡Registrate y se parte de PanamaTrips!
+                    .card-body
+                        .container
+                            .row 
+                                h3.col-sm-12 PanamaTrips!
+                            form(action="#")
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='nombrePersona') Nombre:
+                                    .col-sm-10
+                                        input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque su nombre')
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='apellidoPersona') Apellido:
+                                    .col-sm-10
+                                        input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque su apellido')
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='provinciaPersona') Provincia:
+                                    .col-sm-10
+                                        select(class='form-control')
+                                            option Bocas del Toro
+                                            option Coclé
+                                            option Colón
+                                            option Chiriquí
+                                            option Darién
+                                            option Herrera
+                                            option Los Santos 
+                                            option Panamá
+                                            option Veraguas
+                                            option Comarcas
+                                            option Prefiero no decir
+                                            option Extranjero
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='correoPersona') Correo:
+                                    .col-sm-10
+                                        input(type='email', class='form-control', placeholder='example@gmail.com')
+                                div(class='form-group row has-feedback') 
+                                    label(class='col-sm-3 col-form-label', for='contrasena') Contraseña:
+                                    .col-sm-8
+                                        input(type='password', id='pass1', class='form-control pass', placeholder='Escriba su contraseña')
+                                    .col-sm-1
+                                        span(toggle="#pass1" class="fa fa-fw fa-eye toggle-password") 
+                                div(class='form-group row has-feedback')
+                                    label(class='col-sm-3 col-form-label', for='contrasena2') Reescriba la contraseña:
+                                    .col-sm-8
+                                        input(type='password', id='pass2', class='form-control pass', placeholder='Reescriba su contraseña')
+                                    .col-sm-1
+                                        span(toggle="#pass2" class="fa fa-fw fa-eye toggle-password") 
+                                div(class='form-group row')
+                                    .col-sm-12.d-flex.justify-content-end
+                                        input(class='btn btn-primary', type='submit', value='Registrarme')
+block scripts 
+    script(src="/js/acciones.js")

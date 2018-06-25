@@ -1,0 +1,5 @@
+.card-header{
+    color: white;
+    background: linear-gradient(to right, #20d63e,  rgb(104, 104, 226));
+    font-weight: 700;
+}
