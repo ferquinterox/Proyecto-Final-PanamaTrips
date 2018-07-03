@@ -1,0 +1,52 @@
+extends basic.pug
+block header
+ link(rel="stylesheet", href="/css/actividades.css")
+block content
+       .container    
+        .row(class="mt-4 info")    
+            div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
+                img(class="img-fluid w-100 ", src="/css/playa-venao-1.jpg.jpg", alt="Imagen descriptiva")
+            div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
+                h4.mt-2 Selina Hotel
+                p Selina esta ubicado en la Provincia de Los Santos especificamente en Pedasí, es ideal para practicar Surf y Sup, tenemos habitaciones compartidas y privadas. 
+                |
+                a.btn.btn-primary.btn-lg.active(href='/pago', role='button', aria-pressed='true') Reserva Ya!
+                p 
+                //Habitaciones
+                table.table
+                 thead.thead-dark
+                  tr
+                    th(scope='col')  Número
+                    th(scope='col')  Habitaciones
+                    th(scope='col')  Precio
+                  tr 
+                    td(scope='row') 001
+                    td Habitacion doble con baño privado
+                    td Desde 60.00$ por persona.
+                  tr
+                    td(scope='row') 002
+                    td Habitacion doble estandar con baño privado.
+                    td Desde 70.00$ por persona.
+                  tr
+                    td(scope='row') 003
+                    td Habitacion doble con baño compartido.
+                    td Desde 55.00$ por persona.  
+                p jajsjdjdsdjs
+                             //Calendario
+                .card-columns
+                 .card.bg-success
+                  .card-body.text-center
+                   label(for='exampleInputEmail1') Fecha de inicio
+                   input#exampleInputEmail1.form-control-sm(type='date')
+                 .card.bg-success
+                  .card-body.text-center
+                   label(for='exampleInputEmail1') Fecha de salida
+                   input#exampleInputEmail1.form-control-sm(type='date')
+                //Incluye
+                .card(style='width: 18rem;')
+                .card-header
+                     |Incluye
+                ul.list-group.list-group-flush
+                   li.list-group-item Wifi Gratis
+                   li.list-group-item Estacionamientos Gratis
+                   li.list-group-item Mascotas   	
