@@ -45,15 +45,22 @@ block content
                                     label(class='col-sm-2 col-form-label', for='correoPersona') Telefonos y Correo:
                                     .col-sm-10
                                         input(type='text', class='form-control', id="contacto")
-                                div(class='form-group row has-feedback') 
-                                    label(class='col-sm-3 col-form-label', for='contrasena') Habitaciones y Precio:
-                                    .col-sm-8
+                                div(class='form-group row') 
+                                    label(class='col-sm-3 col-form-label', for='contrasena') Habitaciones:
+                                    .col-sm-10
                                         textarea#exampleFormControlTextarea1.form-control(rows='3')
-                                    div(class='form-group row has-feedback')
+                                div(class='form-group row has-feedback')
+                                    label(class='col-sm-3 col-form-label', for='contrasena') Precios:
+                                    .col-sm-10
+                                        input(type='text', id='precio', class='form-control pass')
+                                select(class='form-control')
+                                            option Precio por persona
+                                            option Precio por habitación        
+                                div(class='form-group row has-feedback')
                                     label(class='col-sm-3 col-form-label', for='contrasena2') Informacion Adicional:
-                                    .col-sm-8
+                                    .col-sm-10
                                         input(type='text', id='infomas', class='form-control pass')
-                                    div(class='form-group row')
+                                div(class='form-group row')
                                     .col-sm-12.d-flex.justify-content-end
                                         a.btn.btn-primary.btn-lg.active(href='/actividades', role='button', aria-pressed='true') Guardar Datos
 block scripts 
