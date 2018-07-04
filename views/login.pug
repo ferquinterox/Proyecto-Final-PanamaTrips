@@ -1,0 +1,23 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/inicio.css")
+block content
+        h2 LOGIN
+        
+        body
+    form.form-signin.border.rounded(method='post')
+      .text-center.mb-5
+        h1.h3.mb-3.font-weight-normal Iniciar sesi&oacute;n
+      |       
+      .form-label-group
+        input#inputEmail.form-control(type='email', required='', name='email', autofocus='')
+        |         
+        label(for='inputEmail') Correo
+      |       
+      .form-label-group
+        input#inputPassword.form-control(type='password', name='password' , required='')
+        |         
+        label(for='inputPassword') Contrase&ntilde;a
+      |       
+      button.btn.btn-lg.btn-primary.btn-block(type='submit') Iniciar sesi&oacute;n
+      br
