@@ -30,6 +30,11 @@ app.get('/registro', function(req, res){
     res.render("registro");
 });
 
+//Pagina de registro
+app.get('/login', function(req, res){
+    res.render("login");
+});
+
 //separa un puerto
 app.listen(port, function(){
 console.log(`Escuchando en el puerto ${port}...`);
