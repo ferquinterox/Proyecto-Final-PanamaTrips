@@ -20,11 +20,6 @@ app.get("/", (req, res) => {
 });
 //send es una respuesta
 
-//Pagina de login
-app.get('/login', function(req, res){
-    res.render("login");
-});
-
 //Pagina de ofertas
 app.get('/ofertas', function(req, res){
     res.render("ofertas");
