@@ -15,32 +15,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 //crear una ruta para el node
 //Metodo para renderizar el pug js
-app.get("/", (req, res) => {
-    res.render("index");
-});
-//send es una respuesta
 
-//Pagina de actividades
-app.get('/actividades', function(req, res){
-    res.render("actividades");
-});
-//Pagina de agregar actividades
-app.get('/adminActividades', function(req, res){
-    res.render("adminActividades");
-});
-//Pagina de pago 
-app.get('/pago', function(req, res){
-    res.render("pago");
-});
-//Pagina de ofertas
-app.get('/ofertas', function(req, res){
-    res.render("ofertas");
-});
-
-//Pagina de registro
-app.get('/registro', function(req, res){
-    res.render("registro");
-});
+var routes = require('./routes/actividades');
+app.use('/',routes);
 
 //separa un puerto
 app.listen(port, function(){
