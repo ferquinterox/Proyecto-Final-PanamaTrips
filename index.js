@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 const path = require('path');
 //Puerto nuevo llamado NODE_JS_PORT
-const port = process.env.NODE_JS_PORT;
+const port = process.env.NODE_JS_PORT || 4000;
 //Requerimientos del pug
 const pug = require('pug');
 
@@ -34,4 +34,3 @@ app.get('/registro', function(req, res){
 app.listen(port, function(){
 console.log(`Escuchando en el puerto ${port}...`);
 })
-
