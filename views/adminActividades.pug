@@ -1,0 +1,67 @@
+extends basic.pug
+block content
+    .container.mt-3
+        .row
+            div(class='col-sm-12')
+                h3 ¡Agrega tu actividad!
+            div(class='d-none d-lg-block col-lg-4 col-xl-3')                
+                img(src="/css/panamatrips.png", alt="logo", height="250", width='100%', class='rounded-circle shadow')
+            div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
+                .card.shadow-lg.mb-3
+                    .card-header 
+                        span(class='fa fa-users fa-1x') ¡Se parte de Panama Trips!
+                    .card-body
+                        .container
+                            .row 
+                                h3.col-sm-12 PanamaTrips!
+                            form(action="#")
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='nombrePersona') Seleccione las imagenes:
+                                    .col-sm-10
+                                        input#uploadImage(type='file', name='myPhoto', onchange='PreviewImage();')
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='nombrePersona') Nombre de la actividad:
+                                    .col-sm-10
+                                        input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque el nombre')
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='apellidoPersona') Descripcion:
+                                    .col-sm-10
+                                        textarea#exampleFormControlTextarea1.form-control(rows='3')
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='provincias') Provincia:
+                                    .col-sm-10
+                                        select(class='form-control')
+                                            option Bocas del Toro
+                                            option Coclé
+                                            option Colón
+                                            option Chiriquí
+                                            option Darién
+                                            option Herrera
+                                            option Los Santos 
+                                            option Panamá
+                                            option Veraguas
+                                            option Comarcas                            
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='correoPersona') Telefonos y Correo:
+                                    .col-sm-10
+                                        input(type='text', class='form-control', id="contacto")
+                                div(class='form-group row') 
+                                    label(class='col-sm-3 col-form-label', for='contrasena') Habitaciones:
+                                    .col-sm-10
+                                        textarea#exampleFormControlTextarea1.form-control(rows='3')
+                                div(class='form-group row has-feedback')
+                                    label(class='col-sm-3 col-form-label', for='contrasena') Precios:
+                                    .col-sm-10
+                                        input(type='text', id='precio', class='form-control pass')
+                                select(class='form-control')
+                                            option Precio por persona
+                                            option Precio por habitación        
+                                div(class='form-group row has-feedback')
+                                    label(class='col-sm-3 col-form-label', for='contrasena2') Informacion Adicional:
+                                    .col-sm-10
+                                        input(type='text', id='infomas', class='form-control pass')
+                                div(class='form-group row')
+                                    .col-sm-12.d-flex.justify-content-end
+                                        a.btn.btn-primary.btn-lg.active(href='/actividades', role='button', aria-pressed='true') Guardar Datos
+block scripts 
+    script(src="/js/acciones.js")

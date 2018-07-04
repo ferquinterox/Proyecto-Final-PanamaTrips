@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 const path = require('path');
 //Puerto nuevo llamado NODE_JS_PORT
-const port = process.env.NODE_JS_PORT || 4000;
+const port = process.env.NODE_JS_PORT || 3000;
 //Requerimientos del pug
 const pug = require('pug');
 
@@ -20,6 +20,18 @@ app.get("/", (req, res) => {
 });
 //send es una respuesta
 
+//Pagina de actividades
+app.get('/actividades', function(req, res){
+    res.render("actividades");
+});
+//Pagina de agregar actividades
+app.get('/adminActividades', function(req, res){
+    res.render("adminActividades");
+});
+//Pagina de pago 
+app.get('/pago', function(req, res){
+    res.render("pago");
+});
 //Pagina de ofertas
 app.get('/ofertas', function(req, res){
     res.render("ofertas");
