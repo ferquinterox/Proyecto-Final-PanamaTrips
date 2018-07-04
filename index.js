@@ -15,10 +15,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 //crear una ruta para el node
 //Metodo para renderizar el pug js
-app.get("/", (req, res) => {
-    res.render("index");
-});
-//send es una respuesta
 
 //Pagina de actividades
 app.get('/actividades', function(req, res){
