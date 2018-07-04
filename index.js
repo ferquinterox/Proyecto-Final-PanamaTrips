@@ -25,6 +25,11 @@ app.get('/ofertas', function(req, res){
     res.render("ofertas");
 });
 
+//Pagina de login
+app.get('/login', function(req, res){
+    res.render("login");
+});
+
 //Pagina de registro
 app.get('/registro', function(req, res){
     res.render("registro");
