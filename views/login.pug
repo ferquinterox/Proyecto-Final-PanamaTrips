@@ -1,0 +1,42 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/registro.css")
+    link(rel="stylesheet", href="/css/login.css")
+block content
+    .container.mt-3
+        .row
+            div(class='col-sm-12')
+                h3 ¡Se parte de nuestra comunidad de viajeros!
+            div(class='d-none d-lg-block col-lg-4 col-xl-3')
+                img(src="/css/bocas-toro-panama.jpg", alt="logo", height="250", width='100%', class='mb-2 rounded-circle shadow')
+                img(src="/css/bocas-toro-panama.jpg", alt="logo", height="250", width='100%', class='rounded-circle shadow')
+            div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
+                .card.shadow-lg.mb-3
+                    .card-header 
+                        span(class='fa fa-users fa-1x') ¡Iniciar Sesión en PanamaTrips!
+                    .card-body
+                        .container
+                            .row
+                                h3.col-sm-10 PanamaTrips!
+                            form.login(action="#")
+                                label(class='', for='correox') Correo:
+                                input(type="email", class='form-control', placeholder='usuario@gmail.com')           
+                                |
+                                label(class='', for='contra') Contraseña:
+                                input(type="password", class='form-control', placeholder='coloque su contraseña')           
+                                |                 
+                                input(class='btn btn-primary', type='submit', value='Registrarme')
+                                |                 
+                                .remember-forgot
+                                    .row
+                                        .col-md-6
+                                            .checkbox
+                                            label
+                                                input(type="checkbox")
+                                                |Recordar
+                                        |                         
+                                        .col-md-6.forgot-pass-content
+                                            a.forgot-pass(href="javascription:void(0)") Olvido la Contraseña
+                                
+block scripts 
+    script(src="/js/acciones.js")

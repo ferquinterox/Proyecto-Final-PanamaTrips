@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 //crear una ruta para el node
 //Metodo para renderizar el pug js
 
+
 var actividades = require('./routes/actividades');
 app.use('/',actividades);
 
@@ -45,4 +46,3 @@ app.use((req, res, next)=>{
 app.listen(port, function(){
 console.log(`Escuchando en el puerto ${port}...`);
 })
-
