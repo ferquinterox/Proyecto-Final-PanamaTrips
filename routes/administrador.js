@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 //EL MODEL actividad
 router.get("/", (req, res) => {
     res.render("index");
@@ -23,15 +24,7 @@ router.get('/control', function(req, res){
     }).catch(err => {
         console.log(err);
         res.status(500).json({error: err});
-    }); /*
-    actividad.findAll(function(error, actividades){
-        if(error)
-            next(error)
-        else if(!actividades)
-            actividades[];
-        else
-            res.render("control_admin") ;   
-    });*/
+    }); 
 });
 //Pagina de agregar actividades
 router.get('/adminActividades', function(req, res){
@@ -40,39 +33,27 @@ router.get('/adminActividades', function(req, res){
 
 
 router.post('/admin/control/actualizar', function(req, res, next){
-    console.log('Aquiii');
-	actividad.update(req.body.id,req.body.actividad,req.body.compania, req.body.fecha,  req.body.activo,function(error,msg){
-		if(error)
-			next(error);
-		else if(!msg){
-			var err = new Error('Actividad no existe');
-			err.status = 401;
-            next (err);}
-        alert("Actividad actualizada correctamente");
-		
-      });
-    /* actividad.findOneAndUpdate({
+    actividad.findOneAndUpdate({
         _id:req.body.id},{ $set: {nombreact: req.body.actividad,compania: req.body.compania,fecha_pub: req.body.fecha, estado: req.body.activo}}).exec().then(result => {
-        res.status(200).json(result);
+        res.redirect('/admin/control');
     })
     .catch(err => {
         console.log(err);
         res.status(500).json({error: err});
-    }); */
+    });
 });
 
 //ELIMINAR
 router.post('/admin/control/eliminar', function(req, res, next){
-	actividad.delete(req.body.id, function(error,msg){
-		if(error)
-			next(error);
-		else if(msg){
-			var err = new Error('cedula no existe');
-			err.status = 401;
-			next(err);
-		}
-		else{
-			}
-	  }); 
+	actividad.remove({
+        _id: req.body.id
+    }).exec()
+    .then(result => {
+        res.redirect('/admin/control');
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
 });
 module.exports = router;
