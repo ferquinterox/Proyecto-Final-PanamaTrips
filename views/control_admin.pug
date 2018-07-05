@@ -26,24 +26,23 @@ block content
                                                 th(scope="col") Actualizar
                                         tbody
                                             for lista, n in actividad
-                                                form(action='/control/actualizar', method='POST')
+                                                form(action='control/actualizar', method='post')
                                                     tr
                                                         td= n+1
-                                                        td #{lista.actividad}
+                                                        td #{lista.nombreact}
                                                             input#actividad(type='text' name='actividad')
                                                         td #{lista.compania}
                                                             input#compania(type='text' name='compania')
                                                         td #{lista.fecha_pub}
                                                             input#fecha(type='text' name='fecha')
-                                                        td #{lista.activo}
+                                                        td #{lista.estado}
                                                             select#sexo(name="activo")
                                                                 option(value="active") Activo
                                                                 option(value="inactive") Inactivo
                                                         td
                                                             input(type='hidden', value=lista.id, name='id')
                                                             input(type='submit',value='Actualizar').btn.btn-success
-                                                        td
-                                                            form(action='/control', method='POST')
+                                                //form(action='/eliminar', method='POST')
                                                                 input(type='hidden', value=lista.id, name='id')
-                                                            td
+                                                        td
                                                                 input(type='submit',value='Borrar').btn.btn-danger

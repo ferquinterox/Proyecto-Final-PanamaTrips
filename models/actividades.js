@@ -6,14 +6,14 @@ var actividadesSchema = new mongoose.Schema({
     nombreact: { type: String, unique: false, required: false, trim: true },
     descripcion: { type: String, unique: false, required: false, trim: true },
     provincia: { type: Number, unique: false, required: false, trim: true },
-    contacto: { type: String, unique: true, required: false, trim: true },
-    habdescripcion:{ type: String, unique: true, required: false, trim: true},
-    precio: { type: mongoose.Schema.Types.Decimal128, unique: true, required: false, trim: true},
-    secprecio: {type: String, unique: true, required: false, trim: true},
-    infoadicional: { type: String, unique: true, required: false, trim: true }, 
-    estado: { type: String, unique: true, required: false, trim: true },
-    fecha_pub: { type: Date, unique: true, required: false, trim: true },
-    compania: { type: String, unique: true, required: false, trim: true }
+    contacto: { type: String, unique: false, required: false, trim: true },
+    habdescripcion:{ type: String, unique: false, required: false, trim: true},
+    precio: { type: mongoose.Schema.Types.Decimal128, unique: false, required: false, trim: true},
+    secprecio: {type: String, unique: false, required: false, trim: true},
+    infoadicional: { type: String, unique: false, required: false, trim: true }, 
+    estado: { type: String, unique: false, required: false, trim: true },
+    fecha_pub: { type: Date, unique: false, required: false, trim: true },
+    compania: { type: String, unique: false, required: false, trim: true }
 },{collection:'actividades'});
 
 actividadesSchema.statics.findAll = function(callback){
@@ -29,11 +29,11 @@ actividadesSchema.statics.findAll = function(callback){
 actividadesSchema.statics.insert = function(id, nombreact,decripcion,provincia,contacto,habdescripcion,precio,secprecio,infoadicional,callback){
     Actividades.findOne({id:id},'id',function(err,actividades){
         if(err){
-            return callback(err)
-        }
+            //return callback(err)
+        }/* 
         else if(actividades){
             return callback(actividades);
-        }
+        } */
         else{
             var data={
                 nombreact:nombreact,
@@ -46,28 +46,28 @@ actividadesSchema.statics.insert = function(id, nombreact,decripcion,provincia,c
                 indoadicional:infoadicional,
                 };
             Actividades.create(data,function(err){
-                if(err)
+                /* if(err)
                     return callback(err);
-                return callback();
+                return callback(); */
             })}
     })   
 }
-actividadesSchema.statics.update = function(habdescripcion,precio,secprecio,callback){
-    Actividades.findOne({id:id},'habdescripcion,precio,secprecio',function(err,actividades){
+actividadesSchema.statics.update = function(nombreact,compania,activo,callback){
+    Actividades.findOne({id:id},'nombreact,compania,activo',function(err,actividades){
         if(err)
             return callback(err);
-        else if(!actividades){
+        else if(!Actividades){
             console.log(ac);
             return callback();
         }
         else{
-                if(habdescripcion)
-                    actividades.habdescripcion = habdescripcion;
-                if(precio)
-                    actividades.precio=precio;
-                if(secprecio)
-                    actividades.secprecio = secprecio;               
-                actividades.save(function(err){
+                if(nombreact)
+                    Actividades.nombreact = nombreact;
+                if(compania)
+                    Actividades.compania=compania;
+                if(activo)
+                    Actividades.activo = activo;               
+                Actividades.save(function(err){
                     if(err)
                         return callback(err);
                     return callback(null,true);
@@ -80,7 +80,7 @@ actividadesSchema.statics.delete = function(id,callback){
     Estudiante.findOne({id:id},'id',function(err,users){
         if(err)
             return callback(err);
-        else if(!actividades)
+        else if(!Actividades)
             return callback(null,'cedula no existe');
         Estudiante.deleteOne({id:id}, function(err){
                 if(err)
