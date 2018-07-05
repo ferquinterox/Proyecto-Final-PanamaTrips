@@ -7,10 +7,13 @@ router.get("/", (req, res) => {
 //send es una respuesta
 
 var actividad = require('../models/actividades');
+console.log(actividad);
+
+
 //Pagina de actividades
 router.get('/control', function(req, res){
      actividad.find()
-    .select('id nombreact compania fecha_pub estado')
+    .select('_id nombreact compania fecha_pub estado')
     .exec()
     .then(doc => {
         console.log(doc)
@@ -36,8 +39,9 @@ router.get('/adminActividades', function(req, res){
 });
 
 
-router.post('/actualizar', function(req, res, next){
-	actividad.update(req.body.actividad,req.body.compania,req.body.fecha,req.body.activo, function(error,msg){
+router.post('/admin/control/actualizar', function(req, res, next){
+    console.log('Aquiii');
+	actividad.update(req.body.id,req.body.actividad,req.body.compania, req.body.fecha,  req.body.activo,function(error,msg){
 		if(error)
 			next(error);
 		else if(!msg){
@@ -46,11 +50,19 @@ router.post('/actualizar', function(req, res, next){
             next (err);}
         alert("Actividad actualizada correctamente");
 		
-	  });
+      });
+    /* actividad.findOneAndUpdate({
+        _id:req.body.id},{ $set: {nombreact: req.body.actividad,compania: req.body.compania,fecha_pub: req.body.fecha, estado: req.body.activo}}).exec().then(result => {
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    }); */
 });
 
 //ELIMINAR
-router.post('/eliminar', function(req, res, next){
+router.post('/admin/control/eliminar', function(req, res, next){
 	actividad.delete(req.body.id, function(error,msg){
 		if(error)
 			next(error);
@@ -60,8 +72,7 @@ router.post('/eliminar', function(req, res, next){
 			next(err);
 		}
 		else{
-			alert('Actividad eliminada exitosamente');
 			}
-	  });
+	  }); 
 });
 module.exports = router;

@@ -52,37 +52,39 @@ actividadesSchema.statics.insert = function(id, nombreact,decripcion,provincia,c
             })}
     })   
 }
-actividadesSchema.statics.update = function(nombreact,compania,activo,callback){
-    Actividades.findOne({id:id},'nombreact,compania,activo',function(err,actividades){
-        if(err)
-            return callback(err);
-        else if(!Actividades){
-            console.log(ac);
-            return callback();
+actividadesSchema.statics.update = function(id, nombreact,compania,activo,callback){
+    Actividades.findOne({_id:id},'nombreact,compania,activo',function(err,actividades){
+        if(err){
+            console.log(err);
+        }
+            //return callback(err);
+        else if(!actividades){
+            console.log('NO HAY');
+            //return callback();
         }
         else{
                 if(nombreact)
-                    Actividades.nombreact = nombreact;
+                    actividades.nombreact = nombreact;
                 if(compania)
-                    Actividades.compania=compania;
+                    actividades.compania=compania;
                 if(activo)
-                    Actividades.activo = activo;               
-                Actividades.save(function(err){
-                    if(err)
-                        return callback(err);
-                    return callback(null,true);
+                    actividades.activo = activo;               
+                actividades.save(function(err){
+                    if(err){}
+                        //return callback(err);
+                    //return callback(null,true);
                 });
             }
     })   
 }
 
 actividadesSchema.statics.delete = function(id,callback){
-    Estudiante.findOne({id:id},'id',function(err,users){
+    Actividades.findOne({_id:id},'id',function(err,users){
         if(err)
             return callback(err);
         else if(!Actividades)
             return callback(null,'cedula no existe');
-        Estudiante.deleteOne({id:id}, function(err){
+        Actividades.deleteOne({_id:id}, function(err){
                 if(err)
                     return callback(err);
                 return callback();//Success
@@ -90,6 +92,6 @@ actividadesSchema.statics.delete = function(id,callback){
     })   
 }
 
-let Actividades = mongoose.model('Actividades',actividadesSchema);
+let Actividades = mongoose.model('Actividades', actividadesSchema);
 
 module.exports = Actividades;
