@@ -10,10 +10,7 @@ router.get("/", (req, res) => {
 router.get('/actividades', function(req, res){
     res.render("actividades");
 });
-//Pagina de agregar actividades
-router.get('/adminActividades', function(req, res){
-    res.render("adminActividades");
-});
+
 //Pagina de pago 
 router.get('/pago', function(req, res){
     res.render("pago");

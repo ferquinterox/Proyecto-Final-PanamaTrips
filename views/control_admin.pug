@@ -1,0 +1,48 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/control.css")
+block content
+    .container.mb-4
+        .row
+            .col-sm-12 
+                h3.mt-3 ¡Bienvenido administrador, #{usuario}!
+        .row
+            .col-sm-12
+                div(class="card bg-dark text-white")
+                    img(class="card-img", src="/css/bocas-toro-panama.jpg", alt="Card image")
+                    div(class="card-img-overlay")
+                        h4.card-title Control de las actividades en el sistema
+                        .card-body
+                            div(class='pre-scrollable')
+                                table.table.table-hover.table-light
+                                        thead
+                                            tr
+                                                th(scope="col") N°
+                                                th(scope="col") Actividad
+                                                th(scope="col") Compañia
+                                                th(scope="col") Fecha de publicación
+                                                th(scope="col") Activo
+                                                th(scope="col") Eliminar
+                                                th(scope="col") Actualizar
+                                        tbody
+                                            for lista, n in actividad
+                                                form(action='/control/actualizar', method='POST')
+                                                    tr
+                                                        td= n+1
+                                                        td #{lista.actividad}
+                                                            input#actividad(type='text' name='actividad')
+                                                        td #{lista.compania}
+                                                            input#compania(type='text' name='compania')
+                                                        td #{lista.fecha}
+                                                            input#fecha(type='text' name='fecha')
+                                                        td #{lista.activo}
+                                                            select#sexo(name="activo")
+                                                                option(value="active") Activo
+                                                                option(value="inactive") Inactivo
+                                                        td
+                                                            input(type='submit',value='Actualizar').btn.btn-success
+                                                        td
+                                                            form(action='/control', method='POST')
+                                                                input(type='hidden', value=lista.id, name='id')
+                                                            td
+                                                                input(type='submit',value='Borrar').btn.btn-danger
