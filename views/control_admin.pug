@@ -33,13 +33,14 @@ block content
                                                             input#actividad(type='text' name='actividad')
                                                         td #{lista.compania}
                                                             input#compania(type='text' name='compania')
-                                                        td #{lista.fecha}
+                                                        td #{lista.fecha_pub}
                                                             input#fecha(type='text' name='fecha')
                                                         td #{lista.activo}
                                                             select#sexo(name="activo")
                                                                 option(value="active") Activo
                                                                 option(value="inactive") Inactivo
                                                         td
+                                                            input(type='hidden', value=lista.id, name='id')
                                                             input(type='submit',value='Actualizar').btn.btn-success
                                                         td
                                                             form(action='/control', method='POST')

@@ -28,6 +28,11 @@ block content
                                     .col-sm-10
                                         input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque su apellido')
                                 div(class='form-group row') 
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='usuariosPersona') Nombre de usuario:
+                                    .col-sm-10
+                                        input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque su usuario', name='usuario')
+                                div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='provinciaPersona') Provincia:
                                     .col-sm-10
                                         select(class='form-control')
@@ -46,17 +51,17 @@ block content
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='correoPersona') Correo:
                                     .col-sm-10
-                                        input(type='email', class='form-control', placeholder='example@gmail.com')
+                                        input(type='email', class='form-control', placeholder='example@gmail.com', name='correo')
                                 div(class='form-group row has-feedback') 
                                     label(class='col-sm-3 col-form-label', for='contrasena') Contraseña:
                                     .col-sm-8
-                                        input(type='password', id='pass1', class='form-control pass', placeholder='Escriba su contraseña')
+                                        input(type='password', id='pass1', class='form-control pass', placeholder='Escriba su contraseña', name='pass')
                                     .col-sm-1
                                         span(toggle="#pass1" class="fa fa-fw fa-eye toggle-password") 
                                 div(class='form-group row has-feedback')
                                     label(class='col-sm-3 col-form-label', for='contrasena2') Reescriba la contraseña:
                                     .col-sm-8
-                                        input(type='password', id='pass2', class='form-control pass', placeholder='Reescriba su contraseña')
+                                        input(type='password', id='pass2', class='form-control pass', placeholder='Reescriba su contraseña', name='passagain')
                                     .col-sm-1
                                         span(toggle="#pass2" class="fa fa-fw fa-eye toggle-password") 
                                 div(class='form-group row')

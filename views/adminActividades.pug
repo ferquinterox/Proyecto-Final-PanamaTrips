@@ -14,54 +14,54 @@ block content
                         .container
                             .row 
                                 h3.col-sm-12 PanamaTrips!
-                            form(action="#")
+                            form(action="/insertar_act", method='post')
                                 div(class='form-group row') 
-                                    label(class='col-sm-2 col-form-label', for='nombrePersona') Seleccione las imagenes:
+                                    label(class='col-sm-2 col-form-label') Seleccione las imagenes:
                                     .col-sm-10
                                         input#uploadImage(type='file', name='myPhoto', onchange='PreviewImage();')
                                 div(class='form-group row') 
-                                    label(class='col-sm-2 col-form-label', for='nombrePersona') Nombre de la actividad:
+                                    label(class='col-sm-2 col-form-label') Nombre de la actividad:
                                     .col-sm-10
-                                        input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque el nombre')
+                                        input(type="text", class='form-control', name='nombreact', placeholder='Coloque el nombre')
                                 div(class='form-group row') 
-                                    label(class='col-sm-2 col-form-label', for='apellidoPersona') Descripcion:
+                                    label(class='col-sm-2 col-form-label') Descripcion:
                                     .col-sm-10
-                                        textarea#exampleFormControlTextarea1.form-control(rows='3')
+                                        textarea#exampleFormControlTextarea1.form-control(rows='3', name="descrip")
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='provincias') Provincia:
                                     .col-sm-10
-                                        select(class='form-control')
-                                            option Bocas del Toro
-                                            option Coclé
-                                            option Colón
-                                            option Chiriquí
-                                            option Darién
-                                            option Herrera
-                                            option Los Santos 
-                                            option Panamá
-                                            option Veraguas
-                                            option Comarcas                            
+                                        select(class='form-control', name='provincias')
+                                            option(value='bocas') Bocas del Toro
+                                            option(value='cocle') Coclé
+                                            option(value='colon') Colón
+                                            option(value='chiriqui') Chiriquí
+                                            option(value='darien') Darién
+                                            option(value='herrera') Herrera
+                                            option(value='lossantos') Los Santos 
+                                            option(value='panama') Panamá
+                                            option(value='veraguas') Veraguas
+                                            option(value='comarcas') Comarcas                            
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='correoPersona') Telefonos y Correo:
                                     .col-sm-10
-                                        input(type='text', class='form-control', id="contacto")
+                                        input(type='text', class='form-control', name="contacto")
                                 div(class='form-group row') 
                                     label(class='col-sm-3 col-form-label', for='contrasena') Habitaciones:
                                     .col-sm-10
-                                        textarea#exampleFormControlTextarea1.form-control(rows='3')
+                                        textarea#exampleFormControlTextarea1.form-control(rows='3', name='habdescripcion')
                                 div(class='form-group row has-feedback')
                                     label(class='col-sm-3 col-form-label', for='contrasena') Precios:
                                     .col-sm-10
-                                        input(type='text', id='precio', class='form-control pass')
-                                select(class='form-control')
-                                            option Precio por persona
-                                            option Precio por habitación        
+                                        input(type='text', name='precio', class='form-control pass')
+                                select(class='form-control', name='secprecio')
+                                            option(value='prexper') Precio por persona
+                                            option(value='prexhab') Precio por habitación        
                                 div(class='form-group row has-feedback')
                                     label(class='col-sm-3 col-form-label', for='contrasena2') Informacion Adicional:
                                     .col-sm-10
-                                        input(type='text', id='infomas', class='form-control pass')
+                                        input(type='text', name='infomas', class='form-control pass')
                                 div(class='form-group row')
                                     .col-sm-12.d-flex.justify-content-end
-                                        a.btn.btn-primary.btn-lg.active(href='/actividades', role='button', aria-pressed='true') Guardar Datos
+                                        input.btn.btn-primary.btn-lg.active(type='submit', value='Guardar Datos') 
 block scripts 
     script(src="/js/acciones.js")

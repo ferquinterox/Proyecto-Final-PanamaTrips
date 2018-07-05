@@ -6,9 +6,20 @@ router.get("/", (req, res) => {
 });
 //send es una respuesta
 
+var actividad = require('../models/actividades');
 //Pagina de actividades
 router.get('/control', function(req, res){
-    res.render("control_admin");
+    actividad.find()
+    .select('id actividad compania fecha_pub activo')
+    .exec()
+    .then(doc => {
+        res.render("control_admin", {
+            actividad: doc
+        });
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
 });
 //Pagina de agregar actividades
 router.get('/adminActividades', function(req, res){
@@ -17,7 +28,8 @@ router.get('/adminActividades', function(req, res){
 
 
 router.post('control/actualizar', function(req, res, next){
-	actividad.update(req.body.actividad,req.body.compania,req.body.fecha,req.body.activo, function(error,msg){
+	actividad.update({
+        _id: req.body.id }, $set = req.body.actividad,req.body.compania,req.body.fecha,req.body.activo, function(error,msg){
 		if(error)
 			next(error);
 		else if(!msg){
