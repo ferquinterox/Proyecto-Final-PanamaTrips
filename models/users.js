@@ -3,14 +3,17 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 var userSchema = new mongoose.Schema({
+    id:{ type: mongoose.Schema.Types.ObjectId},
     email: { type: String, unique: true, required: true, trim: true },
-    username: { type: String, unique: false, required: true, trim: true },
+    nombre: { type: String, unique: false, required: true, trim: true },
+    apellido: { type: String, unique: false, required: true, trim: true },
+    provincia: {type: String, unique: false, required: true},
     password: { type: String, unique: false, required: true, trim: true },
     passConfirm: { type: String, unique: false, required: true, trim: true },
 },{collection:'users'});
 
 
-
+/*
 userSchema.statics.authenticate = function(email,password,callback){
     User.findOne({email:email},'username password',function(err,user){
         if(err)
@@ -25,7 +28,7 @@ userSchema.statics.authenticate = function(email,password,callback){
     })
     
    
-}
+}*/
 
 let User = mongoose.model('User',userSchema);
 
