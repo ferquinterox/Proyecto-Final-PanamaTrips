@@ -9,16 +9,16 @@ block content
             div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
                 .card.shadow-lg.mb-3
                     .card-header 
-                        span(class='fa fa-users fa-1x') ¡Se parte de Panama Trips!
+                        span(class='fa fa-users fa-1x') ¡Agregue una nueva actividad!
                     .card-body
                         .container
                             .row 
                                 h3.col-sm-12 PanamaTrips!
-                            form(action="/insertar_act", method='post')
+                            form(action="/insertar_act", method='post', enctype='multipart/form-data')
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Seleccione las imagenes:
                                     .col-sm-10
-                                        input#uploadImage(type='file', name='myPhoto', onchange='PreviewImage();')
+                                        input#uploadImage(type='file', name='imagen')
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Nombre de la actividad:
                                     .col-sm-10
@@ -42,7 +42,11 @@ block content
                                             option(value='veraguas') Veraguas
                                             option(value='comarcas') Comarcas                            
                                 div(class='form-group row') 
-                                    label(class='col-sm-2 col-form-label', for='correoPersona') Telefonos y Correo:
+                                    label(class='col-sm-2 col-form-label', for='correoPersona') Correo:
+                                    .col-sm-10
+                                        input(type='text', class='form-control', name="correo")
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='telefonoPersona') Telefonos:
                                     .col-sm-10
                                         input(type='text', class='form-control', name="contacto")
                                 div(class='form-group row') 
@@ -50,12 +54,12 @@ block content
                                     .col-sm-10
                                         textarea#exampleFormControlTextarea1.form-control(rows='3', name='hab')
                                 div(class='form-group row has-feedback')
-                                    label(class='col-sm-3 col-form-label', for='contrasena') Precios:
-                                    .col-sm-10
+                                    label(class='col-sm-2 col-form-label', for='contrasena') Precios:
+                                    .col-sm-5
                                         input(type='text', name='precio', class='form-control pass')
-                                select(class='form-control', name='sec')
-                                            option(value='prexper') Precio por persona
-                                            option(value='prexhab') Precio por habitación        
+                                    select(class='col-sm-5 form-control', name='sec')
+                                                option(value='prexper') Precio por persona
+                                                option(value='prexhab') Precio por habitación        
                                 div(class='form-group row has-feedback')
                                     label(class='col-sm-3 col-form-label', for='contrasena2') Informacion Adicional:
                                     .col-sm-10

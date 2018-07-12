@@ -16,31 +16,58 @@ block content
                         a.btn.btn-primary(href='/admin/adminActividades', role='button').btn.btn-warning.btn-lgbtn-block Insertar
                         .card-body
                             div(class='pre-scrollable')
-                                table.table.table-hover.table-light
-                                        thead
+                                table.table.table-hover.table-light.mb-0
+                                        thead.thead-dark
                                             tr
                                                 th(scope="col") N°
                                                 th(scope="col") Actividad
                                                 th(scope="col") Compañia
-                                                th(scope="col") Fecha de publicación
-                                                th(scope="col") Activo
+                                                th(scope="col") Descripcion
+                                                th(scope="col") Provincia
+                                                th(scope="col") Contacto
+                                                th(scope="col") Correo
+                                                th(scope="col") Estado
+                                                th(scope="col") Habitacion
+                                                th(scope="col") Precio
                                                 th(scope="col") Eliminar
                                                 th(scope="col") Actualizar
                                         tbody
                                             for lista, n in actividad
                                                     tr
                                                         form(action='admin/control/actualizar', method='post')
-                                                            td= n+1
+                                                            td.bg-secondary.text-light= n+1
                                                             td #{lista.nombreact}
                                                                 input#actividad(type='text' name='actividad')
                                                             td #{lista.compania}
                                                                 input#compania(type='text' name='compania')
+                                                            td #{lista.descripcion}
+                                                                input#descrip(type='text' name='descrip')
+                                                            td #{lista.provincia}
+                                                                select(class='form-control', name='provincias')
+                                                                    option(value='bocas') Bocas del Toro
+                                                                    option(value='cocle') Coclé
+                                                                    option(value='colon') Colón
+                                                                    option(value='chiriqui') Chiriquí
+                                                                    option(value='darien') Darién
+                                                                    option(value='herrera') Herrera
+                                                                    option(value='lossantos') Los Santos 
+                                                                    option(value='panama') Panamá
+                                                                    option(value='veraguas') Veraguas
+                                                                    option(value='comarcas') Comarcas     
+                                                            td #{lista.contacto}
+                                                                input#contacto(type='text' name='contacto')
+                                                            td #{lista.correo}
+                                                                input#correo(type='text' name='correo')
                                                             td #{lista.fecha_pub}
                                                                 input#fecha(type='text' name='fecha')
                                                             td #{lista.estado}
                                                                 select#sexo(name="activo")
                                                                     option(value="active") Activo
                                                                     option(value="inactive") Inactivo
+                                                            td #{lista.habdescripcion}
+                                                                input#habdescripcion(type='text' name='hab') 
+                                                            td #{lista.precio}
+                                                                input#precio(type='text' name='precio') 
                                                             td
                                                                 input(type='hidden', value=lista._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success
@@ -49,4 +76,4 @@ block content
                                                             td
                                                                 input(type='submit',value='Borrar').btn.btn-danger                                   
                                                             td
-                                                        a.btn.btn-primary(href='/admin/adminActividades', role='button').btn.btn-warning Insertar
+                                                        

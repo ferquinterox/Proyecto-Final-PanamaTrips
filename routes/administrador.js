@@ -1,6 +1,9 @@
 var express = require('express');
+const multer = require('multer');
 var router = express.Router();
-
+var moment = require('moment');
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise; 
 //EL MODEL actividad
 router.get("/", (req, res) => {
     res.render("index");
@@ -8,13 +11,12 @@ router.get("/", (req, res) => {
 //send es una respuesta
 
 var actividad = require('../models/actividades');
-console.log(actividad);
 
 
 //Pagina de actividades
 router.get('/control', function(req, res){
      actividad.find()
-    .select('_id nombreact compania fecha_pub estado')
+    .select('_id nombreact compania descripcion provincia contacto correo fecha_pub estado habdescripcion precio')
     .exec()
     .then(doc => {
         console.log(doc)
@@ -34,9 +36,30 @@ router.get('/adminActividades', function(req, res){
 
 router.post('/admin/control/actualizar', function(req, res, next){
     actividad.findOneAndUpdate({
-        _id:req.body.id},{ $set: {nombreact: req.body.actividad,compania: req.body.compania,fecha_pub: req.body.fecha, estado: req.body.activo}}).exec().then(result => {
+        _id:req.body.id},{ $set: {
+            nombreact: req.body.actividad,
+            compania: req.body.compania,
+            descripcion: req.body.descrip,
+            provincia: req.body.provincias,
+            contacto: req.body.contacto,
+            correo: req.body.correo,
+            habdescripcion: req.body.hab,
+            precio: req.body.precio,
+            fecha_pub: req.body.fecha,
+            estado: req.body.activo}}).exec().then(result => {
         res.redirect('/admin/control');
     })
+    /* _id: mongoose.Types.ObjectId(),
+            nombreact: req.body.nombreact,
+            descripcion: req.body.descrip,
+            provincia: req.body.provincias,
+            contacto: req.body.contacto,
+            correo: req.body.correo,
+            habdescripcion: req.body.hab,
+            precio: req.body.precio,
+            secprecio: req.body.sec,
+            indoadicional: req.body.infomas,
+            fecha_pub: moment().toISOString()*/
     .catch(err => {
         console.log(err);
         res.status(500).json({error: err});
