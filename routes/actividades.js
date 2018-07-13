@@ -51,6 +51,11 @@ router.get('/login', function(req, res, next){
 
 });
 
+//Pagina de Sbore Nosotros
+router.get('/sobreNosotros', function(req, res){
+    res.render("sobreNosotros");
+});
+
 //Pagina de pago (PAYPAL)
 router.get('/pago', function(req, res){
     res.render("pago");
