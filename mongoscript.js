@@ -18,6 +18,12 @@ db.users.insertOne({
     username:'maureth',
     password:'maureth23'
 });
+
+db.users.insertOne({
+    email:'nicole@gmail.com',
+    username:'nicoleta',
+    password:'nicole01'
+});
 // Para hacer un query a la bd y probar que funciona pueden hacer
 // db.panamatrips.find({}).pretty()
 // esto es equivalente a el clasico 'Select * from estudiantes'
