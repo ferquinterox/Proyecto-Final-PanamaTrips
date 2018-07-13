@@ -13,9 +13,9 @@ var userSchema = new mongoose.Schema({
 },{collection:'users'});
 
 
-/*
+
 userSchema.statics.authenticate = function(email,password,callback){
-    User.findOne({email:email},'username password',function(err,user){
+    User.findOne({email:email},'email password',function(err,user){
         if(err)
             return callback(err);
         else if(!user)
@@ -28,7 +28,7 @@ userSchema.statics.authenticate = function(email,password,callback){
     })
     
    
-}*/
+}
 
 let User = mongoose.model('User',userSchema);
 
