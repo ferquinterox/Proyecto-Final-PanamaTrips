@@ -113,11 +113,16 @@ router.post('/registrar', function(req, res, next){
 
 //Para autenticar un usuario (FALTA)
 router.post('/autenticar', function(req, res, next){
-	User.authenticate(req.body.email, req.body.password, function(error,user){
+	User.authenticate(req.body.email, req.body.password, function(error,User){
 		if(error){
 			next(error.message);
-		}
+        }
+        else if(!User) {
+			var err = new Error('Usuario o contraseña incorrecta');
+            err.status = 401;
+			next(err); }
 		else{
+            req.email=User.email;
 			res.redirect('/admin/control');  }
 	});
 });

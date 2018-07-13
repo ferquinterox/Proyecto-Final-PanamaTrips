@@ -19,13 +19,13 @@ block content
                             .row
                                 h3.col-sm-10 PanamaTrips!
                             form.login(action="/autenticar", method='post')
-                                label(class='', for='correox') Correo:
-                                input(type="email", class='form-control', placeholder='usuario@gmail.com')           
+                                label(class='') Correo:
+                                input(type="email", name='email',class='form-control', placeholder='usuario@gmail.com')           
                                 |
-                                label(class='', for='contra') Contraseña:
-                                input(type="password", name='email', class='form-control', placeholder='coloque su contraseña')           
+                                label(class='') Contraseña:
+                                input(type="password", name='password', class='form-control', placeholder='coloque su contraseña')           
                                 |                 
-                                input(class='btn btn-primary', name='password' type='submit', value='Registrarme')
+                                input(class='btn btn-primary' type='submit', value='Registrarme')
                                 |                 
                                 .remember-forgot
                                     .row
