@@ -28,8 +28,20 @@ router.get("/", (req, res) => {
 });
 
 //Pagina de actividades
-router.get('/actividades', function(req, res){
-    res.render("actividades");
+router.get('/actividades/:actividadId', function(req, res){
+    var id = req.params.actividadId;
+    actividades.findById(id)
+    .exec()
+    .then(result => {
+        res.status(200).render("actividad", {
+            actividad: result
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
 });
 
 //Pagina para insertar actividades
