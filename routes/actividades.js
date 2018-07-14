@@ -11,7 +11,20 @@ var file = require('../public/js/files')
 mongoose.Promise = global.Promise; 
 //Inicio
 router.get("/", (req, res) => {
-    res.render("index");
+    actividades.find().select('nombreact imagenAct').limit(3)
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        res.render("index", {
+            actividad: doc
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
+    
 });
 
 //Pagina de actividades
@@ -120,10 +133,13 @@ router.post('/autenticar', function(req, res, next){
         else if(!User) {
 			var err = new Error('Usuario o contraseña incorrecta');
             err.status = 401;
-			next(err); }
+            res.render('login', {error: err});
+        }
 		else{
             req.email=User.email;
-			res.redirect('/admin/control');  }
+            res.redirect('/admin/control'); 
+        
+        }
 	});
 });
 

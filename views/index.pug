@@ -6,7 +6,23 @@ block content
         .row
             div(class="col-sm-12")
                 h3 ¡Descubre los mejores trips de Panamá!
-    //Carousel de imagenes
+    -var actividad1;
+    -var actividad2;
+    -var actividad3;
+    -var provincias = ["Bocas del toro", "Cocle", "Colon", "Chiriquí", "Darién", "Herrera", "Los Santos", "Panamá", "Veraguas", "Comarcas"];
+    for lista, i in actividad
+        case i
+            when 0
+                
+                -actividad1 =  {nombre: lista.nombreact, imagen: lista.imagenAct}; 
+               
+            when 1 
+                -actividad2 =  {nombre: lista.nombreact, imagen: lista.imagenAct}; 
+                
+            when 2 
+                -actividad3 =  { nombre: lista.nombreact, imagen: lista.imagenAct}; 
+
+    //Carousel de imagenes          
     .container-fluid(class="no-padding")
             div(class="col-sm-12 no-padding")
                 div(id="controles", class="carousel slide", data-ride="carousel")
@@ -17,19 +33,19 @@ block content
                     div(class="carousel-inner")
                         div(class="carousel-item active")
                             .carousel-caption
-                                h2 TOP del mes
+                                h2 #{actividad1.nombre}
                                 a(href="/ofertas", class='btn btn-info') Ver Oferta
-                            img(src="/css/bocas-toro-panama.jpg", alt="Primera Oferta", class="d-block w-100")
+                            img(src=actividad1.imagen, alt="Primera Oferta", class="d-block w-100")
                         div(class="carousel-item")
                             .carousel-caption
-                                h2 TOP del mes
+                                h2 #{actividad2.nombre}
                                 a(href="/ofertas", class='btn btn-info') Ver Oferta
-                            img(src="/css/bocas-toro-panama.jpg", alt="Segunda Oferta", class="d-block w-100")
+                            img(src=actividad2.imagen, alt="Segunda Oferta", class="d-block w-100")
                         div(class="carousel-item")
                             .carousel-caption
-                                h2 TOP del mes
+                                h2 #{actividad3.nombre}
                                 a(href="/ofertas", class='btn btn-info') Ver Oferta
-                            img(src="/css/bocas-toro-panama.jpg", alt="Tercera Oferta", class="d-block w-100")
+                            img(src=actividad3.imagen, alt="Tercera Oferta", class="d-block w-100")
                     a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
                         span(class="carousel-control-prev-icon" aria-hidden="true")
                         span(class="sr-only") Anterior
@@ -43,34 +59,44 @@ block content
             div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
                 img(class="img-fluid w-100 ", src="/css/bocas-toro-panama.jpg", alt="Imagen descriptiva")
             div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
-                h4.mt-2 Titulo del articulo
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident libero optio reiciendis placeat officia nesciunt, est dolorum, in pariatur esse quo nisi voluptate a recusandae consectetur odit dolores. Consequatur, molestias!
+                h4.mt-2 Conoce todo lo que Panamá tiene para ofrecerte
+                p ¡Aqui en PanamáTrips encontraras las mejores actividades y viajes que Panamá tiene para ofrecerte, desde cruceros hasta ferias aqui en Panamá! 
+                p Desde aquí podras reservar un puesto en la actividad o establecimiento que ofrece la actividad. 
+                h5 Uneté y caza las mejores ofertas.
+                a(href='/registro', class="btn btn-info rounded") Registrate
         .row(class="info info-sec mt-5")
             div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
-                h4.mt-2 Titulo del articulo
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident libero optio reiciendis placeat officia nesciunt, est dolorum, in pariatur esse quo nisi voluptate a recusandae consectetur odit dolores. Consequatur, molestias!
+                h4.mt-2 ¿Deseas promocionarte con nosotros?
+                p ¡Si eres un hotel puedes afiliarte con nosotros y subir tus promociones y actividades para atraer mas personas!
+                a(href='#', class="btn btn-info rounded") Mas Información
             div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
-                img(class="img-fluid w-100 ", src="/css/bocas-toro-panama.jpg", alt="Imagen descriptiva")
-    .container-fluid    
-        //Cuadro de imagenes de abajo    
+                img(class="img-fluid w-100 ", src="/css/hoteleria.jpg", alt="Imagen descriptiva")
+    
+    //Cuadro de imagenes de abajo 
+    .container-fluid      
         .row(class="mt-5")
             div(class="col-sm-12 col-md-12 col-lg-7 col-xl-7 no-padding")
                 div(class="card bd-dark text-whiter")
-                    img(class="card-img banner1" src="/css/bocas-toro-panama.jpg" alt="Card image")    
+                    img(class="card-img banner1" src="/css/panama.jpg" alt="Card image")    
                     div(class="card-img-overlay")
-                        h2.card-title Provincia
-                        p.card-text Promocion del viaje
-                        button(class="btn btn-info") Mas Información
+                        -var numero =  Math.floor(Math.random() * 10); 
+                        h2.card-title  #{provincias[numero]}
+                        p Descubre las ofertas disponibles en esta provincia 
+                        button(class="btn btn-success") Ofertas de #{provincias[numero]}
+
             div(class="col-sm-12 col-md-12 col-lg-5 col-xl-5 no-padding")
                 div(class="card bd-dark text-whiter")
-                    img(class="card-img banner2" src="/css/bocas-toro-panama.jpg" alt="Card image")    
+                    img(class="card-img banner2" src="/css/canotaje.jpg" alt="Card image")    
                     div(class="card-img-overlay")
-                        h2.card-title Provincia
-                        p.card-text Promocion del viaje
-                        button(class="btn btn-info") Mas Información
+                        -numero =  Math.floor(Math.random() * 10); 
+                        h2.card-title  #{provincias[numero]} 
+                        p Descubre las ofertas disponibles en esta provincia 
+                        button(class="btn btn-info") Ofertas de #{provincias[numero]}
+
                 div(class="card bd-dark text-whiter")
-                    img(class="card-img banner2" src="/css/bocas-toro-panama.jpg" alt="Card image")    
+                    img(class="card-img banner2" src="/css/tucan.jpg" alt="Card image")    
                     div(class="card-img-overlay")
-                        h2.card-title Provincia
-                        p.card-text Promocion del viaje
-                        button(class="btn btn-info") Mas Información
+                        -numero =  Math.floor(Math.random() * 10); 
+                        h2.card-title  #{provincias[numero]} 
+                        p Descubre las ofertas disponibles en esta provincia 
+                        button(class="btn btn-primary") Ofertas de #{provincias[numero]}
