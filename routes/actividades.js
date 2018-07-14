@@ -111,7 +111,7 @@ router.post('/registrar', function(req, res, next){
     }
 });
 
-//Para autenticar un usuario (FALTA)
+//Para autenticar un usuario 
 router.post('/autenticar', function(req, res, next){
 	User.authenticate(req.body.email, req.body.password, function(error,User){
 		if(error){
@@ -127,4 +127,9 @@ router.post('/autenticar', function(req, res, next){
 	});
 });
 
+//Logout
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/index.pug');
+});
 module.exports = router;
