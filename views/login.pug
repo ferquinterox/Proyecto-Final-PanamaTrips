@@ -18,6 +18,8 @@ block content
                         .container
                             .row
                                 h3.col-sm-10 PanamaTrips!
+                                if (error)
+                                    h5.text-danger #{error}
                             form.login(action="/autenticar", method='post')
                                 label(class='') Correo:
                                 input(type="email", name='email',class='form-control', placeholder='usuario@gmail.com')           

@@ -5,18 +5,62 @@ var moment = require('moment');
 var bcrypt = require('bcrypt');
 var User = require('../models/users');
 var actividades = require('../models/actividades');
+var ofertas = require('../models/ofertas'); //mmmmmmmmmm
 
 var file = require('../public/js/files')    
 
 mongoose.Promise = global.Promise; 
 //Inicio
 router.get("/", (req, res) => {
-    res.render("index");
+    actividades.find().select('nombreact imagenAct').limit(3)
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        res.render("index", {
+            actividad: doc
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
+    
 });
 
+//Pagina de Ofertas
+router.get('/ofertas/:ofertasId',function(req, res){
+    var id = req.params.ofertasId;
+    ofertas.findById(id)
+    .exec()
+    .then(result => {
+        res.status(200).render("ofertas", {
+            ofertas: result
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    }) 
+});
+
+
 //Pagina de actividades
-router.get('/actividades', function(req, res){
-    res.render("actividades");
+router.get('/actividades/:actividadId', function(req, res){
+    var id = req.params.actividadId;
+    actividades.findById(id)
+    .exec()
+    .then(result => {
+        res.status(200).render("actividad", {
+            actividad: result
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
 });
 
 //Pagina para insertar actividades
@@ -125,10 +169,13 @@ router.post('/autenticar', function(req, res, next){
         else if(!User) {
 			var err = new Error('Usuario o contraseña incorrecta');
             err.status = 401;
-			next(err); }
+            res.render('login', {error: err});
+        }
 		else{
             req.email=User.email;
-			res.redirect('/admin/control');  }
+            res.redirect('/admin/control'); 
+        
+        }
 	});
 });
 
