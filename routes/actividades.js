@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 var moment = require('moment');
-var bcrypt = require('bcrypt');
+var passport = require('passport');
 var User = require('../models/users');
 var actividades = require('../models/actividades');
 
@@ -70,10 +70,10 @@ router.post('/insertar_act', file.single('imagen'), function(req, res, next){
         });     
 });
 
-//Pagina para logearse
-router.get('/login', function(req, res, next){
-    res.render("login");
 
+//Pagina de ver actividades por provincias
+router.get('/provincias', function(req, res){
+    res.render("provincias");
 });
 
 //Pagina de pago (PAYPAL)
@@ -87,72 +87,54 @@ router.get('/ofertas', function(req, res){
 });
 
 //Pagina de registro
-router.get('/registro', function(req, res){
+/*router.get('/registro', function(req, res){
     res.render("registro");
 });
+*/
+//REGISTRO
 
-//Pagina para registrar un nuevo usuario
-router.post('/registrar', function(req, res, next){
-    if(req.body.password === req.body.passwordagain){
-    User.find({ email: req.body.email}).exec()
-        .then(user => {
-            if(user.length >= 1){
-                return res.status(400).json({
-                    message: "Ese correo ya existe"
-                });
-            }else{
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    if (err){
-                        return res.status(500).json({
-                            error: err + 'AQKI'
-                        })
-                    }else{
-                        var user = new User({
-                            _id: new mongoose.Types.ObjectId(),
-                            email: req.body.email,
-                            nombre: req.body.nombre,
-                            apellido: req.body.apellido,
-                            provincia: req.body.provincia,
-                            password: hash,
-                            passConfirm: hash
-                        }).save().then(result => {
-                            res.redirect('/login');
-
-                        }).catch(err =>{ 
-                            console.log(err);
-                            res.redirect('/registrar');
-                        })    
-                    }
-                })
-            }
-        })
-        .catch(err =>{ 
-            console.log(err);
-            res.redirect('/registrar');
-        })
-    }else{
-        console.log('NO son iguales');
-        res.status(500).json({error: "Las contrasenas no coinciden"});
-    }
+router.get('/registro', function(req, res){
+	let messages = req.flash('error');
+	res.render('registro',{messages: messages, hasErrors: messages.length > 0 });
 });
 
-//Para autenticar un usuario (FALTA)
-router.post('/autenticar', function(req, res, next){
-	User.authenticate(req.body.email, req.body.password, function(error,User){
-		if(error){
-			next(error.message);
-        }
-        else if(!User) {
-			var err = new Error('Usuario o contraseña incorrecta');
-            err.status = 401;
-            res.render('login', {error: err});
-        }
-		else{
-            req.email=User.email;
-            res.redirect('/admin/control'); 
-        
-        }
-	});
+router.post('/registrar', passport.authenticate('local.signup',{
+	successRedirect: '/login',
+	failureRedirect: '/registro',
+	failureFlash: true
+}));
+
+
+//LOGIN
+router.get('/login', function(req, res){
+	let messages = req.flash('error');
+	res.render('login',{messages: messages, hasErrors: messages.length > 0 });
 });
 
+router.get('/logout', function(req,res,next){
+	req.logout();
+	res.redirect('/')
+});
+
+router.post('/login', passport.authenticate('local.signin',{
+	successRedirect: '/admin/control',
+	failureRedirect: '/login',
+	failureFlash: true
+}));
+
+//Para saber si esta logiado o no
+function isLoggedIn (req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/login')
+}
+
+
+function notLoggedIn (req, res, next){
+	if(!req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/index')
+}
 module.exports = router;

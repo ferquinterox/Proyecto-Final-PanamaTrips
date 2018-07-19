@@ -3,12 +3,18 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 const pug = require('pug');
-const path = require('path');
 const morgan = require('morgan');
 var actividades = require('./routes/actividades');
 var administrador = require('./routes/administrador');
+var session = require('express-session'); 
+var path = require('path');
+var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
+var flash = require('connect-flash');
+var cookieParser = require('cookie-parser');
+var validator = require('express-validator');
 
-
+require('./config/passport');
 //Bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +31,7 @@ db.once('open', () => {
 });
 
 //Puerto nuevo llamado NODE_JS_PORT
-const port = process.env.NODE_JS_PORT || 3000;
+const port = process.env.NODE_JS_PORT || 4000;
 
 //Rutas para que pug sepa identificar
 app.set('views', path.join(__dirname, 'views'));
@@ -36,6 +42,25 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/uploads')));
 
 app.use('/uploads', express.static(__dirname + "/uploads"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(validator());
+app.use(cookieParser());
+app.use(session({
+	secret: 'work hard',
+	resave: false,
+	saveUninitialized: false,
+	store: new MongoStore({mongooseConnection: db}),
+	cookie: {maxAge: 60 * 60 * 1000}
+  }));
+  app.use(flash());
+  app.use(passport.initialize());
+  app.use(passport.session());
+//esto es para que si esta logeado le salga el boton de cerrar sesion 
+  app.use(function(req,res,next){
+	res.locals.login = req.isAuthenticated();
+	next();
+})
 //Rutas
 app.use('/',actividades);
 app.use('/admin',administrador);
