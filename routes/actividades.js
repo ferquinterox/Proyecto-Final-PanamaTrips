@@ -155,4 +155,17 @@ router.post('/autenticar', function(req, res, next){
 	});
 });
 
+router.get('/perfil:personaID', function(req, res, next){
+    var id = req.params.personaID;
+    User.findById(id)
+    .exec()
+    .then(result => {
+        res.render('profile', {
+            perfil: result
+        });
+    })
+    .catch(err =>{
+        res.render(500).json({error: err.message});
+    })
+});
 module.exports = router;

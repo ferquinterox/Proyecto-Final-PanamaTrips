@@ -1,0 +1,60 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/perfil.css")
+block content
+    .container
+        .row.mt-4
+            .col-sm-12.d-flex.justify-content-center
+                img(src="/css/hoteleria.jpg", alt="Imagen de perfil", class='rounded-circle perfil')
+            .col-sm-12.d-flex.justify-content-center
+                h2.mt-2 Perfil de #{perfil.nombre} #{perfil.apellido}
+        .row.mb-4.mt-2
+            .col-sm-12.w-100
+                    ul.nav.nav-tabs
+                        li.nav-item
+                            a(class='tabs btn', data-toggle="tab" role="tab" aria-controls="datos_principales" aria-selected="true" href="#datos_principales") Informacion Basica
+                        li.nav-item
+                            a(class='tabs btn', data-toggle="tab" role="tab" aria-controls="actividades" aria-selected="false" href="#actividades") Actividades
+                    .tab-content.panel
+                        div(id="datos_principales" role="tabpanel" class="active tab-pane fade show")
+                            .container
+                                .row
+                                    div(class='col-sm-12 col-md-12 col-lg-6')
+                                        h5 Nombre:
+                                        p.info #{perfil.nombre}
+                                    div(class='col-sm-12 col-md-12 col-lg-6')
+                                        h5 Apellido:
+                                        p.info #{perfil.apellido}
+                                    div(class='col-sm-12 col-md-12 col-lg-6')
+                                        h5 Provincia:
+                                        p.info #{perfil.provincia}
+                                    div(class='col-sm-12 col-md-12 col-lg-6')
+                                        h5 Correo:
+                                        p.info #{perfil.email}
+                                    div(class='col-sm-12 col-md-12 col-lg-6')
+                                        h5 Fecha de nacimiento:
+                                        p.info informa
+                                    div(class='col-sm-12 col-md-12 col-lg-6')
+                                        h5 Rol:
+                                        p.info informa
+                        div(id="actividades" role="tabpanel" class="tab-pane fade")
+                            .container
+                                .row
+                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
+                                        .actividad
+                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
+                                            p  Info thumbnail
+                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
+                                        .actividad
+                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
+                                            p  Info thumbnail
+                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
+                                        .actividad
+                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
+                                            p  Info thumbnail
+                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
+                                        .actividad
+                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
+                                            p  Info thumbnail
+
+
