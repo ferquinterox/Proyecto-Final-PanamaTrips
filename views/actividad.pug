@@ -1,0 +1,93 @@
+extends basic.pug
+block header
+ link(rel="stylesheet", href="/css/actividades.css")
+block content
+       .container
+        .row(class="mt-2")
+            div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4")
+              a(href="#", class='btn btn-info w-100') 
+                i(class="fa fa-arrow-circle-left") 
+                  span Regresar a las actividades
+        .row(class="mt-1 mb-4")    
+            div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 mb-2")
+                img(class="img-fluid imagen", src='/'+actividad.imagenAct)
+            div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8")
+                .card.info
+                  .card-header
+                    .container 
+                      .row
+                        div(class='col-sm-12 col-md-12 col-lg-6 col-xl-6')
+                          h3.mt-1 #{actividad.nombreact} 
+                          h6 Provincia: 
+                            small #{actividad.provincia}
+                          h6 Fecha de publicación: 
+                            small #{actividad.fecha_pub}
+                        div(class='col-sm-12 col-md-12 col-lg-6 col-xl-6')
+                          a.float-right.btn.btn-primary.btn-lg.active(href='/pago', role='button', aria-pressed='true') ¡Reserva Ya!
+                  .card-body
+                        h5 Compañia:
+                        p.ml-2 #{actividad.compania}
+                        hr
+                        h5 Descripción:
+                        p.ml-2 #{actividad.descripcion}
+                        hr
+                        if (actividad.habdescripcion)
+                            h5 Habitaciones:
+                            p.ml-2 #{actividad.habdescripcion}
+                            hr
+                        h5 Precio:
+                        p.ml-2 #{actividad.precio}, (#{actividad.secprecio})
+                        hr
+                        if (actividad.contacto || actividad.correo)
+                          if (!actividad.contacto)
+                            h5 Contacto:
+                            p.ml-2 Número de contacto: No proporcionado por el autor
+                            p.ml-2 Correo: #{actividad.correo}
+                            hr
+                          else if (!actividad.correo)
+                            h5 Contacto:
+                            p.ml-2 Número de contacto: #{actividad.contacto} 
+                            p.ml-2 Correo: No proporcionado por el autor
+                            hr
+                          else
+                            h5 Contacto:
+                            p.ml-2 Número de contacto: #{actividad.contacto}
+                            p.ml-2 Correo: #{actividad.correo}
+                            hr
+                        h5 Informacion adicional:
+                        if (actividad.infoadicional)
+                          p.ml-2 #{actividad.infoadicional}
+                        else
+                          p.ml-2 No hay mas información adicional disponible
+        .row
+          div(class="col-sm-12")
+            .d-flex.justify-content-center.similares-top
+              h3 Más Actividades en #{actividad.provincia}
+        .row.mb-3
+          div(class="col-sm-12")
+            .card-group
+              .card
+                img(src="/css/tucan.jpg", alt="Imagen1", class="card-img-top")
+                .card-body
+                  h4.card-title Actividad Extra
+                  p.card-text Descripcion de la actividad
+                  a(href="#", class="black-text d-flex justify-content-end")
+                    h6 Ver actividad
+                      i(class="fa fa-angle-double-right")
+              .card
+                img(src="/css/tucan.jpg", alt="Imagen1", class="card-img-top")
+                .card-body
+                  h4.card-title Actividad Extra
+                  p.card-text Descripcion de la actividad
+                  a(href="#", class="black-text d-flex justify-content-end")
+                    h6 Ver actividad
+                      i(class="fa fa-angle-double-right")
+              .card
+                img(src="/css/tucan.jpg", alt="Imagen3", class="card-img-top")
+                .card-body
+                  h4.card-title Actividad Extra
+                  p.card-text Descripcion de la actividad
+                  a(href="#", class="black-text d-flex justify-content-end")
+                    h6 Ver actividad
+                      i(class="fa fa-angle-double-right")
+            
