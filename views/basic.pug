@@ -10,6 +10,7 @@ html
         link(rel="stylesheet", href="/popups/css/popupS.min.css")
         link(rel="icon", type="image/png", href="/favicon/favicon-32x32.png", sizes="32x32")
         link(rel="icon", type="image/png", href="/favicon/favicon-16x16.png", sizes="16x16")
+        link(rel='icon', href="/favicon/favicon.ico", type="image/x-icon")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
         block header
     body
@@ -29,10 +30,10 @@ html
                                         span.ml-1 Inicio      
                             li(class="nav-item dropdown")
                                 a(href="#", class="nav-link dropdown-toggle", id="navbarDropdownMenuLink", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
-                                    i(class="fa fa-tag") 
-                                        span.ml-1 Ofertas
+                                    i(class="fa fa-plane") 
+                                        span.ml-1 Actividades
                                 div(class='dropdown-menu', aria-labelledby="navbarDropdownMenuLink")
-                                    a(class='dropdown-item', href="/ofertas") Todas las provincias
+                                    a(class='dropdown-item', href="/actividades") Todas las provincias
                                     div.dropdown-divider
                                     a(class='dropdown-item', href='#') Bocas del Toro        
                                     a(class='dropdown-item', href='#') Coclé        
@@ -45,9 +46,9 @@ html
                                     a(class='dropdown-item', href='#') Veraguas        
                                     a(class='dropdown-item', href='#') Comarcas
                             li(class="nav-item")
-                                a(href="/adminActividades", class="nav-link")
-                                    i(class="fa fa-plane") 
-                                        span.ml-1 Actividades
+                                a(href="/ofertas", class="nav-link")
+                                    i(class="fa fa-tag") 
+                                        span.ml-1 Ofertas
                             li(class="nav-item")
                                 a(href='#', class="nav-link")
                                     i(class="fa fa-users") 

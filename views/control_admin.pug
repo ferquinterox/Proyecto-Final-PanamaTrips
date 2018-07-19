@@ -26,11 +26,12 @@ block content
                                                 th(scope="col") Provincia
                                                 th(scope="col") Contacto
                                                 th(scope="col") Correo
+                                                th(scope="col") Fecha de Publicación
                                                 th(scope="col") Estado
                                                 th(scope="col") Habitacion
                                                 th(scope="col") Precio
-                                                th(scope="col") Eliminar
                                                 th(scope="col") Actualizar
+                                                th(scope="col") Eliminar
                                         tbody
                                             for lista, n in actividad
                                                     tr
@@ -59,7 +60,6 @@ block content
                                                             td #{lista.correo}
                                                                 input#correo(type='text' name='correo')
                                                             td #{lista.fecha_pub}
-                                                                input#fecha(type='text' name='fecha')
                                                             td #{lista.estado}
                                                                 select#sexo(name="activo")
                                                                     option(value="active") Activo

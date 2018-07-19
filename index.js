@@ -34,6 +34,8 @@ app.set("view engine", 'pug');
 app.use(express.static(path.join(__dirname, '/bower_components')));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/uploads')));
+
+app.use('/uploads', express.static(__dirname + "/uploads"));
 //Rutas
 app.use('/',actividades);
 app.use('/admin',administrador);
