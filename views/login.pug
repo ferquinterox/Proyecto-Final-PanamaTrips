@@ -18,27 +18,17 @@ block content
                         .container
                             .row
                                 h3.col-sm-10 PanamaTrips!
-                                if (error)
-                                    h5.text-danger #{error}
-                            form.login(action="/autenticar", method='post')
+                            if hasErrors
+                             .alert.alert-danger
+                                    each lista in messages
+                                        p #{lista}
+                            form.login(action="/login", method='post')
                                 label(class='') Correo:
                                 input(type="email", name='email',class='form-control', placeholder='usuario@gmail.com')           
                                 |
                                 label(class='') Contraseña:
                                 input(type="password", name='password', class='form-control', placeholder='coloque su contraseña')           
                                 |                 
-                                input(class='btn btn-primary', name='password' type='submit', value='Iniciar Sesión')
-                                |                 
-                                .remember-forgot
-                                    .row
-                                        .col-md-6
-                                            .checkbox
-                                            label
-                                                input(type="checkbox")
-                                                |Recordar
-                                        |                         
-                                        .col-md-6.forgot-pass-content
-                                            a.forgot-pass(href="javascription:void(0)") Olvido la Contraseña
-                                
+                                input(class='btn btn-primary' type='submit', value='Registrarme')
 block scripts 
     script(src="/js/acciones.js")

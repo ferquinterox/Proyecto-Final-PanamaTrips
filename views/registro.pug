@@ -17,7 +17,11 @@ block content
                         .container
                             .row
                                 //img(class='col-sm-1', src="/css/logo.png", alt="Logo", width="100%",  height="50px")  
-                                h3.col-sm-10 PanamaTrips!
+                            h3.col-sm-10 PanamaTrips!
+                            if hasErrors
+                             .alert.alert-danger
+                                    each lista in messages
+                                     p #{lista}
                             form(action="/registrar", method='post')
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='nombrePersona') Nombre:
