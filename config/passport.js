@@ -24,7 +24,7 @@ let LocalStrategy = require('passport-local').Strategy;
   },
   function (req, email, password, done) {
     req.checkBody('email','Correo Invalido').notEmpty().isEmail();
-    req.checkBody('password','Password Invalido').notEmpty().isLength({min:6});
+    req.checkBody('password','Password Invalido, debe contener mas de 6 caracteres').notEmpty().isLength({min:6});
     var errors = req.validationErrors();
     if (errors) {
         let messages = [];
