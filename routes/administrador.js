@@ -14,7 +14,7 @@ var actividad = require('../models/actividades');
 
 
 //Pagina de actividades
-router.get('/control', function(req, res){
+router.get('/control',isLoggedIn, function(req, res){
      actividad.find()
     .select('_id nombreact compania descripcion provincia contacto correo fecha_pub estado habdescripcion precio')
     .exec()
@@ -29,9 +29,11 @@ router.get('/control', function(req, res){
     }); 
 });
 //Pagina de agregar actividades
-router.get('/adminActividades', function(req, res){
+router.get('/adminActividades',isLoggedIn, function(req, res){
     res.render("adminActividades");
 });
+
+
 
 
 router.post('/admin/control/actualizar', function(req, res, next){
@@ -79,4 +81,20 @@ router.post('/admin/control/eliminar', function(req, res, next){
         res.status(500).json({error: err});
     });
 });
+
+//Para saber si esta logiado o no
+function isLoggedIn (req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/login')
+}
+
+
+function notLoggedIn (req, res, next){
+	if(!req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/index')
+}
 module.exports = router;
