@@ -33,7 +33,7 @@ html
                                     i(class="fa fa-plane") 
                                         span.ml-1 Actividades
                                 div(class='dropdown-menu', aria-labelledby="navbarDropdownMenuLink")
-                                    a(class='dropdown-item', href="/actividades") Todas las provincias
+                                    a(class='dropdown-item', href='/provincias') Todas las provincias
                                     div.dropdown-divider
                                     a(class='dropdown-item', href='#') Bocas del Toro        
                                     a(class='dropdown-item', href='#') Coclé        
@@ -53,6 +53,10 @@ html
                                 a(href='#', class="nav-link")
                                     i(class="fa fa-users") 
                                         span.ml-1 Sobre Nosotros
+                            //esto es para que si esta logueado le salga cerrar sesion sino no
+                    if login
+                        a(href='/logout', class="btn btn-primary rounded") Cerrar Sesión
+                    else 
                         a(href='/login', class="btn btn-primary rounded") Iniciar Sesión
                         a(href='/registro', class="btn btn-info ml-2 rounded") Registrate
 

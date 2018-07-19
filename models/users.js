@@ -13,8 +13,18 @@ var userSchema = new mongoose.Schema({
 },{collection:'users'});
 
 
+userSchema.methods.encryptPassword = function(password){
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10),null);
+    
+};
+//validar contraseñ
+userSchema.methods.validPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+    
+};
 
-userSchema.statics.authenticate = function(email,password,callback){
+
+/*userSchema.statics.authenticate = function(email,password,callback){
     User.findOne({email:email},'email password',function(err,user){
         if(err)
             return callback(err);
@@ -28,7 +38,7 @@ userSchema.statics.authenticate = function(email,password,callback){
     })
     
    
-}
+}*/
 
 let User = mongoose.model('User',userSchema);
 
