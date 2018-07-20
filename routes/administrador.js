@@ -8,6 +8,8 @@ mongoose.Promise = global.Promise;
 router.get("/", (req, res) => {
     res.render("index");
 });
+
+
 //send es una respuesta
 
 var actividad = require('../models/actividades');
@@ -28,13 +30,11 @@ router.get('/control',isLoggedIn, function(req, res){
         res.status(500).json({error: err});
     }); 
 });
+
 //Pagina de agregar actividades
 router.get('/adminActividades',isLoggedIn, function(req, res){
     res.render("adminActividades");
 });
-
-
-
 
 router.post('/admin/control/actualizar', function(req, res, next){
     actividad.findOneAndUpdate({
@@ -95,6 +95,46 @@ function notLoggedIn (req, res, next){
 	if(!req.isAuthenticated()){
 		return next();
 	}
-	res.redirect('/index')
+	res.redirect('/registro')
 }
+
+//MODEL DE OFERTAS
+var ofertas = require('../models/ofertas');
+//Pag de Ofertas
+router.get('/control', isLoggedIn, (req, res, next) => {
+    ofertas.find()
+    //.select('_id nombreact provincia precioOf tiempo estado').exec()
+    .select('_id nombreact provincia precioOf tiempoOf estado').exec()
+    .then(doc => {
+        console.log(doc)
+        res.render("adminOfertas", {
+            ofertas: doc
+        });
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    }); 
+});
+//agregar oferta de actividades
+router.get('/adminOfertas',isLoggedIn,(req, res) => {
+    res.render("adminOfertas");
+});
+
+router.post('/insertar_ofert',(req, res, next) => {
+    ofertas.findOne({
+        _id:req.body.id},{ $set: {
+            nombreact: req.body.actividad,
+            provincia: req.body.provincias,
+            precioOf: req.body.precio,
+            tiempoOf: req.body.tiempo,
+            estado: req.body.estado}}).exec().then(result => {
+            res.redirect('/admin/control/adminOfertas');
+        }).catch(err => {
+                console.log(err);
+                res.status(500).json({error: err});
+            });
+        });
+ 
+
+
 module.exports = router;

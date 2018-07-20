@@ -4,23 +4,16 @@ var Schema = mongoose.Schema;
 
 var ofertasSchema = new Schema({
     id:{ type: Schema.Types.ObjectId},
-    nombreact: { type: Schema.Types.ObjectId, ref: "Actividades", required: false, trim: true }, //referencia de conexion con el schema de actividades
-    precio: { type: Schema.Types.Decimal128, required: false, trim: true }, //precio oferta
-    tiempo:{type:Date, default: Date.now, require:false, trim:true } //tiempo de la oferta
+    nombreact: { type: Schema.Types.ObjectId, required: false, trim: true }, //referencia de conexion con el schema de actividades
+    provincia: { type: Schema.Types.ObjectId,required: false, trim: true },
+    /* nombreact: { type: Schema.Types.ObjectId, ref: "Actividades", required: false, trim: true }, //referencia de conexion con el schema de actividades
+    provincia: { type: Schema.Types.ObjectId, ref: "Actividades", required: false, trim: true }, */
+    precioOf: { type: Schema.Types.Decimal128, required: false, trim: true }, //precio oferta
+    tiempoOf:{type:Date, default: Date.now, require:false, trim:true }, //tiempo de la oferta
     //tiempo:{type:Date, default: Date.setHours(48,0,0,0), require:false, trim:true } //tiempo de la oferta
+    estado:{type: Boolean,
+        default: false}
 });
-
-/* 
-let Ofertas = mongoose.model('Ofertas', { tiempoOf: Date });
-
-Ofertas.findOne(function (err, doc) {
-  doc.tiempoOf.setHours(48,0,0,0);
-  doc.save(callback); // no lo guarda
-
-  doc.markModified('tiempoOf');
-  doc.save(callback); // works
-}) */
-
 
 let Ofertas = mongoose.model('Ofertas', ofertasSchema);
 
