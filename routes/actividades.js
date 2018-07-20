@@ -144,8 +144,8 @@ router.get('/pago', function(req, res){
 });
 
 //Pagina de ofertas
-router.get('/Ofertas', function(req, res){
-    res.render("Ofertas");
+router.get('/ofertas', function(req, res){
+    res.render("ofertas");
 });
 
 router.get('/adminOfertas', function(req, res){
