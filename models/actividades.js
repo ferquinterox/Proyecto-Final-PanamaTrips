@@ -15,7 +15,8 @@ var actividadesSchema = new mongoose.Schema({
     estado: { type: String, required: false, trim: true, default: 'Activo'},
     fecha_pub: { type: Date, required: false, trim: true },
     compania: { type: String, required: false, trim: true },
-    imagenAct: {type: String, required: false}
+    imagenAct: {type: String, required: false},
+    imagenes : { type : Array , required:false, default : [] }
 },{collection:'actividades'});
 
 

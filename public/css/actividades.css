@@ -1,10 +1,16 @@
-.imagen{
+.carousel-inner{
+    border-radius: 15px;
+}
+.visual{
     width: 420px;
     height: 400px;
-    border-radius: 15px;
     -webkit-box-shadow: -5px 10px 31px -8px rgba(0,0,0,0.75);
     -moz-box-shadow: -5px 10px 31px -8px rgba(0,0,0,0.75);
     box-shadow: -5px 10px 31px -8px rgba(0,0,0,0.75);
+}
+.miniatura{
+    width: 85px;
+    height: 80px;
 }
 .info{
     -webkit-box-shadow: -5px 10px 31px -8px rgba(0,0,0,0.75);
@@ -33,3 +39,32 @@ span{
     font-weight: 700;
     border-radius: 15px 15px 0px 0px;
 }
+.card-img-top{
+    height: 250px;
+    width: 100%;
+}
+#carousel .list-inline {
+    white-space:nowrap;
+    overflow-x: scroll;
+}
+
+#carousel .carousel-indicators {
+    position: static;
+    left: initial;
+    width: initial;
+    margin-left: initial;
+}
+
+#carousel .carousel-indicators > li {
+    width: initial;
+    height: initial;
+    text-indent: initial;
+}
+
+#carousel .carousel-indicators > li.active img {
+    opacity: 0.7;
+}
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }

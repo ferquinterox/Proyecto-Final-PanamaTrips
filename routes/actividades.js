@@ -11,7 +11,7 @@ var file = require('../public/js/files')
 mongoose.Promise = global.Promise; 
 //Inicio
 router.get("/", (req, res) => {
-    actividades.find().select('nombreact imagenAct').limit(3)
+    actividades.find().select('nombreact imagenes').limit(3)
     .exec()
     .then(doc => {
         console.log(doc)
@@ -30,22 +30,36 @@ router.get("/", (req, res) => {
 //Pagina de actividades
 router.get('/actividades/:actividadId', function(req, res){
     var id = req.params.actividadId;
+    var info_act = {};
     actividades.findById(id)
     .exec()
     .then(result => {
+        info_act = {info: result};
+    })
+    .catch(err => {
+        console.log(err)
+    });
+    actividades.aggregate([{ $sample: { size:3 } }])
+    .exec()
+    .then(result =>{
         res.status(200).render("actividad", {
-            actividad: result
+            similares: result,
+            actividad: info_act.info
         });
+        console.log(info_act.info);
     })
     .catch(err => {
         res.status(500).json({
-            error: err
+            error: err.message
         })
-    })
+    });
 });
 
 //Pagina para insertar actividades
-router.post('/insertar_act', file.single('imagen'), function(req, res, next){
+router.post('/insertar_act', file.any('imagen'), function(req, res, next){
+        var paths = req.files.map(function(file) {
+            return file.path; // or file.originalname
+          });
         var actividad = new actividades({
             _id: mongoose.Types.ObjectId(),
             nombreact: req.body.nombreact,
@@ -58,7 +72,7 @@ router.post('/insertar_act', file.single('imagen'), function(req, res, next){
             secprecio: req.body.sec,
             indoadicional: req.body.infomas,
             fecha_pub: moment().toISOString(),
-            imagenAct: req.file.path
+            imagenes: paths
         });
         actividad.save().then(result => {
             console.log(result);
