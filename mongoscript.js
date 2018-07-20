@@ -7,17 +7,6 @@ db.createUser({user:'Nicole',pwd:'nickyeslobest',roles:[{role:'readWrite',db:'pa
 //db.auth('Nicole','nickyeslobest');   [por si algun dia necesitamos usar Authetication]
 // NO CREAR ESTE USUARIO MAS DE 1 VEZ
 db.createCollection('users');
-db.users.insertOne({
-    email:'fernando@gmail.com',
-    username:'Fernandox',
-    password:'fernando123'
-});
-
-db.users.insertOne({
-    email:'maureth@gmail.com',
-    username:'maureth',
-    password:'maureth23'
-});
 
 db.users.insertOne({
     email:'nicole@gmail.com',
