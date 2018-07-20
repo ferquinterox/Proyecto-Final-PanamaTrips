@@ -44,7 +44,31 @@ router.get('/ofertas/:ofertasId',function(req, res){
         })
     }) 
 });
-
+//pag insertar ofertas
+/* router.post('/insertar_ofert', file.single('imagen'), function(req, res, next){
+    var actividad = new actividades({
+        _id: mongoose.Types.ObjectId(),
+        nombreact: req.body.nombreact,
+        descripcion: req.body.descrip,
+        provincia: req.body.provincias,
+        contacto: req.body.contacto,
+        correo: req.body.correo,
+        habdescripcion: req.body.hab,
+        precio: req.body.precio,
+        secprecio: req.body.sec,
+        indoadicional: req.body.infomas,
+        fecha_pub: moment().toISOString(),
+        imagenAct: req.file.path
+    });
+    actividad.save().then(result => {
+        console.log(result);
+        res.redirect('/admin/control');    
+    }).catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    });     
+}); */
 
 //Pagina de actividades
 router.get('/actividades/:actividadId', function(req, res){
@@ -106,8 +130,12 @@ router.get('/pago', function(req, res){
 });
 
 //Pagina de ofertas
-router.get('/ofertas', function(req, res){
-    res.render("ofertas");
+router.get('/Ofertas', function(req, res){
+    res.render("Ofertas");
+});
+
+router.get('/adminOfertas', function(req, res){
+    res.render("adminOfertas");
 });
 
 //Pagina de registro
