@@ -71,20 +71,18 @@ router.post('/insertar_act', file.single('imagen'), function(req, res, next){
 });
 
 //mostrar actividades por cada provincia 
-router.post('/mostrar_act', function(req, res){
-    //provincia: req.body.provincia
-    actividades.find().where(provincia).equals(req.body.provincia)
-   .select('_id nombreact compania descripcion provincia contacto correo  habdescripcion precio')
-   .exec()
-   .then(doc => {
-       console.log(doc)
-       res.redirect("/actividades", {
-           actividades: doc
-       });
-   }).catch(err => {
-       console.log(err);
-       res.status(500).json({error: err});
-   }); 
+router.get('/actividad/:provincia', function(req, res, next){
+    var provincia= req.params.provincia;
+    actividades.find({'provincia':provincia})
+    .exec()
+    .then(result => {
+        res.render('actividades', {
+            actividad: result
+        });
+    })
+    .catch(err =>{
+        res.render(500).json({error: err.message});
+    })
 });
 
 //Pagina de ver provincias
@@ -93,9 +91,9 @@ router.get('/provincias', function(req, res){
 });
 
 //Pagina de ver actividades por provincias
-router.get('/actividades', function(req, res){
+/* router.get('/actividades', function(req, res){
     res.render("actividades");
-});
+}); */
 
 
 //Pagina de pago (PAYPAL)
