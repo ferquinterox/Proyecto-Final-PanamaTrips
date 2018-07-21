@@ -8,12 +8,9 @@ mongoose.Promise = global.Promise;
 router.get("/", (req, res) => {
     res.render("index");
 });
-
-
 //send es una respuesta
-
 var actividad = require('../models/actividades');
-
+var ofertas = require('../models/ofertas');
 
 //Pagina de actividades
 router.get('/control',isLoggedIn, function(req, res){
@@ -30,7 +27,6 @@ router.get('/control',isLoggedIn, function(req, res){
         res.status(500).json({error: err});
     }); 
 });
-
 //Pagina de agregar actividades
 router.get('/adminActividades',isLoggedIn, function(req, res){
     res.render("adminActividades");
@@ -82,6 +78,54 @@ router.post('/admin/control/eliminar', function(req, res, next){
     });
 });
 
+
+
+//Rederizado a la pag. de adminOfertas
+router.get('/adminOfertas',isLoggedIn, function(req, res){
+    res.render("adminOfertas");
+});
+
+//Pagina de Ofertas
+router.get('/control',isLoggedIn, function(req, res){
+     ofertas.find()
+    .select('nombreofer compania descripcion provincia telefono correo tiempo precio fecha_pub estado') 
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        res.render("control_admin", {
+            oferta: doc
+        });
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    }); 
+});
+
+
+
+router.post('/admin/control/actualizarof',isLoggedIn, function(req, res, next){
+    ofertas.findOneAndUpdate({
+        _id:req.body.id},{ $set: {
+            nombreofer: req.body.oferta,
+            compania: req.body.compania,
+            descripcion: req.body.descrip,
+            provincia: req.body.provincias,
+            telefono: req.body.telefono,
+            correo: req.body.correo,
+            tiempo: req.body.tiempo,
+            precio: req.body.precio,
+            fecha_pub: req.body.fecha,
+            estado: req.body.activo}}).exec().then(result => {
+        res.redirect('/admin/control');
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
+});
+
+
+
 //Para saber si esta logiado o no
 function isLoggedIn (req, res, next){
 	if(req.isAuthenticated()){
@@ -95,46 +139,6 @@ function notLoggedIn (req, res, next){
 	if(!req.isAuthenticated()){
 		return next();
 	}
-	res.redirect('/registro')
+	res.redirect('/index')
 }
-
-//MODEL DE OFERTAS
-var ofertas = require('../models/ofertas');
-//Pag de Ofertas
-router.get('/control', isLoggedIn, (req, res, next) => {
-    ofertas.find()
-    //.select('_id nombreact provincia precioOf tiempo estado').exec()
-    .select('_id nombreact provincia precioOf tiempoOf estado').exec()
-    .then(doc => {
-        console.log(doc)
-        res.render("adminOfertas", {
-            ofertas: doc
-        });
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json({error: err});
-    }); 
-});
-//agregar oferta de actividades
-router.get('/adminOfertas',isLoggedIn,(req, res) => {
-    res.render("adminOfertas");
-});
-
-router.post('/insertar_ofert',(req, res, next) => {
-    ofertas.findOne({
-        _id:req.body.id},{ $set: {
-            nombreact: req.body.actividad,
-            provincia: req.body.provincias,
-            precioOf: req.body.precio,
-            tiempoOf: req.body.tiempo,
-            estado: req.body.estado}}).exec().then(result => {
-            res.redirect('/admin/control/adminOfertas');
-        }).catch(err => {
-                console.log(err);
-                res.status(500).json({error: err});
-            });
-        });
- 
-
-
 module.exports = router;
