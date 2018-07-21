@@ -1,0 +1,21 @@
+extends basic.pug
+block content
+
+
+  h2 Metodo de pago
+       .container    
+        .row(class="mt-4 info")    
+            div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
+                img(class="img-fluid w-100 ", src="/css/playa-venao-3.jpg", alt="Imagen descriptiva")
+            div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
+                h4.mt-2 Selina Hotel, 2 dias y desayuno incluido.  Mastercard 
+            
+                .card(style='width: 18rem;')
+                  .card-header
+                    |Mastercard
+                  ul.list-group.list-group-flush
+                   li.list-group-item Numero de la tarjeta:
+                   input#exampleInputEmail1.form-control-sm(type='text')
+                   li.list-group-item Estacionamientos Gratis
+                   li.list-group-item Mascotas       	
+                  button.btn.btn-primary(type='submit') Pagar!

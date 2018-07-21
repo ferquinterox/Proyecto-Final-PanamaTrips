@@ -29,6 +29,7 @@ body {
 .pie{
     background: linear-gradient(to left, #001d4c, #004c00);
     color: white;
+    
 }
 .pie h5{
     font-style: oblique;

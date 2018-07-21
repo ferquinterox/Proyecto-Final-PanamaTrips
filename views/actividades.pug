@@ -1,0 +1,42 @@
+extends basic.pug
+block content
+        .container
+            .col-sm-12 
+                h3.mt-3 ¡Estas son las actividades, #{usuario}!
+            .col-sm-12
+            .row
+            .col-sm-12
+                div(class="card bg-dark text-white")
+                    img(class="card-img", src="/css/bocas-toro-panama.jpg", alt="Card image")
+                    div(class="card-img-overlay")
+                        h4.card-title Actividades por provincia
+                        .card-body
+                            div(class='pre-scrollable')
+                                table.table.table-hover.table-light.mb-0
+                                        thead.thead-dark
+                                            tr
+                                                th(scope="col") N°
+                                                th(scope="col") Actividad
+                                                th(scope="col") Compañia
+                                                th(scope="col") Descripcion
+                                                th(scope="col") Provincia
+                                                th(scope="col") Contacto
+                                                th(scope="col") Correo
+                                                th(scope="col") Habitacion
+                                                th(scope="col") Precio
+                                        tbody
+                                            for lista, n in actividad
+                                                tr
+                                                    
+                                                    td.bg-secondary.text-light= n+1
+                                                    td #{lista.nombreact}
+                                                    td #{lista.compania}
+                                                    td #{lista.descripcion}
+                                                    td #{lista.provincia} 
+                                                    td #{lista.contacto}
+                                                    td #{lista.correo}
+                                                    td #{lista.habdescripcion}
+                                                    td #{lista.precio}
+                                                    td
+                                                        input(type='hidden', value=lista._id, name='id')
+                                                        input(type='submit',value='Fuck').btn.btn-success

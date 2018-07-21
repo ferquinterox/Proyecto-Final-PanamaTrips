@@ -1,3 +1,60 @@
 extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/inicio.css")
 block content
+
         h2 Ofertas
+        h5 Excelentes ofertas en los mejores destinos de Panamá 
+        .container
+                div(class="col-8 col-md-8 col-lg-12 col-xl-12 pt-4")
+                
+                        div(class="col-8 col-md-8 col-lg-8 col-xl-4 pt-4 ")
+                                .row(class="mt-8 info")    
+                                div(class="col-sm-8  col-xl-12 no-padding")
+                                        img(class="img-thumbnail",src="/css/bocas-toro-panama.jpg" , alt="img")
+                                div(class="col-sm-12 col-md-12  col-xl-12 pt-2")
+                                        h4.mt-2 Bocas del Toro
+                                        p Lorem ipsum dolor sit amet!
+                                a(href='#', class="btn btn-info ml-2 rounded", style="float:right;") Más Información
+                       
+
+                        div(class="col-8 col-md-8 col-lg-8 col-xl-4 pt-4 ", style="margin-top:-405px;float:right;")
+                                .row(class="mt-8 info")    
+                                div(class="col-sm-8  col-xl-12 no-padding")
+                                        img(class="img-thumbnail",src="/css/bocas-toro-panama.jpg" , alt="img")
+                                div(class="col-sm-12 col-md-12  col-xl-12 pt-2")
+                                        h4.mt-2 Titulo del articulo
+                                        p Lorem ipsum dolor sit amet!
+                                button(class="btn btn-info" , style="float:right;") Más Información
+        
+        //Carousel de imagenes
+        .container-fluid(class="padding-bottom($spacer * .5)")
+            div(class="col-sm-12 no-padding pt-4")
+                div(id="controles", class="carousel slide", data-ride="carousel")
+                    ol(class="carousel-indicators")
+                        li(data-target="#indicadores", data-slide-to="0", class="active")
+                        li(data-target="#indicadores", data-slide-to="1")
+                        li(data-target="#indicadores", data-slide-to="2")
+                    div(class="carousel-inner")
+                        div(class="carousel-item active")
+                            .carousel-caption
+                                h2 TOP del mes
+                                a(href="#", class='btn btn-info') Pamama
+                            img(src="/css/bocas-toro-panama.jpg", alt="Primera Oferta", class="d-block w-100")
+                        div(class="carousel-item")
+                            .carousel-caption
+                                h2 TOP del mes
+                                a(href="#", class='btn btn-info') Veraguas
+                            img(src="/css/bocas-toro-panama.jpg", alt="Segunda Oferta", class="d-block w-100")
+                        div(class="carousel-item")
+                            .carousel-caption
+                                h2 TOP del mes
+                                a(href="#", class='btn btn-info') Chiriqui
+                            img(src="/css/bocas-toro-panama.jpg", alt="Tercera Oferta", class="d-block w-100")
+                    a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
+                        span(class="carousel-control-prev-icon" aria-hidden="true")
+                        span(class="sr-only") Anterior
+                    a(class="carousel-control-next" href="#controles" role="button" data-slide="next")
+                        span(class="carousel-control-next-icon" aria-hidden="true")
+                        span(class="sr-only") Siguiente
+                p

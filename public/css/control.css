@@ -1,0 +1,23 @@
+.card-body{
+    color: black;
+}
+.card-img{
+    opacity: 0.5;
+    max-height: 800px;
+}
+.error{
+    font-weight: 900;
+}
+.card-title{
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-weight: 900;
+}
+.modal-img{
+    max-height: 300px;
+    max-width: 700px;
+}
+.pre-scrollable{
+    max-height: 650px;
+}
