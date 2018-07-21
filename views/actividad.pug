@@ -47,10 +47,11 @@ block content
                           h6 Fecha de publicación: 
                             small #{actividad.fecha_pub}
                         div(class='col-sm-12 col-md-12 col-lg-5 col-xl-5')
-                          form(action="/pago", method="post")
-                            input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
-                            input(name="actividad" type="hidden" value=actividad._id)
-                            input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
+                            form(action="/pago", method="post")
+                              input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
+                              input(name="actividad" type="hidden" value=actividad._id)
+                              //input(name="compania" type="hidden" value=actividad.compania)
+                              input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
                   .card-body
                         h5 Compañia:
                         p.ml-2 #{actividad.compania}

@@ -7,93 +7,99 @@ var passport = require('passport');
 var User = require('../models/users');
 var actividades = require('../models/actividades');
 var Reservas = require('../models/reservas')
-var file = require('../public/js/files')    
+var file = require('../public/js/files')
 
-mongoose.Promise = global.Promise; 
+mongoose.Promise = global.Promise;
 //Inicio
 router.get("/", (req, res) => {
     actividades.find().select('nombreact imagenes').limit(3)
-    .exec()
-    .then(doc => {
-        console.log(doc)
-        res.render("index", {
-            actividad: doc
-        });
-    })
-    .catch(err => {
-        res.status(500).json({
-            error: err
-        })
-    })
-    
-});
-
-//ACTIVIDAD ESPECIFICA
-router.get('/actividades/:actividadId', function(req, res){
-    var id = req.params.actividadId;
-    var info_act = {};
-    actividades.findById(id)
-    .exec()
-    .then(result => {
-        info_act = {info: result};
-        actividades.aggregate([{ $sample: { size:3 } }])
         .exec()
-        .then(result =>{
-            res.status(200).render("actividad", {
-                similares: result,
-                actividad: info_act.info
+        .then(doc => {
+            console.log(doc)
+            res.render("index", {
+                actividad: doc
             });
-            console.log(info_act.info);
         })
         .catch(err => {
             res.status(500).json({
-                error: err.message
+                error: err
             })
+        })
+
+});
+
+//ACTIVIDAD ESPECIFICA
+router.get('/actividades/:actividadId', function(req, res) {
+    var id = req.params.actividadId;
+    var info_act = {};
+    actividades.findById(id)
+        .exec()
+        .then(result => {
+            info_act = {
+                info: result
+            };
+            actividades.aggregate([{
+                    $sample: {
+                        size: 3
+                    }
+                }])
+                .exec()
+                .then(result => {
+                    res.status(200).render("actividad", {
+                        similares: result,
+                        actividad: info_act.info
+                    });
+                    console.log(info_act.info);
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        error: err.message
+                    })
+                });
+        })
+        .catch(err => {
+            console.log(err)
         });
-    })
-    .catch(err => {
-        console.log(err)
-    });
-   
+
 });
 
 //INSERTAR ACTIVIDADES
-router.post('/insertar_act', file.any('imagen'), function(req, res, next){
-        var paths = req.files.map(function(file) {
-            return file.path; // or file.originalname
-          });
-        var actividad = new actividades({
-            _id: mongoose.Types.ObjectId(),
-            nombreact: req.body.nombreact,
-            descripcion: req.body.descrip,
-            provincia: req.body.provincias,
-            contacto: req.body.contacto,
-            correo: req.body.correo,
-            habdescripcion: req.body.hab,
-            precio: req.body.precio,
-            secprecio: req.body.sec,
-            indoadicional: req.body.infomas,
-            fecha_pub: moment().toISOString(),
-            imagenes: paths
-        });
-        actividad.save().then(result => {
-            console.log(result);
-            res.redirect('/admin/control');    
-        }).catch(err => {
-            res.status(500).json({
-                error: err
-            })
-        });     
+router.post('/insertar_act', file.any('imagen'), function(req, res, next) {
+    var paths = req.files.map(function(file) {
+        return file.path; // or file.originalname
+    });
+    var actividad = new actividades({
+        _id: mongoose.Types.ObjectId(),
+        nombreact: req.body.nombreact,
+        descripcion: req.body.descrip,
+        provincia: req.body.provincias,
+        contacto: req.body.contacto,
+        correo: req.body.correo,
+        habdescripcion: req.body.hab,
+        precio: req.body.precio,
+        secprecio: req.body.sec,
+        indoadicional: req.body.infomas,
+        fecha_pub: moment().toISOString(),
+        imagenes: paths
+    });
+    actividad.save().then(result => {
+        console.log(result);
+        res.redirect('/admin/control');
+    }).catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    });
 });
 
 
 //Pagina de ver actividades por provincias
-router.get('/provincias', function(req, res){
+router.get('/provincias', function(req, res) {
     res.render("provincias");
 });
 
 //Pagina de pago (PAYPAL)
-router.post('/pago', function(req, res){
+router.post('/pago', function(req, res) {
     var reserva = new Reservas({
         _id: mongoose.Types.ObjectId(),
         usuario: req.body.usuario,
@@ -101,18 +107,22 @@ router.post('/pago', function(req, res){
         fecha_res: moment().toISOString()
     });
     reserva.save().then(result => {
-        console.log(result);
-        res.render("pago");
-    }).catch(err => {
-        res.status(500).json({
-            error: err
-        })
-    });     
-    
+        actividades.findById(req.body.actividad)
+            .exec()
+            .then(result => {
+                res.render("pago", {
+                    actividad: result
+                });
+            }).catch(err => {
+                res.status(500).json({
+                    error: err
+                })
+            })
+    });
 });
 
 //Pagina de ofertas
-router.get('/ofertas', function(req, res){
+router.get('/ofertas', function(req, res) {
     res.render("ofertas");
 });
 
@@ -123,80 +133,95 @@ router.get('/ofertas', function(req, res){
 */
 //REGISTRO
 
-router.get('/registro', function(req, res){
-	let messages = req.flash('error');
-	res.render('registro',{messages: messages, hasErrors: messages.length > 0 });
+router.get('/registro', function(req, res) {
+    let messages = req.flash('error');
+    res.render('registro', {
+        messages: messages,
+        hasErrors: messages.length > 0
+    });
 });
 
-router.post('/registrar', passport.authenticate('local.signup',{
-	successRedirect: '/login',
-	failureRedirect: '/registro',
-	failureFlash: true
+router.post('/registrar', passport.authenticate('local.signup', {
+    successRedirect: '/login',
+    failureRedirect: '/registro',
+    failureFlash: true
 }));
 
 
 //LOGIN
-router.get('/login', function(req, res){
-	let messages = req.flash('error');
-	res.render('login',{messages: messages, hasErrors: messages.length > 0 });
+router.get('/login', function(req, res) {
+    let messages = req.flash('error');
+    res.render('login', {
+        messages: messages,
+        hasErrors: messages.length > 0
+    });
 });
 
 //PERFIL DEL USUARIO
-router.get('/perfil/:personaID', function(req, res, next){
+router.get('/perfil/:personaID', function(req, res, next) {
     var id = req.params.personaID;
     var info_per = {};
     var info_act = {};
     User.findById(id).exec().then(result => {
 
-        info_per = {info: result};
-        Reservas.find({"usuario": id})
-        .populate('actividad', 'imagenes nombreact descripcion')
-        .exec()
-        .then(resultado =>{
-            info_act = {act: resultado.actividad};
-            console.log(info_act);
-            console.log(resultado);
-            res.render('profile', {
-                actividades: resultado,
-                perfil: info_per.info
-            })}
-
-        ).catch(err => {
-                res.status(500).json({
-                    error: err
+            info_per = {
+                info: result
+            };
+            Reservas.find({
+                    "usuario": id
                 })
-        });
-    })
-    .catch(err =>{
-        res.render(500).json({error: err.message});
-    })
+                .populate('actividad', 'imagenes nombreact descripcion')
+                .exec()
+                .then(resultado => {
+                        info_act = {
+                            act: resultado.actividad
+                        };
+                        console.log(info_act);
+                        console.log(resultado);
+                        res.render('profile', {
+                            actividades: resultado,
+                            perfil: info_per.info
+                        })
+                    }
+
+                ).catch(err => {
+                    res.status(500).json({
+                        error: err
+                    })
+                });
+        })
+        .catch(err => {
+            res.render(500).json({
+                error: err.message
+            });
+        })
 });
 
 //CERRAR SESION
-router.get('/logout', function(req,res,next){
-	req.logout();
-	res.redirect('/')
+router.get('/logout', function(req, res, next) {
+    req.logout();
+    res.redirect('/')
 });
 
-router.post('/login', passport.authenticate('local.signin',{
-	successRedirect: '/admin/control',
-	failureRedirect: '/login',
-	failureFlash: true
+router.post('/login', passport.authenticate('local.signin', {
+    successRedirect: '/admin/control',
+    failureRedirect: '/login',
+    failureFlash: true
 }));
 
 //Para saber si esta logiado o no
-function isLoggedIn (req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect('/login')
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login')
 }
 
-function notLoggedIn (req, res, next){
-	if(!req.isAuthenticated()){
-		return next();
-	}
-	res.redirect('/index')
+function notLoggedIn(req, res, next) {
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/index')
 }
 
 module.exports = router;
