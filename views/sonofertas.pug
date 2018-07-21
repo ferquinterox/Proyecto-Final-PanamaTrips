@@ -16,27 +16,29 @@ block content
                                         thead.thead-dark
                                             tr
                                                 th(scope="col") N°
-                                                th(scope="col") Actividad
+                                                th(scope="col") Oferta
                                                 th(scope="col") Compañia
                                                 th(scope="col") Descripcion
                                                 th(scope="col") Provincia
-                                                th(scope="col") Contacto
+                                                th(scope="col") Telefono
                                                 th(scope="col") Correo
-                                                th(scope="col") Habitacion
+                                                th(scope="col") Estado
+                                                th(scope="col") Tiempo en Horas
                                                 th(scope="col") Precio
                                         tbody
-                                            for lista, n in actividad
+                                            for lofert, n in oferta
                                                 tr
                                                     
                                                     td.bg-secondary.text-light= n+1
-                                                    td #{lista.nombreact}
-                                                    td #{lista.compania}
-                                                    td #{lista.descripcion}
-                                                    td #{lista.provincia} 
-                                                    td #{lista.contacto}
-                                                    td #{lista.correo}
-                                                    td #{lista.habdescripcion}
-                                                    td #{lista.precio}
+                                                    td #{lofert.nombreofer}
+                                                    td #{lofert.compania}
+                                                    td #{lofert.descripcion}
+                                                    td #{lofert.provincia} 
+                                                    td #{lofert.telefono}
+                                                    td #{lofert.correo}
+                                                    td #{lofert.estado}
+                                                    td #{lofert.tiempo}
+                                                    td #{lofert.precio}
                                                     td
-                                                        input(type='hidden', value=lista._id, name='id')
+                                                        input(type='hidden', value=lofert._id, name='id')
                                                         input(type='submit',value='Fuck').btn.btn-success

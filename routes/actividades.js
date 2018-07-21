@@ -12,7 +12,7 @@ var file = require('../public/js/files')
 mongoose.Promise = global.Promise; 
 //Inicio
 router.get("/", (req, res) => {
-    actividades.find().select('nombreact imagenes').limit(3)
+    actividades.find().select('nombreact imagenAct').limit(3)
     .exec()
     .then(doc => {
         console.log(doc)
@@ -73,36 +73,22 @@ router.get('/ofertas/:ofertasId',function(req, res){
 //Pagina de actividades
 router.get('/actividades/:actividadId', function(req, res){
     var id = req.params.actividadId;
-    var info_act = {};
     actividades.findById(id)
     .exec()
     .then(result => {
-        info_act = {info: result};
-    })
-    .catch(err => {
-        console.log(err)
-    });
-    actividades.aggregate([{ $sample: { size:3 } }])
-    .exec()
-    .then(result =>{
         res.status(200).render("actividad", {
-            similares: result,
-            actividad: info_act.info
+            actividad: result
         });
-        console.log(info_act.info);
     })
     .catch(err => {
         res.status(500).json({
-            error: err.message
+            error: err
         })
-    });
+    })
 });
 
 //Pagina para insertar actividades
-router.post('/insertar_act', file.any('imagen'), function(req, res, next){
-        var paths = req.files.map(function(file) {
-            return file.path; // or file.originalname
-          });
+router.post('/insertar_act', file.single('imagen'), function(req, res, next){
         var actividad = new actividades({
             _id: mongoose.Types.ObjectId(),
             nombreact: req.body.nombreact,
@@ -115,7 +101,7 @@ router.post('/insertar_act', file.any('imagen'), function(req, res, next){
             secprecio: req.body.sec,
             indoadicional: req.body.infomas,
             fecha_pub: moment().toISOString(),
-            imagenes: paths
+            imagenAct: req.file.path
         });
         actividad.save().then(result => {
             console.log(result);
@@ -144,14 +130,13 @@ router.get('/pago', function(req, res){
 });
 
 //Pagina de ofertas
-router.get('/ofertas', function(req, res){
-    res.render("ofertas");
-});
-
 router.get('/adminOfertas', function(req, res){
     res.render("adminOfertas");
 });
-
+//Pagina de ofertas
+router.get('/ofertas', function(req, res){
+    res.render("ofertas");
+});
 //Pagina de registro
 /*router.get('/registro', function(req, res){
     res.render("registro");
@@ -177,19 +162,6 @@ router.get('/login', function(req, res){
 	res.render('login',{messages: messages, hasErrors: messages.length > 0 });
 });
 
-router.get('/perfil:personaID', function(req, res, next){
-    var id = req.params.personaID;
-    User.findById(id)
-    .exec()
-    .then(result => {
-        res.render('profile', {
-            perfil: result
-        });
-    })
-    .catch(err =>{
-        res.render(500).json({error: err.message});
-    })
-});
 router.get('/logout', function(req,res,next){
 	req.logout();
 	res.redirect('/')

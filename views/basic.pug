@@ -28,15 +28,6 @@ html
                                 a(href="/", class="nav-link")
                                     i(class="fa fa-home") 
                                         span.ml-1 Inicio      
-                            li(class="nav-item")
-                                a(href="/adminOfertas", class="nav-link")
-                                    i(class="fa fa-tag") 
-                                        span.ml-1 AdOfertas
-                            li(class="nav-item")
-                                a(href="/ofertas", class="nav-link")
-                                    i(class="fa fa-plane") 
-                                        span.ml-1 Ofertas
-
                             li(class="nav-item dropdown")
                                 a(href="#", class="nav-link dropdown-toggle", id="navbarDropdownMenuLink", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
                                     i(class="fa fa-plane") 
@@ -54,7 +45,10 @@ html
                                     a(class='dropdown-item', href='#') Panamá        
                                     a(class='dropdown-item', href='#') Veraguas        
                                     a(class='dropdown-item', href='#') Comarcas
-                            
+                            li(class="nav-item")
+                                a(href="/ofertas", class="nav-link")
+                                    i(class="fa fa-tag") 
+                                        span.ml-1 Ofertas
                             li(class="nav-item")
                                 a(href='/sobreNosotros', class="nav-link")
                                     i(class="fa fa-users") 
@@ -85,7 +79,7 @@ html
                                 li 
                                     a(href="#") Terminos y Condiciones
                                 li 
-                                    a(href="#") Sobre Nosotros
+                                    a(href="/sobreNosotros") Sobre Nosotros
                 .container
                     div(class="row mt-4")
                         div(class="col-sm-12")

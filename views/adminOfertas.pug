@@ -9,19 +9,26 @@ block content
             div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
                 .card.shadow-lg.mb-3
                     .card-header 
-                        span(class='fa fa-users fa-1x') ¡Ofertas!
+                        span(class='fa fa-tags fa-1x') ¡Ofertas!
                     .card-body
                         .container
                             .row 
                                 h3.col-sm-12 PanamaTrips!
                             form(action="/insertar_ofert", method='post', enctype='multipart/form-data')
-                                
                                 div(class='form-group row') 
-                                    label(class='col-sm-2 col-form-label') Actividad:
+                                    label(class='col-sm-2 col-form-label') Seleccione las imagenes:
                                     .col-sm-10
-                                        select(class='form-control', name='actividad')
-                                            option(value='a1') Actividad 1
-                                            option(value='a2') Actividad 2
+                                        input#subirimagen(type='file', name='imagen[]', multiple, onchange='archivos()')
+                                        p.text-success(id='buenArchivo')
+                                        p.text-danger(id='malArchivo')
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label') Oferta:
+                                    .col-sm-10
+                                        input(type="text", class='form-control', name='nombreof', placeholder='Nombre de su Oferta')
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label') Descripción:
+                                    .col-sm-10
+                                        textarea#exampleFormControlTextarea1.form-control(rows='1', name="descrip")
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='provincias') Provincia:
                                     .col-sm-10
@@ -35,15 +42,23 @@ block content
                                             option(value='lossantos') Los Santos 
                                             option(value='panama') Panamá
                                             option(value='veraguas') Veraguas
-                                            option(value='comarcas') Comarcas 
+                                            option(value='comarcas') Comarcas
 
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label') Tel. de Contacto:
+                                    .col-sm-10
+                                        input(type="text", class='form-control', name='tel', placeholder='8556677')
+                                
+                                div(class='form-group row') 
+                                    label(class='col-sm-2 col-form-label', for='correoc') Correo:
+                                    .col-sm-10
+                                        input(type='text', class='form-control', name="correo")
+                                
                                 div(class='form-group row has-feedback')
                                     label(class='col-sm-2 col-form-label', for='contrasena') Precios:
                                     .col-sm-5
-                                        input(type='text', name='precio', class='form-control pass')
-                                    select(class='col-sm-5 form-control', name='sec')
-                                                option(value='prexper') Precio por persona
-                                                option(value='prexhab') Precio por habitación               
+                                        input(type='text', name='precio', class='form-control pass', placeholder='00.00')
+                                    input(type='text ',value='Precio por Persona',readonly ,name='prexper', class='col-sm-5 form-control pass')
                                 
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='tiempo') Tiempo de la Oferta:
@@ -54,20 +69,16 @@ block content
                                             option(value='72') 3 Días
                                             option(value='96') 4 Días
                                             option(value='120') 5 Días
+                                
                                 div(class='form-group row') 
-                                    label(class='col-sm-2 col-form-label', for='estado') Estado de la oferta:
+                                    label(class='col-sm-2 col-form-label') Compañía:
                                     .col-sm-10
-                                        select(class='form-control', name='estado')
-                                            option(value='false') Guardar Oferta
-                                            option(value='false') Eliminar Oferta
-                                        
+                                        input(type="text", class='form-control', name='compa')
+                                
                                 div(class='form-group row')
                                     .col-sm-12.d-flex.justify-content-end
                                         input.btn.btn-primary.btn-lg.active(type='submit', value='Guardar Datos')
                                     .col-sm-10
-                                        a.btn.btn-primary(href='/admin/control', role='button').btn.btn-info Regresar al Panel de control
-                                    
-                                
-                                                        
+                                        a.btn.btn-primary(href='/admin/control', role='button').btn.btn-info Regresar al Panel de control                       
 block scripts 
     script(src="/js/acciones.js")
