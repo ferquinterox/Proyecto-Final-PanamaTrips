@@ -32,6 +32,19 @@ actividadesSchema.statics.findAll = function(callback){
     })
 }
 
+/* actividadesSchema.statics.findAll = function(callback){
+    Actividades.findOne({provincia:provincia},'provincia',function(err,actividades) {
+        if(err)
+            return callback(err);
+        else if(!Actividades)
+            return callback(null,'No existe ninguna actividad para esta provincia');
+        Actividades.find({provincia:provincia}, function(err){
+            if(err)
+                return callback(err);
+            return callback();//Success
+        });
+})   
+} */
 
 actividadesSchema.statics.delete = function(id,callback){
     Actividades.findOne({_id:id},'id',function(err,users){
