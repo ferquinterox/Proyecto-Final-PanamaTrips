@@ -40,21 +40,11 @@ block content
                         div(id="actividades" role="tabpanel" class="tab-pane fade")
                             .container
                                 .row
-                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
-                                        .actividad
-                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
-                                            p  Info thumbnail
-                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
-                                        .actividad
-                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
-                                            p  Info thumbnail
-                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
-                                        .actividad
-                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
-                                            p  Info thumbnail
-                                    div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
-                                        .actividad
-                                            img(src="/css/tucan.jpg", alt="Foto actividad", class='img-thumbnail')
-                                            p  Info thumbnail
+                                    each act, i in actividades
+                                        div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
+                                            .actividad
+                                                img(src='/'+act.actividad.imagenes[0], alt="Foto actividad", class='img-thumbnail')
+                                                p  #{act.actividad.nombreact}
+                                                p #{act.fecha_res}
 
 

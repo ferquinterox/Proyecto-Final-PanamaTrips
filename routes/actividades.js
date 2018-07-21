@@ -3,9 +3,10 @@ var router = express.Router();
 const mongoose = require('mongoose');
 var moment = require('moment');
 var passport = require('passport');
+
 var User = require('../models/users');
 var actividades = require('../models/actividades');
-
+var Reservas = require('../models/reservas')
 var file = require('../public/js/files')    
 
 mongoose.Promise = global.Promise; 
@@ -27,7 +28,7 @@ router.get("/", (req, res) => {
     
 });
 
-//Pagina de actividades
+//ACTIVIDAD ESPECIFICA
 router.get('/actividades/:actividadId', function(req, res){
     var id = req.params.actividadId;
     var info_act = {};
@@ -35,27 +36,28 @@ router.get('/actividades/:actividadId', function(req, res){
     .exec()
     .then(result => {
         info_act = {info: result};
+        actividades.aggregate([{ $sample: { size:3 } }])
+        .exec()
+        .then(result =>{
+            res.status(200).render("actividad", {
+                similares: result,
+                actividad: info_act.info
+            });
+            console.log(info_act.info);
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err.message
+            })
+        });
     })
     .catch(err => {
         console.log(err)
     });
-    actividades.aggregate([{ $sample: { size:3 } }])
-    .exec()
-    .then(result =>{
-        res.status(200).render("actividad", {
-            similares: result,
-            actividad: info_act.info
-        });
-        console.log(info_act.info);
-    })
-    .catch(err => {
-        res.status(500).json({
-            error: err.message
-        })
-    });
+   
 });
 
-//Pagina para insertar actividades
+//INSERTAR ACTIVIDADES
 router.post('/insertar_act', file.any('imagen'), function(req, res, next){
         var paths = req.files.map(function(file) {
             return file.path; // or file.originalname
@@ -91,8 +93,22 @@ router.get('/provincias', function(req, res){
 });
 
 //Pagina de pago (PAYPAL)
-router.get('/pago', function(req, res){
-    res.render("pago");
+router.post('/pago', function(req, res){
+    var reserva = new Reservas({
+        _id: mongoose.Types.ObjectId(),
+        usuario: req.body.usuario,
+        actividad: req.body.actividad,
+        fecha_res: moment().toISOString()
+    });
+    reserva.save().then(result => {
+        console.log(result);
+        res.render("pago");
+    }).catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    });     
+    
 });
 
 //Pagina de ofertas
@@ -125,19 +141,38 @@ router.get('/login', function(req, res){
 	res.render('login',{messages: messages, hasErrors: messages.length > 0 });
 });
 
-router.get('/perfil:personaID', function(req, res, next){
+//PERFIL DEL USUARIO
+router.get('/perfil/:personaID', function(req, res, next){
     var id = req.params.personaID;
-    User.findById(id)
-    .exec()
-    .then(result => {
-        res.render('profile', {
-            perfil: result
+    var info_per = {};
+    var info_act = {};
+    User.findById(id).exec().then(result => {
+
+        info_per = {info: result};
+        Reservas.find({"usuario": id})
+        .populate('actividad', 'imagenes nombreact descripcion')
+        .exec()
+        .then(resultado =>{
+            info_act = {act: resultado.actividad};
+            console.log(info_act);
+            console.log(resultado);
+            res.render('profile', {
+                actividades: resultado,
+                perfil: info_per.info
+            })}
+
+        ).catch(err => {
+                res.status(500).json({
+                    error: err
+                })
         });
     })
     .catch(err =>{
         res.render(500).json({error: err.message});
     })
 });
+
+//CERRAR SESION
 router.get('/logout', function(req,res,next){
 	req.logout();
 	res.redirect('/')
@@ -157,11 +192,11 @@ function isLoggedIn (req, res, next){
 	res.redirect('/login')
 }
 
-
 function notLoggedIn (req, res, next){
 	if(!req.isAuthenticated()){
 		return next();
 	}
 	res.redirect('/index')
 }
+
 module.exports = router;
