@@ -35,16 +35,16 @@ html
                                 div(class='dropdown-menu', aria-labelledby="navbarDropdownMenuLink")
                                     a(class='dropdown-item', href='/provincias') Todas las provincias
                                     div.dropdown-divider
-                                    a(class='dropdown-item', href='#') Bocas del Toro        
-                                    a(class='dropdown-item', href='#') Coclé        
-                                    a(class='dropdown-item', href='#') Colón        
-                                    a(class='dropdown-item', href='#') Chiriquí        
-                                    a(class='dropdown-item', href='#') Darién      
-                                    a(class='dropdown-item', href='#') Herrera        
-                                    a(class='dropdown-item', href='#') Los Santos       
-                                    a(class='dropdown-item', href='#') Panamá        
-                                    a(class='dropdown-item', href='#') Veraguas        
-                                    a(class='dropdown-item', href='#') Comarcas
+                                    a(class='dropdown-item', href='/actividad/panama') Bocas del Toro        
+                                    a(class='dropdown-item', href='/actividad/cocle') Coclé        
+                                    a(class='dropdown-item', href='/actividad/colon') Colón        
+                                    a(class='dropdown-item', href='/actividad/chiriqui') Chiriquí        
+                                    a(class='dropdown-item', href='/actividad/darien') Darién      
+                                    a(class='dropdown-item', href='/actividad/herrera') Herrera        
+                                    a(class='dropdown-item', href='/actividad/lossantos') Los Santos       
+                                    a(class='dropdown-item', href='/actividad/panama') Panamá        
+                                    a(class='dropdown-item', href='/actividad/veraguas') Veraguas        
+                                    a(class='dropdown-item', href='/actividad/gunayala') Guna Yala
                             li(class="nav-item")
                                 a(href="/ofertas", class="nav-link")
                                     i(class="fa fa-tag") 
@@ -55,7 +55,8 @@ html
                                         span.ml-1 Sobre Nosotros
                             //esto es para que si esta logueado le salga cerrar sesion sino no
                     if login
-                        a(href='/logout', class="btn btn-primary rounded") Cerrar Sesión
+                        a(href='/perfilid', class="btn btn-primary rounded") Perfil
+                        a(href='/logout', class="btn btn-primary ml-2 rounded") Cerrar Sesión
                     else 
                         a(href='/login', class="btn btn-primary rounded") Iniciar Sesión
                         a(href='/registro', class="btn btn-info ml-2 rounded") Registrate
