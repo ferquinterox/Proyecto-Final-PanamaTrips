@@ -6,9 +6,14 @@ block content
       .row(class="mt-4 info mb-4")
         div(class='col-sm-12')
           h4 Proceso de Reservación:
+        div(class="col-sm-12 col-md-4 col-lg-4 col-xl-4")
+          button( class='btn btn-info w-100', onclick= 'window.history.back();') 
+            i(class="fa fa-arrow-circle-left") 
+              span Regresar a la actividad
+      .row
         div(class='col-sm-12 col-md-4 col-lg-4 mt-2')
-          img(src="/css/logo.png", alt="Logo", class='w-100 logo')            
-        div(class='col-sm-12 col-md-8 col-lg-8')
+          img(src="/css/logo.png", alt="Logo", class='w-100 logo mb-2')            
+        div(class='col-sm-12 col-md-8 col-lg-8 mb-3')
           .card
             .card-header
               span(class='fa fa-cc-paypal fa-1x top')  Compra seguro en PanamaTrips con PayPal
@@ -25,12 +30,12 @@ block content
                     h5 Descripción:
                     p #{actividad.descripcion}
                     h5 Precio:
-                    p B/. #{actividad.precio} 
+                    p#precio #{actividad.precio} 
                     h5 Condición:
                     p #{actividad.secprecio}
                     h5 Para cuantas personas:
                     input(id='cantidadper', type="number", name="cantidad", min='1', value='1')
-                  div(class='col-sm-12 d-flex justify-content-center mt-4')
+                  div(class='col-sm-12 d-flex justify-content-center mt-4 mb-1')
                         input(type="radio" name="payment-option" value="paypal" checked="true")
                         img(src="/css/paypal-mark.jpg" alt="Pague con PayPal")
                   div(class='col-sm-12 d-flex justify-content-center')

@@ -56,21 +56,52 @@
 
         commit: true,
 
-        payment: function(data, actions) {
+        payment: function (data, actions) {
+            var precio = parseFloat(document.getElementById('precio').innerHTML).toFixed(2);;
+            var cantidad = document.getElementById('cantidadper').value;
+            console.log("precio: " + precio + "cantidad: " + cantidad);
+            var impuesto = (precio * cantidad) * 0.07;
+            impuesto = +impuesto.toFixed(2);
+            var total_price = (precio * cantidad) + impuesto;
+            total_price = +total_price.toFixed(2);
+            console.log("impuesto: " + impuesto + "Precio total: " + total_price);
             return actions.payment.create({
-                payment: {
-                    transactions: [
-                        {
-                            amount: { total: '0.01', currency: 'USD' }
-                        }
-                    ]
+              transactions: [{
+                amount: {
+                  total: total_price,
+                  currency: 'USD',
+                  details: {
+                    subtotal: precio*cantidad,
+                    tax: impuesto
+                  }
+                },
+                description: 'Reservación para la actividad u oferta',
+                //invoice_number: '12345', Insert a unique invoice number
+                payment_options: {
+                  allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
+                },
+                item_list: {
+                  items: [
+                    {
+                      name: 'hat',
+                      description: 'Brown hat.',
+                      quantity: cantidad,
+                      price: precio,
+                      tax: '0',
+                      sku: '1',
+                      currency: 'USD'
+                    }
+                  ]
                 }
+              }],
+              note_to_payer: 'Contactenos en caso de que salga algun inconveniente.'
             });
-        },
+          },
+          
 
         onAuthorize: function(data, actions) {
             return actions.payment.execute().then(function() {
-                window.alert('Payment Complete!');
+                window.alert('Pago completado!');
             });
         }
 

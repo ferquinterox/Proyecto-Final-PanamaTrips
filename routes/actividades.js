@@ -132,7 +132,6 @@ router.get('/ofertas', function(req, res) {
 });
 */
 //REGISTRO
-
 router.get('/registro', function(req, res) {
     let messages = req.flash('error');
     res.render('registro', {
@@ -147,7 +146,9 @@ router.post('/registrar', passport.authenticate('local.signup', {
     failureFlash: true
 }));
 
-
+router.get('/registro-compania', function(req, res, next){
+    res.render('registroHotel');
+});
 //LOGIN
 router.get('/login', function(req, res) {
     let messages = req.flash('error');
