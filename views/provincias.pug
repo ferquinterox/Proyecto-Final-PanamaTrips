@@ -4,14 +4,14 @@ block header
 block content
     .container
           .row(class="mt-5")
-            form(action='/mostrar_act', method='post')
+            form(action='/provincias:provincia', method='get')
             div(class="col-sm-12 col-md-14 col-lg-6 col-xl-6")
                 div(class="card bd-dark text-whiter")
                     img(class="card-img banner2" src="/css/panama.jpg" alt="Card image")    
                     div(class="card-img-overlay")
                         h2.card-title  Panamá
                         p Descubre las actividades disponibles en esta provincia
-                        input.btn.btn-primary.btn-lg.active(type='submit', value='panama' name='provincia')
+                        input.btn.btn-primary.btn-lg.active(type='submit', value='panama' name='panama')
 
 
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
