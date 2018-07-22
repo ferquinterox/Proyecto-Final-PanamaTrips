@@ -86,13 +86,13 @@ router.get('/adminOfertas',isLoggedIn, function(req, res){
 });
 
 //Pagina de Ofertas
-router.get('/control',isLoggedIn, function(req, res){
+router.get('/controlof',isLoggedIn, function(req, res){
      ofertas.find()
     .select('nombreofer compania descripcion provincia telefono correo tiempo precio fecha_pub estado') 
     .exec()
     .then(doc => {
         console.log(doc)
-        res.render("control_admin", {
+        res.render("control_adminof", {
             oferta: doc
         });
     }).catch(err => {
@@ -102,8 +102,8 @@ router.get('/control',isLoggedIn, function(req, res){
 });
 
 
-
-router.post('/admin/control/actualizarof',isLoggedIn, function(req, res, next){
+//ACTUALIZAR OFERTAS
+router.post('/admin/controlof/actualizarof',isLoggedIn, function(req, res, next){
     ofertas.findOneAndUpdate({
         _id:req.body.id},{ $set: {
             nombreofer: req.body.oferta,
@@ -114,9 +114,9 @@ router.post('/admin/control/actualizarof',isLoggedIn, function(req, res, next){
             correo: req.body.correo,
             tiempo: req.body.tiempo,
             precio: req.body.precio,
-            fecha_pub: req.body.fecha,
+            fecha_pub: req.body.fechaof,
             estado: req.body.activo}}).exec().then(result => {
-        res.redirect('/admin/control');
+        res.redirect('/admin/controlof');
     })
     .catch(err => {
         console.log(err);
@@ -124,7 +124,19 @@ router.post('/admin/control/actualizarof',isLoggedIn, function(req, res, next){
     });
 });
 
-
+//ELIMINAR
+router.post('/admin/controlof/eliminarof', function(req, res, next){
+	oferta.remove({
+        _id: req.body.id
+    }).exec()
+    .then(result => {
+        res.redirect('/admin/controlof');
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
+});
 
 //Para saber si esta logiado o no
 function isLoggedIn (req, res, next){

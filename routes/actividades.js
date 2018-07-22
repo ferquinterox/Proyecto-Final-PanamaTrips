@@ -108,7 +108,7 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
     });
     oferta.save().then(result => {
         console.log(result);
-        res.redirect('/admin/control');    
+        res.redirect('/admin/controlof');    
     }).catch(err => {
         res.status(500).json({
             error: err
@@ -239,7 +239,8 @@ router.get('/logout', function(req,res,next){
 });
 
 router.post('/login', passport.authenticate('local.signin',{
-	successRedirect: '/admin/control',
+    successRedirect: '/admin/control',
+    successRedirect: '/admin/controlof',
 	failureRedirect: '/login',
 	failureFlash: true
 }));
