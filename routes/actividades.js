@@ -119,7 +119,7 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
 
 
 //mostrar actividades por cada provincia 
-router.get('/actividad/:provincia', function(req, res, next){
+router.get('/actividad/:provincia', function(req, res){
     var provincia= req.params.provincia;
     actividades.find({'provincia':provincia})
     .exec()
