@@ -14,7 +14,7 @@ var ofertas = require('../models/ofertas');
 var users=require('../models/users');
 
 //Pagina para traer las actividades
-router.get('/control',isLoggedIn, function(req, res){
+router.get('/control',isLoggedIn,isAdmin, function(req, res){
     actividad.find()
    .select('_id nombreact compania descripcion provincia contacto correo fecha_pub estado habdescripcion precio')
    .exec()
@@ -33,10 +33,6 @@ router.get('/control',isLoggedIn, function(req, res){
 router.post('/admin/control/actualizaruser', function(req, res, next){
     users.findOneAndUpdate({
         _id:req.body.id},{ $set: {
-            nombre:req.body.nombre,
-            apellido:req.body.apellido,
-            email:req.body.email,
-            provincia:req.body.provincia,
             rol:req.body.rol}}).exec().then(result => {
         res.redirect('/admin/controluser');
     })
