@@ -10,8 +10,10 @@ var userSchema = new mongoose.Schema({
     provincia: {type: String, unique: false, required: true},
     password: { type: String, unique: false, required: true, trim: true },
     passConfirm: { type: String, unique: false, required: true, trim: true },
+    rol:{type: String, unique: false, required: true, trim: true, default:'usuario'}
 },{collection:'users'});
 
+let Users = mongoose.model('Users', userSchema);
 
 userSchema.methods.encryptPassword = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10),null);
@@ -23,22 +25,29 @@ userSchema.methods.validPassword = function(password){
     
 };
 
-
-/*userSchema.statics.authenticate = function(email,password,callback){
-    User.findOne({email:email},'email password',function(err,user){
+userSchema.statics.findAll = function(callback){
+    Users.find({},function(err,user) {
         if(err)
             return callback(err);
         else if(!user)
             return callback();
-        var hash = user.password;
-        if(bcrypt.compareSync(password, hash))
-            return callback(null,user)
-        else
-            return callback();
+        return callback(null,user);
     })
-    
-   
-}*/
+}
+
+userSchema.statics.delete = function(id,callback){
+    Users.findOne({_id:id},'id',function(err,user){
+        if(err)
+            return callback(err);
+        else if(!Users)
+            return callback(null,'Este usuario no existe');
+        Users.deleteOne({_id:id}, function(err){
+                if(err)
+                    return callback(err);
+                return callback();//Success
+            });
+    })   
+}
 
 let User = mongoose.model('User',userSchema);
 

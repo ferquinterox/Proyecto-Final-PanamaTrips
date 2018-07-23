@@ -31,7 +31,7 @@ db.once('open', () => {
 });
 
 //Puerto nuevo llamado NODE_JS_PORT
-const port = process.env.NODE_JS_PORT || 4000;
+const port = process.env.NODE_JS_PORT || 3000;
 
 //Rutas para que pug sepa identificar
 app.set('views', path.join(__dirname, 'views'));
