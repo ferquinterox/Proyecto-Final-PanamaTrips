@@ -31,7 +31,11 @@ block content
                             p Descripcion: #{lista.descripcion}
                             span(class="border border-danger") $ #{lista.precio}
                             p
-                            a(href='/unaoferta'+lista._id, class="btn btn-info rounded ") Más Información
+                            //a(href='/unaoferferta'+unaofer._id, class="btn btn-info rounded ") Más Información
+                            form(action='ofertas/:ofertaId', method='GET')
+                                input(type='hidden', value=lista._id, name='id')
+                                td
+                                    input(type='submit',value='Más Información').btn-info.rounded
                             p
                         
                         

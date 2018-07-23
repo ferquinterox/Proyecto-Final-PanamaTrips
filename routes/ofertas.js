@@ -47,14 +47,13 @@ router.get('/ofertas',function(req, res){
 });
 
 //oferta especifica con todo de la pag. unaoferta.pug
-router.get('/ofertas/:ofertaId', function(req, res) {
+router.get('ofertas/:ofertaId', function(req, res) {
     var id = req.params.ofertaId;
-    var info_act = {};
+    var info_ofert = {};
     ofertas.findById(id)
-        .select('_id nombreofer compania descripcion provincia telefono imagenes correo tiempo precio fecha_pub estado')
         .exec()
         .then(result => {
-            info_act = {
+            info_ofert = {
                 info: result
             };
             ofertas.aggregate([{
@@ -66,9 +65,9 @@ router.get('/ofertas/:ofertaId', function(req, res) {
                 .then(result => {
                     res.status(200).render("unaoferta", {
                         similares: result,
-                        actividad: info_act.info
+                        unaofer: info_ofert.info
                     });
-                    console.log(info_act.info);
+                    console.log(info_ofert.info);
                 })
                 .catch(err => {
                     res.status(500).json({
