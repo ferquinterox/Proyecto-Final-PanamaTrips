@@ -178,7 +178,7 @@ router.post('/admin/controlof/actualizarof',isLoggedIn, function(req, res, next)
     });
 });
 
-//ELIMINAR
+//ELIMINAR OFERTAS
 router.post('/admin/controlof/eliminarof', function(req, res, next){
 	ofertas.remove({
         _id: req.body.id

@@ -35,7 +35,7 @@ block content
                                         tbody
                                             for lofert, i in oferta 
                                                     tr
-                                                        form(action='admin/control/actualizarof', method='post')
+                                                        form(action='admin/controlof/actualizarof', method='POST')
                                                             td.bg-secondary.text-light= i+1
                                                             td #{lofert.nombreofer}
                                                                 input#oferta(type='text' name='oferta')
@@ -71,7 +71,7 @@ block content
                                                             td
                                                                 input(type='hidden', value=lofert._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success
-                                                        form(action='admin/control/eliminarof', method='POST')
+                                                        form(action='admin/controlof/eliminarof', method='POST')
                                                             input(type='hidden', value=lofert._id, name='id')
                                                             td
                                                                 input(type='submit',value='Borrar').btn.btn-danger
