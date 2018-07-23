@@ -1,0 +1,64 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/control.css")
+block content
+    .container.mb-4
+        .row
+            .col-sm-12 
+                h3.mt-3 ¡Bienvenido administrador, #{email}!
+        .col-sm-12
+        .row
+            .col-sm-12
+                div(class="card bg-dark text-white")
+                    img(class="card-img", src="/css/bocas-toro-panama.jpg", alt="Card image")
+                    div(class="card-img-overlay")
+                        h4.card-title Control de los Usuarios
+                        .card-body
+                            div(class='pre-scrollable')
+                                table.table.table-hover.table-light.mb-0
+                                        thead.thead-dark
+                                            tr
+                                                th(scope="col") N°
+                                                th(scope="col") Nombre
+                                                th(scope="col") Apeliido
+                                                th(scope="col") Email
+                                                th(scope="col") Provincia
+                                                th(scope="col") Rol
+                                                th(scope="col") Actualizar
+                                                th(scope="col") Eliminar
+                                        tbody
+                                            for lista, n in usuario
+                                                    tr
+                                                        form(action='admin/control/actualizaruser', method='post')     
+                                                            td.bg-secondary.text-light= n+1
+                                                            td #{lista.nombre}
+                                                                input#nombre(type='text' name='nombre')
+                                                            td #{lista.apellido}
+                                                                input#apellido(type='text' name='apellido')
+                                                            td #{lista.email}
+                                                                input#email(type='email' name='email' placeholder='example@gmail.com')
+                                                            td #{lista.provincia}
+                                                                select#provincia( name='provincia')
+                                                                    option(value='Bocas del toro') Bocas del Toro
+                                                                    option(value='Cocle') Coclé
+                                                                    option(value='Colon') Colón
+                                                                    option(value='Chiriqui') Chiriquí
+                                                                    option(value='Darien') Darién
+                                                                    option(value='Herrera') Herrera
+                                                                    option(value='Los Santos') Los Santos 
+                                                                    option(value='Panama') Panamá
+                                                                    option(value='Veraguas') Veraguas
+                                                                    option(value='Comarcas') Comarcas
+                                                                    option(value='-') Prefiero no decir
+                                                                    option(value='Extranjero') Extranjero 
+                                                            td #{lista.rol}
+                                                                select#rol(name="rol")
+                                                                    option(value="usuario") Usuario
+                                                                    option(value="compania") Compañia
+                                                            td
+                                                                input(type='hidden', value=lista._id, name='id')
+                                                                input(type='submit',value='Actualizar').btn.btn-success
+                                                        form(action='admin/control/eliminaruser', method='POST')
+                                                            input(type='hidden', value=lista._id, name='id')
+                                                            td
+                                                                input(type='submit',value='Borrar').btn.btn-danger

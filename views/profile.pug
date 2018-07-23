@@ -5,9 +5,12 @@ block content
     .container
         .row.mt-4
             .col-sm-12.d-flex.justify-content-center
-                img(src="/css/hoteleria.jpg", alt="Imagen de perfil", class='rounded-circle perfil')
+                if perfil.imagenperfil
+                    img(src="/"+ perfil.imagenperfil, alt="Imagen de perfil", class='rounded-circle perfil')
+                else 
+                    img(src="/css/default_profile.jpg", alt="Imagen de perfil", class='rounded-circle perfil')   
             .col-sm-12.d-flex.justify-content-center
-                h2.mt-2 Perfil de #{perfil.nombre} #{perfil.apellido}
+                h2.mt-2 #{perfil.nombre} #{perfil.apellido}
         .row.mb-4.mt-2
             .col-sm-12.w-100
                     ul.nav.nav-tabs
@@ -40,11 +43,14 @@ block content
                         div(id="actividades" role="tabpanel" class="tab-pane fade")
                             .container
                                 .row
-                                    each act, i in actividades
-                                        div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
-                                            .actividad
-                                                img(src='/'+act.actividad.imagenes[0], alt="Foto actividad", class='img-thumbnail')
-                                                p  #{act.actividad.nombreact}
-                                                p #{act.fecha_res}
+                                    if actividades
+                                        each act, i in actividades
+                                            div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
+                                                .actividad
+                                                    img(src='/'+act.actividad.imagenes[0], alt="Foto actividad", class='img-thumbnail')
+                                                    p  #{act.actividad.nombreact}
+                                                    p #{act.fecha_res}
+                                    else 
+                                        h3 No ha solicitado ninguna actividad antes!
 
 

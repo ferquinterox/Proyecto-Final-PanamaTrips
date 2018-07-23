@@ -1,21 +1,52 @@
 extends basic.pug
+block header
+  link(rel="stylesheet", href="/css/pago.css")
 block content
-
-
-  h2 Metodo de pago
-       .container    
-        .row(class="mt-4 info")    
-            div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
-                img(class="img-fluid w-100 ", src="/css/playa-venao-3.jpg", alt="Imagen descriptiva")
-            div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
-                h4.mt-2 Selina Hotel, 2 dias y desayuno incluido.  Mastercard 
-            
-                .card(style='width: 18rem;')
-                  .card-header
-                    |Mastercard
-                  ul.list-group.list-group-flush
-                   li.list-group-item Numero de la tarjeta:
-                   input#exampleInputEmail1.form-control-sm(type='text')
-                   li.list-group-item Estacionamientos Gratis
-                   li.list-group-item Mascotas       	
-                  button.btn.btn-primary(type='submit') Pagar!
+    .container    
+      .row(class="mt-4 info mb-4")
+        div(class='col-sm-12')
+          h4 Proceso de Reservación:
+        div(class="col-sm-12 col-md-4 col-lg-4 col-xl-4")
+          button( class='btn btn-info w-100', onclick= 'window.history.back();') 
+            i(class="fa fa-arrow-circle-left") 
+              span Regresar a la actividad
+      .row
+        div(class='col-sm-12 col-md-4 col-lg-4 mt-2')
+          img(src="/css/logo.png", alt="Logo", class='w-100 logo mb-2')            
+        div(class='col-sm-12 col-md-8 col-lg-8 mb-3')
+          .card
+            .card-header
+              span(class='fa fa-cc-paypal fa-1x top')  Compra seguro en PanamaTrips con PayPal
+            .card-body
+              .container
+                .row
+                  div(class='col-sm-12 col-md-4 col-lg-4')
+                    img(src="/"+actividad.imagenes[0], alt="Logo", class='w-100 logo') 
+                  div(class='col-sm-12 col-md-8 col-lg-8')
+                    h5 Actividad:
+                    p #{actividad.nombreact}
+                    h5 Compañia:
+                    p #{actividad.compania}
+                    h5 Descripción:
+                    p #{actividad.descripcion}
+                    h5 Precio:
+                    p#precio #{actividad.precio} 
+                    h5 Condición:
+                    p #{actividad.secprecio}
+                    h5 Para cuantas personas:
+                    input(id='cantidadper', type="number", name="cantidad", min='1', value='1')
+                  div(class='col-sm-12 d-flex justify-content-center mt-4 mb-1')
+                        input(type="radio" name="payment-option" value="paypal" checked="true")
+                        img(src="/css/paypal-mark.jpg" alt="Pague con PayPal")
+                  div(class='col-sm-12 d-flex justify-content-center')
+                        input(type="radio" name="payment-option" value="card")
+                        img(src="/css/card-mark.png" alt="Se aceptan Visa, MasterCard, American Express", class='mw-100', height='48px')
+                  div(class='col-sm-12 d-flex justify-content-center mt-4')
+                      #paypal-button-container
+                      #card-button-container.hidden
+                        button.btn.btn-primary 
+                           span(class='fa fa-cc-paypal fa-1x')  Continuar
+block scripts
+  script(src="https://www.paypalobjects.com/api/checkout.js")
+  script(src="/js/paypal.js")
+           
