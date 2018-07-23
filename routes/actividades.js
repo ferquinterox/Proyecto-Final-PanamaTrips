@@ -7,7 +7,6 @@ var passport = require('passport');
 var User = require('../models/users');
 var Compania = require('../models/companias');
 var actividades = require('../models/actividades');
-var ofertas = require('../models/ofertas');
 var Reservas = require('../models/reservas')
 var file = require('../public/js/files')    
 
@@ -205,17 +204,6 @@ router.post('/pago', isLoggedIn,function(req, res) {
             })
     });
 });
-
-//Pagina de ofertas
-router.get('/ofertas', function(req, res) {
-    res.render("ofertas");
-});
-
-//Pagina de registro
-/*router.get('/registro', function(req, res){
-    res.render("registro");
-});
-*/
 
 //Pagina de Sobre Nosotros
 router.get('/sobreNosotros', function(req, res){

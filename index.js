@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const pug = require('pug');
 const morgan = require('morgan');
 var actividades = require('./routes/actividades');
+var ofertas = require('./routes/ofertas');
 var administrador = require('./routes/administrador');
 var session = require('express-session'); 
 var path = require('path');
@@ -63,6 +64,7 @@ app.use(session({
 })
 //Rutas
 app.use('/',actividades);
+app.use('/',ofertas);
 app.use('/admin',administrador);
 
 //separa un puerto
