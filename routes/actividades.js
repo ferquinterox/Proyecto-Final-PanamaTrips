@@ -184,10 +184,10 @@ router.get('/provincias', function(req, res){
 
 
 //Pagina de pago (PAYPAL)
-router.post('/pago', function(req, res) {
+router.post('/pago', isLoggedIn,function(req, res) {
     var reserva = new Reservas({
         _id: mongoose.Types.ObjectId(),
-        usuario: req.body.usuario,
+        usuario: req.user._id,
         actividad: req.body.actividad,
         fecha_res: moment().toISOString()
     });
@@ -261,43 +261,27 @@ router.get('/login', function(req, res) {
 });
 
 //PERFIL DEL USUARIO
-router.get('/perfil/:personaID', function(req, res, next) {
+router.get('/perfil', isLoggedIn, function(req, res, next) {
     var id = req.params.personaID;
-    var info_per = {};
-    var info_act = {};
-    User.findById(id).exec().then(result => {
-
-            info_per = {
-                info: result
-            };
-            Reservas.find({
-                    "usuario": id
+    var info_per = {"nombre": req.user.nombre, "apellido": req.user.apellido, "provincia": req.user.provincia, "email": req.user.email, "imagenperfil": req.user.imagenperfil};
+    console.log(req.user._id);
+    Reservas.find({
+            "usuario": req.user._id
+        })
+        .populate('actividad', 'imagenes nombreact descripcion')
+        .exec()
+        .then(resultado => {
+                res.render('profile', {
+                    actividades: resultado,
+                    perfil: info_per
                 })
-                .populate('actividad', 'imagenes nombreact descripcion')
-                .exec()
-                .then(resultado => {
-                        info_act = {
-                            act: resultado.actividad
-                        };
-                        console.log(info_act);
-                        console.log(resultado);
-                        res.render('profile', {
-                            actividades: resultado,
-                            perfil: info_per.info
-                        })
-                    }
+            }
 
-                ).catch(err => {
-                    res.status(500).json({
-                        error: err
-                    })
-                });
-        })
-        .catch(err => {
-            res.render(500).json({
-                error: err.message
-            });
-        })
+        ).catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        });
 });
 
 /* router.post('/login', passport.authenticate('local.signin', {
