@@ -1,6 +1,6 @@
 "use strict";
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt');
 var companySchema = new mongoose.Schema({
     id:{ type: mongoose.Schema.Types.ObjectId},
     imagencompania: { type: String, unique: false, required: false, trim: true },
