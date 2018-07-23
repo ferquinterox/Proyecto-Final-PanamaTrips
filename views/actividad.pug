@@ -98,7 +98,10 @@ block content
               each simi, i in similares
                 div(class="col-sm-12 col-md-4 no-padding")
                   .card
-                    img(src='/'+simi.imagenes[0], alt="Imagen1", class="card-img-top")
+                    if (!simi.imagenes[0]=="")
+                      img(src='/'+simi.imagenes[0], alt="Imagen"+ i, class="card-img-top")
+                    else
+                      img(src='/css/logo.png', alt="Imagen"+ i, class="card-img-top")
                     .card-body
                       h4.card-title #{simi.nombreact}
                       h6.card-text Provincia: #{simi.provincia}
@@ -106,5 +109,7 @@ block content
                       a(href="/actividades/"+simi._id, class="black-text d-flex justify-content-end")
                         h6 Ver actividad
                           i(class="fa fa-angle-double-right")
+                    
+
               
               
