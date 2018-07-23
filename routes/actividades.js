@@ -300,12 +300,6 @@ router.get('/perfil/:personaID', function(req, res, next) {
         })
 });
 
-//CERRAR SESION
-router.get('/logout', function(req, res, next) {
-    req.logout();
-    res.redirect('/')
-});
-
 /* router.post('/login', passport.authenticate('local.signin', {
     successRedirect: '/admin/control',
     failureRedirect: '/login',
