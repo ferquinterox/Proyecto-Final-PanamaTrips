@@ -28,7 +28,7 @@ router.get('/ofertas',function(req, res){
 });
 
 //oferta especifica con todo de la pag. unaoferta.pug
-router.get('/ofertas/:ofertasId', function(req, res){
+/* router.get('/ofertas/:ofertasId', function(req, res){
     var id = req.params.ofertasId;
     var info_ofer = {};
     ofertas.findById(id)
@@ -54,6 +54,27 @@ router.get('/ofertas/:ofertasId', function(req, res){
         console.log(err)
     });
    
+}); */
+
+
+//Pagina de Ofertas
+router.get('/ofertas/:_id', function(req, res){
+    var id= req.params.id;
+    ofertas.find({'_id':id})
+    .exec()
+    .then(result => {
+        res.render('unaoferta', {
+            unao: result
+        });
+    })
+    .catch(err =>{
+        res.render(500).json({error: err.message});
+    })
+});
+
+//Pagina de ofertas
+router.get('/unaoferta', function(req, res){
+    res.render("unaoferta");
 });
 
 //INSERTAR OFERTAS  
@@ -122,10 +143,6 @@ router.post('/pago', function(req, res){
     
 });
 
-//Pagina de ofertas
-router.get('/unaoferta', function(req, res){
-    res.render("unaoferta");
-});
 
 //REGISTRO
 //Pagina de Sobre Nosotros
