@@ -4,30 +4,31 @@ block header
 block content
     .container
           .row(class="mt-5")
+            form(action='/mostrar_act', method='post')
             div(class="col-sm-12 col-md-14 col-lg-6 col-xl-6")
                 div(class="card bd-dark text-whiter")
                     img(class="card-img banner2" src="/css/panama.jpg" alt="Card image")    
                     div(class="card-img-overlay")
                         h2.card-title  Panamá
-                        p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Panamá
+                        p Descubre las actividades disponibles en esta provincia
+                        input.btn.btn-primary.btn-lg.active(type='submit', value='panama' name='provincia')
 
 
-            div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
+            div(class="col-sm-12 col-md-12 col-lg-7 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
                     img(class="card-img banner2" src="/css/colon.jpg" alt="Card image")    
                     div(class="card-img-overlay")
                         h2.card-title  Colón 
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Colón
-
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/colon', role='button', aria-pressed='true') Actividades de Colón
+            
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
                     img(class="card-img banner2" src="/css/cocle.jpg" alt="Card image")    
                     div(class="card-img-overlay")
                         h2.card-title  Coclé
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Coclé
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/cocle', role='button', aria-pressed='true') Actividades de Coclé
         
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
@@ -35,7 +36,7 @@ block content
                     div(class="card-img-overlay")
                         h2.card-title  Chiriquí
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Chiriquí
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/chiriqui', role='button', aria-pressed='true') Actividades de Chiriqui
             
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
@@ -43,7 +44,7 @@ block content
                     div(class="card-img-overlay")
                         h2.card-title  Veraguas
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Veraguas
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/veraguas', role='button', aria-pressed='true') Actividades de Veraguas
 
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
@@ -51,7 +52,7 @@ block content
                     div(class="card-img-overlay")
                         h2.card-title  Herrera
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Herrera
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/herrera', role='button', aria-pressed='true') Actividades de Herrera
             
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
@@ -59,7 +60,7 @@ block content
                     div(class="card-img-overlay")
                         h2.card-title  Bocas del toro
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Bocas del toro
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/bocasdeltoro', role='button', aria-pressed='true') Actividades de Bocas Del Toro
             
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
@@ -67,7 +68,7 @@ block content
                     div(class="card-img-overlay")
                         h2.card-title  Darién
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Darién
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/darien', role='button', aria-pressed='true') Actividades de Darién
             
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
@@ -75,7 +76,7 @@ block content
                     div(class="card-img-overlay")
                         h2.card-title  Los Santos
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de Los Santos
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/lossantos', role='button', aria-pressed='true') Actividades de Los Santos
             
             div(class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ")
                 div(class="card bd-dark text-whiter")
@@ -83,4 +84,5 @@ block content
                     div(class="card-img-overlay")
                         h2.card-title  San Blas
                         p Descubre las actividades disponibles en esta provincia 
-                        button(class="btn btn-primary") Actividades de San Blas
+                        a.btn.btn-primary.btn-lg.active(href='/actividad/gunayala', role='button', aria-pressed='true') Actividades de Guna Yala
+                    hr   
