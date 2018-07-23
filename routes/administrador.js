@@ -14,7 +14,7 @@ var ofertas = require('../models/ofertas');
 var users=require('../models/users');
 
 //Pagina para traer las actividades
-router.get('/control',isLoggedIn,isAdmin, function(req, res){
+router.get('/control',isLoggedIn, function(req, res){
     actividad.find()
    .select('_id nombreact compania descripcion provincia contacto correo fecha_pub estado habdescripcion precio')
    .exec()
@@ -116,7 +116,7 @@ router.post('/admin/control/eliminar', function(req, res, next){
 
 
 //Rederizado a la pag. de adminOfertas
-router.get('/adminOfertas',isLoggedIn, isAdmin, function(req, res){
+router.get('/adminOfertas',isLoggedIn, function(req, res){
     res.render("adminOfertas");
 });
 
