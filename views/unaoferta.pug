@@ -1,7 +1,6 @@
 extends basic.pug
 block header
     link(rel="stylesheet", href="/css/inicio.css")
-    
 block content
     .container(class="mt-3")
         .row
@@ -9,7 +8,7 @@ block content
                 .d-flex.justify-content-center
                     h3 ¡Excelentes ofertas en los mejores destinos de Panamá!
             .container
-                     
+                //- for unaofer, n in oferta     
                 .row(class="mt-4 info")
 
                     div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
@@ -19,8 +18,7 @@ block content
                                 p tu id: #{unaofer._id}
                                 
                                 div(class="carousel-inner")
-                                    if n == 0    
-                                        p tu id: #{unaofer._id}
+                                    if n == 0
                                         div(class="carousel-item active")
                                             img(src='/'+unaofer.imagenes[0], alt="First slide", class="d-block w-100")
                                     
