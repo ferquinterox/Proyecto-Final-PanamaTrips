@@ -88,7 +88,7 @@ router.get('/adminOfertas',isLoggedIn, function(req, res){
 //Pagina de Ofertas
 router.get('/controlof',isLoggedIn, function(req, res){
      ofertas.find()
-    .select('nombreofer compania descripcion provincia telefono correo tiempo precio fecha_pub estado') 
+    .select('_id nombreofer compania descripcion provincia telefono correo tiempo precio fecha_pub estado') 
     .exec()
     .then(doc => {
         console.log(doc)
@@ -100,7 +100,6 @@ router.get('/controlof',isLoggedIn, function(req, res){
         res.status(500).json({error: err});
     }); 
 });
-
 
 //ACTUALIZAR OFERTAS
 router.post('/admin/controlof/actualizarof',isLoggedIn, function(req, res, next){

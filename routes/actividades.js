@@ -6,7 +6,6 @@ var passport = require('passport');
 
 var User = require('../models/users');
 var actividades = require('../models/actividades');
-var ofertas = require('../models/ofertas');
 var Reservas = require('../models/reservas')
 var file = require('../public/js/files')    
 
@@ -87,36 +86,6 @@ router.post('/insertar_act', file.any('imagen'), function(req, res, next){
         });     
 });
 
-//INSERTAR OFERTAS  
-router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
-    var paths = req.files.map(function(file) {
-        return file.path; // or file.originalname
-      });
-    var oferta = new ofertas({
-        id: mongoose.Types.ObjectId(),
-        nombreofer: req.body.nombreof,
-        descripcion: req.body.descrip,
-        provincia: req.body.provincias,
-        telefono: req.body.tel,
-        correo: req.body.correo,
-        precio: req.body.precio,
-        prexpers: req.body.prexper,
-        tiempo: req.body.tiempo,
-        compania:req.body.compa,
-        fecha_pub: moment().toISOString(),
-        imagenes: paths
-    });
-    oferta.save().then(result => {
-        console.log(result);
-        res.redirect('/admin/controlof');    
-    }).catch(err => {
-        res.status(500).json({
-            error: err
-        })
-    });     
-});
-
-
 
 //mostrar actividades por cada provincia 
 router.get('/actividad/:provincia', function(req, res){
@@ -138,12 +107,6 @@ router.get('/provincias', function(req, res){
     res.render("provincias");
 });
 
-//Pagina de ver actividades por provincias
-/* router.get('/actividades', function(req, res){
-    res.render("actividades");
-}); */
-
-
 //Pagina de pago (PAYPAL)
 router.post('/pago', function(req, res){
     var reserva = new Reservas({
@@ -163,17 +126,6 @@ router.post('/pago', function(req, res){
     
 });
 
-//Pagina de ofertas
-router.get('/ofertas', function(req, res){
-    res.render("ofertas");
-});
-
-//Pagina de registro
-/*router.get('/registro', function(req, res){
-    res.render("registro");
-});
-*/
-//REGISTRO
 //Pagina de Sobre Nosotros
 router.get('/sobreNosotros', function(req, res){
     res.render("sobreNosotros");
