@@ -5,9 +5,11 @@ var moment = require('moment');
 var passport = require('passport');
 
 var User = require('../models/users');
+var Compania = require('../models/companias');
 var actividades = require('../models/actividades');
-var Reservas = require('../models/reservas')
-var file = require('../public/js/files')
+var Reservas = require('../models/reservas');
+
+var file = require('../public/js/files');
 
 mongoose.Promise = global.Promise;
 //Inicio
@@ -140,15 +142,28 @@ router.get('/registro', function(req, res) {
     });
 });
 
-router.post('/registrar', passport.authenticate('local.signup', {
+router.post('/registrar', file.single('imagen'), passport.authenticate('local.signup', {
     successRedirect: '/login',
     failureRedirect: '/registro',
     failureFlash: true
 }));
 
-router.get('/registro-compania', function(req, res, next){
-    res.render('registroHotel');
+
+//REGISTRO DE COMPANIAS
+router.get('/registro-compania',  function(req, res){
+    let messages = req.flash('error');
+    res.render('registroHotel', {
+        messages: messages,
+        hasErrors: messages.length > 0
+    });
 });
+
+router.post('/registrar-compania', file.single('imagen'), passport.authenticate('local.signup_comp', {
+    successRedirect: '/login',
+    failureRedirect: '/registro-compania',
+    failureFlash: true
+}));
+
 //LOGIN
 router.get('/login', function(req, res) {
     let messages = req.flash('error');

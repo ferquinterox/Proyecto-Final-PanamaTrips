@@ -1,5 +1,6 @@
 let passport = require('passport');
 let User = require('../models/users');
+let Compania = require('../models/companias');
 let LocalStrategy = require('passport-local').Strategy;
 
   // required for persistent login sessions
@@ -14,6 +15,51 @@ let LocalStrategy = require('passport-local').Strategy;
       done(null, user);
    // });
   });
+
+  // Registro de Compania
+  passport.use('local.signup_comp', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback : true 
+  },
+  function (req, email, password, done) {
+    req.checkBody('email','Correo Invalido').notEmpty().isEmail();
+    req.checkBody('password','Password Invalido, debe contener mas de 6 caracteres').notEmpty().isLength({min:6});
+    var errors = req.validationErrors();
+    if (errors) {
+        let messages = [];
+        errors.forEach(function(error){
+            messages.push(error.msg);
+        });
+        return done(null,false, req.flash('error',messages));
+    }
+    Compania.findOne({'email': email}, function(err, user){
+        if(err){
+            return done(err);
+        }
+        if(user){
+            return done(null, false, {message: 'El correo de esa compañia ya esta en uso'});
+        }
+        var newCompania = new Compania();
+        newCompania.email = email;
+        newCompania.nombre_comp = req.param('nombre_comp');
+        newCompania.tipo_comp = req.param('tipo_comp');
+        newCompania.facebook = req.param('facebook');
+        newCompania.twitter = req.param('twitter');
+        newCompania.instagram = req.param('instagram');
+        newCompania.passConfirm = newCompania.encryptPassword(password);
+        newCompania.password = newCompania.encryptPassword(password);
+        newCompania.imagencompania = req.file.path;
+        newCompania.save(function (err) {
+          if (err) { 
+              return done(err);}
+          return done(null, newCompania);
+        });
+      
+    });
+  }));
+
+
 
   // Signup
   passport.use('local.signup', new LocalStrategy({
@@ -48,6 +94,7 @@ let LocalStrategy = require('passport-local').Strategy;
         newUser.provincia = req.param('provincia');
         newUser.passConfirm = req.param('passwordagain');
         newUser.password = newUser.encryptPassword(password);
+        newUser.imagenperfil = req.file.path;
         newUser.save(function (err) {
           if (err) { 
               return done(err);}

@@ -11,8 +11,9 @@ router.get("/", (req, res) => {
 //send es una respuesta
 
 var actividad = require('../models/actividades');
+var Compania = require('../models/companias');
 
-
+var file = require('../public/js/files');
 //Pagina de actividades
 router.get('/control',isLoggedIn, function(req, res){
      actividad.find()
@@ -33,7 +34,20 @@ router.get('/adminActividades',isLoggedIn, function(req, res){
     res.render("adminActividades");
 });
 
-
+router.get('/solicitudes', function(req, res, next){
+    Compania.find()
+    .select('imagencompania nombre_comp tipo_comp email facebook twitter instagram rol')
+    .exec()
+    .then(doc => {
+        res.render('adminSolicitudes', {
+            solicitudes: doc
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
+});
 
 
 router.post('/admin/control/actualizar', function(req, res, next){

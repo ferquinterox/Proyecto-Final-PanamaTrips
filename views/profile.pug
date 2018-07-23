@@ -5,7 +5,10 @@ block content
     .container
         .row.mt-4
             .col-sm-12.d-flex.justify-content-center
-                img(src="/css/hoteleria.jpg", alt="Imagen de perfil", class='rounded-circle perfil')
+                if perfil.imagenperfil
+                    img(src="/"+ perfil.imagenperfil, alt="Imagen de perfil", class='rounded-circle perfil')
+                else 
+                    img(src="/css/default_profile.jpg", alt="Imagen de perfil", class='rounded-circle perfil')   
             .col-sm-12.d-flex.justify-content-center
                 h2.mt-2 #{perfil.nombre} #{perfil.apellido}
         .row.mb-4.mt-2
