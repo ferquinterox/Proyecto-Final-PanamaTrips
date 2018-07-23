@@ -10,7 +10,7 @@ block content
     -var provincias = ["Bocas del toro", "Cocle", "Colon", "Chiriquí", "Darién", "Herrera", "Los Santos", "Panamá", "Veraguas", "Comarcas"];
 
     //Carousel de imagenes
-    if actividad      
+    if ofertaex      
         .container-fluid(class="no-padding")
                 div(class="col-sm-12 no-padding")
                     div(id="controles", class="carousel slide", data-ride="carousel")
@@ -19,19 +19,19 @@ block content
                             li(data-target="#indicadores", data-slide-to="1")
                             li(data-target="#indicadores", data-slide-to="2")
                         div(class="carousel-inner")
-                            for act, n in actividad
+                            for ofer, n in ofertaex
                                 if n == 0
                                     div(class="carousel-item active")
                                         .carousel-caption
-                                            h2 #{act.nombreact}
+                                            h2 #{ofer.nombreofer}
                                             a(href="/ofertas", class='btn btn-info') Ver Oferta
-                                        img(src='/'+act.imagenes[0], alt="Primera Oferta", class="d-block w-100")
+                                        img(src='/'+ofer.imagenes[0], alt="Primera Oferta", class="d-block w-100")
                                 else
                                     div(class="carousel-item")
                                         .carousel-caption
-                                            h2 #{act.nombreact}
+                                            h2 #{ofer.nombreofer}
                                             a(href="/ofertas", class='btn btn-info') Ver Oferta
-                                        img(src='/'+act.imagenes[0], alt="Oferta", class="d-block w-100")
+                                        img(src='/'+ofer.imagenes[0], alt="Oferta", class="d-block w-100")
                         
                         a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
                             span(class="carousel-control-prev-icon" aria-hidden="true")

@@ -10,6 +10,25 @@ var Reservas = require('../models/reservas')
 var file = require('../public/js/files')    
 
 mongoose.Promise = global.Promise; 
+//Inicio
+router.get("/", (req, res) => {
+    ofertas.find().select('nombreofer imagenes').limit(3)
+        .exec()
+        .then(doc => {
+            console.log(doc)
+            res.render("index", {
+                ofertaex: doc
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
+
+});
+
+
 
 //lleva todas las ofertas a pag. de ofertas.pug
 router.get('/ofertas',function(req, res){
@@ -28,43 +47,49 @@ router.get('/ofertas',function(req, res){
 });
 
 //oferta especifica con todo de la pag. unaoferta.pug
-/* router.get('/ofertas/:ofertasId', function(req, res){
-    var id = req.params.ofertasId;
-    var info_ofer = {};
+router.get('/ofertas/:ofertaId', function(req, res) {
+    var id = req.params.ofertaId;
+    var info_act = {};
     ofertas.findById(id)
-    .exec()
-    .then(result => {
-        info_ofer = {info: result};
-        ofertas.aggregate([{ $sample: { size:3 } }])
+        .select('_id nombreofer compania descripcion provincia telefono imagenes correo tiempo precio fecha_pub estado')
         .exec()
-        .then(result =>{
-            res.status(200).render("unaoferta", {
-                similares: result,
-                unaoferta: info_ofer.info
-            });
-            console.log(info_ofer.info);
+        .then(result => {
+            info_act = {
+                info: result
+            };
+            ofertas.aggregate([{
+                    $sample: {
+                        size: 3
+                    }
+                }])
+                .exec()
+                .then(result => {
+                    res.status(200).render("unaoferta", {
+                        similares: result,
+                        actividad: info_act.info
+                    });
+                    console.log(info_act.info);
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        error: err.message
+                    })
+                });
         })
         .catch(err => {
-            res.status(500).json({
-                error: err.message
-            })
+            console.log(err)
         });
-    })
-    .catch(err => {
-        console.log(err)
-    });
-   
-}); */
+});
 
 
-//Pagina de Ofertas
-router.get('/ofertas/:_id', function(req, res){
-    var id= req.params.id;
-    ofertas.find({'_id':id})
-    .exec()
+//mostrar oferta por el id
+router.get('/ofertas/:id', function(req, res){
+    var id= req.params._id;
+        ofertas.find({'id':id
+    }).exec()
     .then(result => {
         res.render('unaoferta', {
-            unao: result
+            unaofer: result
         });
     })
     .catch(err =>{
@@ -105,24 +130,6 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
         })
     });     
 });
-
-
-
-/* //mostrar actividades por cada provincia 
-router.get('/actividad/:provincia', function(req, res){
-    var provincia= req.params.provincia;
-    actividades.find({'provincia':provincia})
-    .exec()
-    .then(result => {
-        res.render('actividades', {
-            actividad: result
-        });
-    })
-    .catch(err =>{
-        res.render(500).json({error: err.message});
-    })
-}); */
-
 
 //Pagina de pago (PAYPAL)
 router.post('/pago', function(req, res){
