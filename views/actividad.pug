@@ -10,31 +10,34 @@ block content
                   span Regresar a las actividades
         .row(class="mt-1 mb-4")    
             div(id='slider', class="col-sm-12 col-md-12 col-lg-4 col-xl-4 mb-2")
+              if (actividad.imagenes && !actividad.imagenes[0]=="")
                 #carousel.carousel
                   .carousel-inner
-                    each imag, n in actividad.imagenes
-                      if n == 0
-                        .active.item.carousel-item(data-slide-number=n)
-                          img.img-responsive.visual(src='/'+imag)
-                      else
-                        .item.carousel-item(data-slide-number=n)
-                          img.img-responsive.visual(src='/'+imag)
-                    div(class='d-flex justify-content-center')
-                      a.carousel-control.left.pt-3(href="#carousel", data-slide="prev")
-                        i.fa.fa-chevron-left.fa-2x
-                      a.carousel-control.right.pt-3(href="#carousel", data-slide="next")
-                        i.fa.fa-chevron-right.fa-2x
+                      each imag, n in actividad.imagenes
+                        if n == 0
+                          .active.item.carousel-item(data-slide-number=n)
+                            img.img-responsive.visual(src='/'+imag)
+                        else
+                          .item.carousel-item(data-slide-number=n)
+                            img.img-responsive.visual(src='/'+imag)
+                          div(class='d-flex justify-content-center')
+                            a.carousel-control.left.pt-3(href="#carousel", data-slide="prev")
+                              i.fa.fa-chevron-left.fa-2x
+                            a.carousel-control.right.pt-3(href="#carousel", data-slide="next")
+                              i.fa.fa-chevron-right.fa-2x
                       
-                  ul.carousel-indicators.list-inline
-                    each imag2, n in actividad.imagenes
-                      if n == 0
-                        li.list-inline-item.active
-                          a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
-                            img.img-responsive.miniatura(src='/'+imag2)
-                      else
-                        li.list-inline-item
-                          a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
-                            img.img-responsive.miniatura(src='/'+imag2)
+                      ul.carousel-indicators.list-inline
+                        each imag2, n in actividad.imagenes
+                          if n == 0
+                            li.list-inline-item.active
+                              a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                img.img-responsive.miniatura(src='/'+imag2)
+                          else
+                            li.list-inline-item
+                              a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                img.img-responsive.miniatura(src='/'+imag2)
+              else
+                img.img-responsive(src='/css/logo.png', class='visual')
             div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8")
                 .card.info
                   .card-header
