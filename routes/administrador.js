@@ -37,10 +37,6 @@ router.get('/control',isLoggedIn, function(req, res){
 router.post('/admin/control/actualizaruser', function(req, res, next){
     users.findOneAndUpdate({
         _id:req.body.id},{ $set: {
-            nombre:req.body.nombre,
-            apellido:req.body.apellido,
-            email:req.body.email,
-            provincia:req.body.provincia,
             rol:req.body.rol}}).exec().then(result => {
         res.redirect('/admin/controluser');
     })
@@ -140,7 +136,7 @@ router.post('/admin/control/eliminar', function(req, res, next){
 
 
 //Rederizado a la pag. de adminOfertas
-router.get('/adminOfertas',isLoggedIn, isAdmin, function(req, res){
+router.get('/adminOfertas',isLoggedIn, function(req, res){
     res.render("adminOfertas");
 });
 

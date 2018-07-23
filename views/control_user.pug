@@ -32,25 +32,9 @@ block content
                                                         form(action='admin/control/actualizaruser', method='post')     
                                                             td.bg-secondary.text-light= n+1
                                                             td #{lista.nombre}
-                                                                input#nombre(type='text' name='nombre')
                                                             td #{lista.apellido}
-                                                                input#apellido(type='text' name='apellido')
                                                             td #{lista.email}
-                                                                input#email(type='email' name='email' placeholder='example@gmail.com')
                                                             td #{lista.provincia}
-                                                                select#provincia( name='provincia')
-                                                                    option(value='Bocas del toro') Bocas del Toro
-                                                                    option(value='Cocle') Coclé
-                                                                    option(value='Colon') Colón
-                                                                    option(value='Chiriqui') Chiriquí
-                                                                    option(value='Darien') Darién
-                                                                    option(value='Herrera') Herrera
-                                                                    option(value='Los Santos') Los Santos 
-                                                                    option(value='Panama') Panamá
-                                                                    option(value='Veraguas') Veraguas
-                                                                    option(value='Comarcas') Comarcas
-                                                                    option(value='-') Prefiero no decir
-                                                                    option(value='Extranjero') Extranjero 
                                                             td #{lista.rol}
                                                                 select#rol(name="rol")
                                                                     option(value="usuario") Usuario
