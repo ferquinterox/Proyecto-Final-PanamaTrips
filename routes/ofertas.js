@@ -79,7 +79,22 @@ router.get('ofertas/:ofertaId', function(req, res) {
             console.log(err)
         });
 });
+router.get('/ofertas', (req, res) => {
+    ofertas.find().select('nombreofer imagenes').limit(3)
+        .exec()
+        .then(doc => {
+            console.log(doc)
+            res.render("unaoferta", {
+                ofertaex: doc
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
 
+});
 
 //mostrar oferta por el id
 router.get('/ofertas/:id', function(req, res){
