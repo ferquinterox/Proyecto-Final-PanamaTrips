@@ -130,7 +130,7 @@ router.get('/registro', function(req, res){
 });
 
 router.post('/registrar', file.single('imagen'), passport.authenticate('local.signup', {
-    successRedirect: '/login',
+    successRedirect: '/',
     failureRedirect: '/registro',
     failureFlash: true
 }));
@@ -146,7 +146,7 @@ router.get('/registro-compania',  function(req, res){
 });
 
 router.post('/registrar-compania', file.single('imagen'), passport.authenticate('local.signup_comp', {
-    successRedirect: '/login',
+    successRedirect: '/',
     failureRedirect: '/registro-compania',
     failureFlash: true
 }
@@ -198,7 +198,6 @@ router.get('/logout', function(req,res,next){
 
 router.post('/login', passport.authenticate('local.signin',{
     successRedirect: '/admin/control',
-    successRedirect: '/admin/controlof',
 	failureRedirect: '/login',
 	failureFlash: true
 }));
