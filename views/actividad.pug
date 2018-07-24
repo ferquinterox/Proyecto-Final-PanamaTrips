@@ -5,7 +5,7 @@ block content
        .container
         .row(class="mt-2")
             div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4")
-              a(href="#", class='btn btn-info w-100') 
+               a(href="/actividad/"+actividad.provincia , class='btn btn-info w-100') 
                 i(class="fa fa-arrow-circle-left") 
                   span Regresar a las actividades
         .row(class="mt-1 mb-4")    
@@ -98,15 +98,15 @@ block content
               each simi, i in similares
                 div(class="col-sm-12 col-md-4 no-padding")
                   .card
-                    if (!simi.imagenes[0]=="")
-                      img(src='/'+simi.imagenes[0], alt="Imagen"+ i, class="card-img-top")
+                    if (actividad.imagenes && !actividad.imagenes[0]=="")
+                      img(src='/'+actividad.imagenes[0], alt="Imagen"+ i, class="card-img-top")
                     else
                       img(src='/css/logo.png', alt="Imagen"+ i, class="card-img-top")
                     .card-body
-                      h4.card-title #{simi.nombreact}
-                      h6.card-text Provincia: #{simi.provincia}
-                      p.card-text #{simi.descripcion}
-                      a(href="/actividades/"+simi._id, class="black-text d-flex justify-content-end")
+                      h4.card-title #{actividad.nombreact}
+                      h6.card-text Provincia: #{actividad.provincia}
+                      p.card-text #{actividad.descripcion}
+                      a(href="/actividades/"+actividad._id, class="black-text d-flex justify-content-end")
                         h6 Ver actividad
                           i(class="fa fa-angle-double-right")
                     

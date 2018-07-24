@@ -164,12 +164,38 @@ router.post('/pago', function(req, res){
     
 });
 
-
 //REGISTRO
 //Pagina de Sobre Nosotros
 router.get('/sobreNosotros', function(req, res){
     res.render("sobreNosotros");
 });
+
+//LOGIN
+router.get('/login', function(req, res){
+	let messages = req.flash('error');
+	res.render('login',{messages: messages, hasErrors: messages.length > 0 });
+});
+
+//CERRAR SESION
+router.get('/logout', function(req,res,next){
+	req.logout();
+	res.redirect('/')
+});
+
+router.post('/login', passport.authenticate('local.signin',{
+    successRedirect: '/admin/control',
+    successRedirect: '/admin/controlof',
+	failureRedirect: '/login',
+	failureFlash: true
+}));
+
+//Para saber si esta logiado o no
+function isLoggedIn (req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/login')
+}
 
 //LOGIN
 router.get('/login', function(req, res){
