@@ -6,7 +6,7 @@ var passport = require('passport');
 
 var User = require('../models/users');
 var ofertas = require('../models/ofertas');
-var Reservas = require('../models/reservas')
+var Reservasof = require('../models/reservasof')
 var file = require('../public/js/files')    
 
 mongoose.Promise = global.Promise; 
@@ -47,7 +47,7 @@ router.get('/ofertas',function(req, res){
 });
 
 //oferta especifica con todo de la pag. unaoferta.pug
-router.get('ofertas/:ofertaId', function(req, res) {
+router.get('/ofertas/:ofertaId', function(req, res) {
     var id = req.params.ofertaId;
     var info_ofert = {};
     ofertas.findById(id)
@@ -65,7 +65,7 @@ router.get('ofertas/:ofertaId', function(req, res) {
                 .then(result => {
                     res.status(200).render("unaoferta", {
                         similares: result,
-                        unaofer: info_ofert.info
+                        oferta: info_ofert.info
                     });
                     console.log(info_ofert.info);
                 })
@@ -78,42 +78,6 @@ router.get('ofertas/:ofertaId', function(req, res) {
         .catch(err => {
             console.log(err)
         });
-});
-router.get('/ofertas', (req, res) => {
-    ofertas.find().select('nombreofer imagenes').limit(3)
-        .exec()
-        .then(doc => {
-            console.log(doc)
-            res.render("unaoferta", {
-                ofertaex: doc
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            })
-        })
-
-});
-
-//mostrar oferta por el id
-router.get('/ofertas/:id', function(req, res){
-    var id= req.params._id;
-        ofertas.find({'id':id
-    }).exec()
-    .then(result => {
-        res.render('unaoferta', {
-            unaofer: result
-        });
-    })
-    .catch(err =>{
-        res.render(500).json({error: err.message});
-    })
-});
-
-//Pagina de ofertas
-router.get('/unaoferta', function(req, res){
-    res.render("unaoferta");
 });
 
 //INSERTAR OFERTAS  
@@ -146,23 +110,29 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
 });
 
 //Pagina de pago (PAYPAL)
-router.post('/pago', function(req, res){
-    var reserva = new Reservas({
+router.post('/pagof', isLoggedIn,function(req, res) {
+    var reserva = new Reservasof({
         _id: mongoose.Types.ObjectId(),
-        usuario: req.body.usuario,
-        actividad: req.body.actividad,
+        usuario: req.user._id,
+        oferta: req.body.oferta,
         fecha_res: moment().toISOString()
     });
     reserva.save().then(result => {
-        console.log(result);
-        res.render("pago");
-    }).catch(err => {
-        res.status(500).json({
-            error: err
-        })
-    });     
-    
+        ofertas.findById(req.body.oferta)
+            .exec()
+            .then(result => {
+                res.render("pagof", {
+                    oferta: result
+                });
+            }).catch(err => {
+                res.status(500).json({
+                    error: err
+                })
+            })
+    });
 });
+
+
 
 //REGISTRO
 //Pagina de Sobre Nosotros

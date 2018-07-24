@@ -2,7 +2,7 @@ extends basic.pug
 block header
  link(rel="stylesheet", href="/css/actividades.css")
 block content
-       .container
+      .container
         .row(class="mt-2")
             div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4")
                a(href="/actividad/"+actividad.provincia , class='btn btn-info w-100') 
@@ -56,40 +56,40 @@ block content
                               //input(name="compania" type="hidden" value=actividad.compania)
                               input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
                   .card-body
-                        h5 Compañia:
-                        p.ml-2 #{actividad.compania}
-                        hr
-                        h5 Descripción:
-                        p.ml-2 #{actividad.descripcion}
-                        hr
-                        if (actividad.habdescripcion)
-                            h5 Habitaciones:
-                            p.ml-2 #{actividad.habdescripcion}
-                            hr
-                        h5 Precio:
-                        p.ml-2 #{actividad.precio}, (#{actividad.secprecio})
-                        hr
-                        if (actividad.contacto || actividad.correo)
-                          if (!actividad.contacto)
-                            h5 Contacto:
-                            p.ml-2 Número de contacto: No proporcionado por el autor
-                            p.ml-2 Correo: #{actividad.correo}
-                            hr
-                          else if (!actividad.correo)
-                            h5 Contacto:
-                            p.ml-2 Número de contacto: #{actividad.contacto} 
-                            p.ml-2 Correo: No proporcionado por el autor
-                            hr
-                          else
-                            h5 Contacto:
-                            p.ml-2 Número de contacto: #{actividad.contacto}
-                            p.ml-2 Correo: #{actividad.correo}
-                            hr
-                        h5 Informacion adicional:
-                        if (actividad.infoadicional)
-                          p.ml-2 #{actividad.infoadicional}
+                      h5 Compañia:
+                      p.ml-2 #{actividad.compania}
+                      hr
+                      h5 Descripción:
+                      p.ml-2 #{actividad.descripcion}
+                      hr
+                      if (actividad.habdescripcion)
+                          h5 Habitaciones:
+                          p.ml-2 #{actividad.habdescripcion}
+                          hr
+                      h5 Precio:
+                      p.ml-2 #{actividad.precio}, (#{actividad.secprecio})
+                      hr
+                      if (actividad.contacto || actividad.correo)
+                        if (!actividad.contacto)
+                          h5 Contacto:
+                          p.ml-2 Número de contacto: No proporcionado por el autor
+                          p.ml-2 Correo: #{actividad.correo}
+                          hr
+                        else if (!actividad.correo)
+                          h5 Contacto:
+                          p.ml-2 Número de contacto: #{actividad.contacto} 
+                          p.ml-2 Correo: No proporcionado por el autor
+                          hr
                         else
-                          p.ml-2 No hay mas información adicional disponible
+                          h5 Contacto:
+                          p.ml-2 Número de contacto: #{actividad.contacto}
+                          p.ml-2 Correo: #{actividad.correo}
+                          hr
+                      h5 Informacion adicional:
+                      if (actividad.infoadicional)
+                        p.ml-2 #{actividad.infoadicional}
+                      else
+                        p.ml-2 No hay mas información adicional disponible
         .row
           div(class="col-sm-12 no-padding")
             .d-flex.justify-content-center.similares-top
@@ -109,7 +109,3 @@ block content
                       a(href="/actividades/"+actividad._id, class="black-text d-flex justify-content-end")
                         h6 Ver actividad
                           i(class="fa fa-angle-double-right")
-                    
-
-              
-              

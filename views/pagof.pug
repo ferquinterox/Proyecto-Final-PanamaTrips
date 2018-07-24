@@ -1,0 +1,50 @@
+extends basic.pug
+block header
+  link(rel="stylesheet", href="/css/pago.css")
+block content
+    .container    
+      .row(class="mt-4 info mb-4")
+        div(class='col-sm-12')
+          h4 Proceso de Reservación:
+        div(class="col-sm-12 col-md-4 col-lg-4 col-xl-4")
+          button( class='btn btn-info w-100', onclick= 'window.history.back();') 
+            i(class="fa fa-arrow-circle-left") 
+              span Regresar a la Oferta
+      .row
+        div(class='col-sm-12 col-md-4 col-lg-4 mt-2')
+          img(src="/css/logo.png", alt="Logo", class='w-100 logo mb-2')            
+        div(class='col-sm-12 col-md-8 col-lg-8 mb-3')
+          .card
+            .card-header
+              span(class='fa fa-cc-paypal fa-1x top')  Compra seguro en PanamaTrips con PayPal
+            .card-body
+              .container
+                .row
+                  div(class='col-sm-12 col-md-4 col-lg-4')
+                    img(src="/"+oferta.imagenes[0], alt="Logo", class='w-100 logo') 
+                  div(class='col-sm-12 col-md-8 col-lg-8')
+                    h5 Oferta:
+                    p#nombre #{oferta.nombreofer}
+                    h5 Compañia:
+                    p #{oferta.compania}
+                    h5 Descripción:
+                    p#descripcion #{oferta.descripcion}
+                    h5 Precio:
+                    p#precio #{oferta.precio}
+                    h5 Para cuantas personas:
+                    input(id='cantidadper', type="number", name="cantidad", min='1', value='1')
+                  div(class='col-sm-12 d-flex justify-content-center mt-4 mb-1')
+                        input(type="radio" name="payment-option" value="paypal" checked="true")
+                        img(src="/css/paypal-mark.jpg" alt="Pague con PayPal")
+                  div(class='col-sm-12 d-flex justify-content-center')
+                        input(type="radio" name="payment-option" value="card")
+                        img(src="/css/card-mark.png" alt="Se aceptan Visa, MasterCard, American Express", class='mw-100', height='48px')
+                  div(class='col-sm-12 d-flex justify-content-center mt-4')
+                      #paypal-button-container
+                      #card-button-container.hidden
+                        button.btn.btn-primary 
+                           span(class='fa fa-cc-paypal fa-1x')  Continuar
+block scripts
+  script(src="https://www.paypalobjects.com/api/checkout.js")
+  script(src="/js/paypal.js")
+           

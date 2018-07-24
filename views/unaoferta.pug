@@ -1,70 +1,104 @@
 extends basic.pug
 block header
-    link(rel="stylesheet", href="/css/inicio.css")
+ link(rel="stylesheet", href="/css/actividades.css")
 block content
-    .container(class="mt-3")
-        .row
-            div(class="col-sm-12")
-                .d-flex.justify-content-center
-                    h3 ¡Excelentes ofertas en los mejores destinos de Panamá!
             .container
-                //- for unaofer, n in oferta     
-                .row(class="mt-4 info ")
-
-                    div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
-                        .row(class="mt-8 ")    
-                        div(class="col-sm-12  col-xl-12 no-padding" )   
-                            div(id="carouselcito2", class="carousel slide carousel-fade", data-ride="carousel")
-                                p tu id: #{unaofer._id}
-                                
-                                div(class="carousel-inner")
-                                    if n == 0
-                                        div(class="carousel-item active")
-                                            img(src='/'+unaofer.imagenes[0], alt="First slide", class="d-block w-100")
+                .row(class="mt-2")
+                    div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4")
+                        a(href="/ofertas", class='btn btn-info w-100') 
+                            i(class="fa fa-arrow-circle-left") 
+                            span Regresar a las Ofertas
+                .row(class="mt-1 mb-4")    
+                    div(id='slider', class="col-sm-12 col-md-12 col-lg-4 col-xl-4 mb-2")
+                        if (oferta.imagenes && !oferta.imagenes[0]=="")
+                            #carousel.carousel
+                                .carousel-inner
+                                    each imag, n in oferta.imagenes
+                                        if n == 0
+                                            .active.item.carousel-item(data-slide-number=n)
+                                                img.img-responsive.visual(src='/'+imag)
+                                        else
+                                            .item.carousel-item(data-slide-number=n)
+                                                img.img-responsive.visual(src='/'+imag)
+                                            div(class='d-flex justify-content-center')
+                                                a.carousel-control.left.pt-3(href="#carousel", data-slide="prev")
+                                                    i.fa.fa-chevron-left.fa-2x
+                                                a.carousel-control.right.pt-3(href="#carousel", data-slide="next")
+                                                    i.fa.fa-chevron-right.fa-2x
                                     
-                    div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
-                        
-                        h4.mt-2 Oferta: #{unaofer.nombreofer}
-                            
-                        p Provincia: #{unaofer.provincia}
-                        p Descripcion: #{unaofer.descripcion}
-                        span(class="border border-danger") $ #{unaofer.precio}
-                        p Provincia: #{unaofer.provincia}
-                        
-                        form(action='/pago', method='GET')
-                            input(type='hidden', value=unaofer._id, name='id')
-                            td
-                                input(type='submit',value='COMPRAAAA').btn.btn-danger
-                        p
-    //Carousel de imagenes
-    .container-fluid(class="padding-bottom($spacer * .5)")
-        div(class="col-sm-12 no-padding pt-4")
-            div(id="controles", class="carousel slide", data-ride="carousel")
-                ol(class="carousel-indicators")
-                    li(data-target="#indicadores", data-slide-to="0", class="active")
-                    li(data-target="#indicadores", data-slide-to="1")
-                    li(data-target="#indicadores", data-slide-to="2")
-                div(class="carousel-inner")
-                    div(class="carousel-item active")
-                        .carousel-caption
-                            h2 TOP del mes
-                            a(href="#", class='btn btn-info') Pamama
-                        img(src="/css/bocas-toro-panama.jpg", alt="Primera Oferta", class="d-block w-100 ")
-                    div(class="carousel-item")
-                        .carousel-caption
-                            h2 TOP del mes
-                            a(href="#", class='btn btn-info') Veraguas
-                        img(src="/css/bocas-toro-panama.jpg", alt="Segunda Oferta", class="d-block w-100")
-                    div(class="carousel-item")
-                        .carousel-caption
-                            h2 TOP del mes
-                            a(href="#", class='btn btn-info') Chiriqui
-                        img(src="/css/bocas-toro-panama.jpg", alt="Tercera Oferta", class="d-block w-100")
-                a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
-                    span(class="carousel-control-prev-icon" aria-hidden="true")
-                    span(class="sr-only") Anterior
-                a(class="carousel-control-next" href="#controles" role="button" data-slide="next")
-                    span(class="carousel-control-next-icon" aria-hidden="true")
-                    span(class="sr-only") Siguiente
-            p
+                                    //- ul.carousel-indicators.list-inline
+                                    //-     each imag2, n in oferta.imagenes
+                                    //-         if n == 0
+                                    //-             li.list-inline-item.active
+                                    //-                 a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                    //-                     img.img-responsive.miniatura(src='/'+imag2)
+                                    //-         else
+                                    //-             li.list-inline-item
+                                    //-                 a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                    //-                     img.img-responsive.miniatura(src='/'+imag2)
+                        else
+                            img.img-responsive(src='/css/logo.png', class='visual')
+                    div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8")
+                            .card.info
+                                .card-header
+                                    .container 
+                                        .row
+                                            div(class='col-sm-12 col-md-12 col-lg-7 col-xl-7')
+                                                h3.mt-1 #{oferta.nombreofer} 
+                                                h6 Provincia: 
+                                                    small #{oferta.provincia}
+                                                h6 Fecha de publicación: 
+                                                    small #{oferta.fecha_pub}
+                                            div(class='col-sm-12 col-md-12 col-lg-5 col-xl-5')
+                                                    form(action="/pagof", method="post")
+                                                        input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
+                                                        input(name="oferta" type="hidden" value=oferta._id)
+                                                        //input(name="compania" type="hidden" value=oferta.compania)
+                                                        input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
+                                .card-body
+                                        h5 Compañia:
+                                        p.ml-2 #{oferta.compania}
+                                        hr
+                                        h5 Descripción:
+                                        p.ml-2 #{oferta.descripcion}
+                                        hr
+                                        h5 Precio:
+                                        p.ml-2 #{oferta.precio}, Por Persona
+                                        hr
+                                        if (oferta.telefono || oferta.correo)
+                                            if (!oferta.telefono)
+                                                h5 Telefono:
+                                                p.ml-2 Número de telefono: No proporcionado por el autor
+                                                p.ml-2 Correo: #{oferta.correo}
+                                                hr
+                                            else if (!oferta.correo)
+                                                h5 Telefono:
+                                                p.ml-2 Número de telefono: #{oferta.telefono} 
+                                                p.ml-2 Correo: No proporcionado por el autor
+                                                hr
+                                            else
+                                                h5 Telefono:
+                                                p.ml-2 Número de telefono: #{oferta.telefono}
+                                                p.ml-2 Correo: #{oferta.correo}
+                                                hr
+                    //imagenes de ofertas que estan abajo                    
+                .row
+                    div(class="col-sm-12 no-padding")
+                        .d-flex.justify-content-center.similares-top
+                            h3.mt-2.mb
+                        .card-group
+                            each simi, i in similares
+                                div(class="col-sm-12 col-md-4 no-padding")
+                                    .card
+                                        if (oferta.imagenes && !oferta.imagenes[0]=="")
+                                            img(src='/'+oferta.imagenes[0], alt="Imagen"+ i, class="card-img-top")
+                                        else
+                                            img(src='/css/logo.png', alt="Imagen"+ i, class="card-img-top")
+                                        .card-body
+                                            h4.card-title #{oferta.nombreofer}
+                                            h6.card-text Provincia: #{oferta.provincia}
+                                            p.card-text #{oferta.descripcion}
+                                            a(href="/ofertas/"+oferta._id, class="black-text d-flex justify-content-end")
+                                                h6 Ver una Oferta
+                                                i(class="fa fa-angle-double-right")
 
