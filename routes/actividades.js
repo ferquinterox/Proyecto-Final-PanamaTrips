@@ -194,10 +194,12 @@ router.post('/pago', isLoggedIn,function(req, res) {
         fecha_res: moment().toISOString()
     });
     reserva.save().then(reservas => {
+        console.log(reservas);
         actividades.findById(req.body.actividad)
             .exec()
             .then(result => {
                 res.render("pago", {
+                    reservas:reservas,
                     actividad: result
                 });
             }).catch(err => {

@@ -39,6 +39,7 @@ block content
               else
                 img.img-responsive(src='/css/logo.png', class='visual')
             div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8")
+              form(action="/pago", method="post")
                 .card.info
                   .card-header
                     .container 
@@ -50,7 +51,6 @@ block content
                           h6 Fecha de publicación: 
                             small #{actividad.fecha_pub}
                         div(class='col-sm-12 col-md-12 col-lg-5 col-xl-5')
-                            form(action="/pago", method="post")
                               input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
                               input(name="actividad" type="hidden" value=actividad._id)
                               //input(name="compania" type="hidden" value=actividad.compania)
