@@ -36,7 +36,7 @@ const mongoose = require('mongoose');
     var id_user = new mongoose.Types.ObjectId();
     User.findOne({'email': email}, function(err, user){
         var newUser = new User();
-        newUser.id = id_user;
+        newUser._id = id_user;
         newUser.email = email;
         newUser.nombre = req.body.nombre;
         newUser.apellido = req.body.apellido;

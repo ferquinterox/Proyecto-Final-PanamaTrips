@@ -5,7 +5,7 @@ block content
     .container.mb-4
         .row
             .col-sm-12 
-                h3.mt-3 ¡Bienvenido administrador, #{email}!
+                h3.mt-3 ¡Bienvenido #{rol}!
         .col-sm-12
         .row
             .col-sm-12
@@ -19,6 +19,7 @@ block content
                                         thead.thead-dark
                                             tr
                                                 th(scope="col") N°
+                                                th(scope="col") Perfil-Usuario
                                                 th(scope="col") Nombre
                                                 th(scope="col") Apeliido
                                                 th(scope="col") Email
@@ -31,12 +32,11 @@ block content
                                                     tr
                                                         form(action='admin/control/actualizaruser', method='post')     
                                                             td.bg-secondary.text-light= n+1
+                                                            td 
+                                                                img(src="/"+lista.imagenperfil, alt="Perfil del usuario", srcset="", class='img-thumbnail')
                                                             td #{lista.nombre}
-                                                                input#nombre(type='text' name='nombre')
                                                             td #{lista.apellido}
-                                                                input#apellido(type='text' name='apellido')
                                                             td #{lista.email}
-                                                                input#email(type='email' name='email' placeholder='example@gmail.com')
                                                             td #{lista.provincia}
                                                                 select#provincia( name='provincia')
                                                                     option(value='Bocas del toro') Bocas del Toro
@@ -55,6 +55,7 @@ block content
                                                                 select#rol(name="rol")
                                                                     option(value="usuario") Usuario
                                                                     option(value="compania") Compañia
+                                                                    option(value="administrador") Administrador
                                                             td
                                                                 input(type='hidden', value=lista._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success

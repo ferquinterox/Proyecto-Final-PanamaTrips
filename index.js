@@ -60,6 +60,9 @@ app.use(session({
 //esto es para que si esta logeado le salga el boton de cerrar sesion 
   app.use(function(req,res,next){
 	res.locals.login = req.isAuthenticated();
+	if (req.user){
+	res.locals.rol = req.user.rol;
+	}
 	next();
 })
 //Rutas

@@ -65,36 +65,6 @@ router.get('/actividades/:actividadId', function(req, res) {
 });
 
 //INSERTAR ACTIVIDADES
-router.post('/insertar_act', file.any('imagen'), function(req, res, next) {
-    var paths = req.files.map(function(file) {
-        return file.path; // or file.originalname
-    });
-    var actividad = new actividades({
-        _id: mongoose.Types.ObjectId(),
-        nombreact: req.body.nombreact,
-        descripcion: req.body.descrip,
-        provincia: req.body.provincias,
-        contacto: req.body.contacto,
-        correo: req.body.correo,
-        habdescripcion: req.body.hab,
-        precio: req.body.precio,
-        secprecio: req.body.sec,
-        indoadicional: req.body.infomas,
-        fecha_pub: moment().toISOString(),
-        imagenes: paths
-    });
-    actividad.save().then(result => {
-        console.log(result);
-        res.redirect('/admin/control');
-    }).catch(err => {
-        res.status(500).json({
-            error: err
-        })
-    });
-   
-});
-
-//INSERTAR ACTIVIDADES
 router.post('/insertar_act', file.any('imagen'), function(req, res, next){
         var paths = req.files.map(function(file) {
             return file.path; // or file.originalname
@@ -253,12 +223,16 @@ router.get('/perfil', isLoggedIn, function(req, res, next) {
         .populate('actividad', 'imagenes nombreact descripcion')
         .exec()
         .then(resultado => {
+            Compania.find({usuario: req.user._id})
+                .exec()
+                .then(resultado2 => {
                 res.render('profile', {
                     actividades: resultado,
-                    perfil: info_per
+                    perfil: info_per,
+                    compania: resultado2
                 })
-            }
-
+            })
+            }   
         ).catch(err => {
             res.status(500).json({
                 error: err
