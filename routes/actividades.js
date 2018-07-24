@@ -188,9 +188,12 @@ router.post('/pago', isLoggedIn,function(req, res) {
         _id: mongoose.Types.ObjectId(),
         usuario: req.user._id,
         actividad: req.body.actividad,
+        fechaI:req.body.finicio,
+        fechaS:req.body.fsalida,
+        personas:req.body.cantidad,
         fecha_res: moment().toISOString()
     });
-    reserva.save().then(result => {
+    reserva.save().then(reservas => {
         actividades.findById(req.body.actividad)
             .exec()
             .then(result => {

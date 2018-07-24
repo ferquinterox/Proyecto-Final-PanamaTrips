@@ -33,8 +33,13 @@ block content
                     p#precio #{actividad.precio} 
                     h5 Condición:
                     p #{actividad.secprecio}
-                    h5 Para cuantas personas:
-                    input(id='cantidadper', type="number", name="cantidad", min='1', value='1')
+                    h5 Cantidad de Personas:
+                    p #{reservas.personas}
+                    h5 Fecha de Inicio:
+                    p #{reservas.fechaI}
+                    h5 Fecha de Salida:
+                    p #{reservas.fechaS}
+                    //input(id='cantidadper', type="number", name="cantidad", min='1', value='1')
                   div(class='col-sm-12 d-flex justify-content-center mt-4 mb-1')
                         input(type="radio" name="payment-option" value="paypal" checked="true")
                         img(src="/css/paypal-mark.jpg" alt="Pague con PayPal")

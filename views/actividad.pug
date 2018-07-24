@@ -62,6 +62,14 @@ block content
                         h5 Descripción:
                         p.ml-2 #{actividad.descripcion}
                         hr
+                        h5 Escoga sus fecha:
+                        p.ml-2 Inicio:
+                        input(name='finicio' , type='date')
+                        p.ml-2 Salida:
+                        input(name='fsalida', type='date')
+                        p.ml-2 Personas:
+                        input(type="number", name="cantidad", min='1', value='1')
+                        hr
                         if (actividad.habdescripcion)
                             h5 Habitaciones:
                             p.ml-2 #{actividad.habdescripcion}
