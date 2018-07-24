@@ -5,30 +5,34 @@ block header
 block content
     .container.mt-3
         .row
-            div(class='col-sm-12')
-                h3 ¡Se parte de nuestra comunidad de viajeros!
-            div(class='d-none d-lg-block col-lg-4 col-xl-3')
-                img(src="/css/bocas-toro-panama.jpg", alt="logo", height="250", width='100%', class='mb-2 rounded-circle shadow')
-                img(src="/css/bocas-toro-panama.jpg", alt="logo", height="250", width='100%', class='rounded-circle shadow')
-            div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
-                .card.shadow-lg.mb-3
-                    .card-header 
-                        span(class='fa fa-users fa-1x') ¡Iniciar Sesión en PanamaTrips!
-                    .card-body
-                        .container
-                            .row
-                                h3.col-sm-10 PanamaTrips!
-                            if hasErrors
-                             .alert.alert-danger
-                                    each lista in messages
-                                        p #{lista}
-                            form.login(action="/login", method='post')
-                                label(class='') Correo:
-                                input(type="email", name='email',class='form-control', placeholder='usuario@gmail.com')           
-                                |
-                                label(class='') Contraseña:
-                                input(type="password", name='password', class='form-control', placeholder='coloque su contraseña')           
-                                |                 
-                                input(class='btn btn-primary' type='submit', value='Iniciar')
+            .col-sm-12    
+                div(class='d-flex justify-content-center')
+                        .card.shadow-lg.mb-3
+                            .card-header 
+                                span(class='fa fa-users fa-1x') ¡Iniciar Sesión en PanamaTrips!
+                            .card-body
+                                .container
+                                    .row
+                                        div(class='d-block d-lg-none d-xl-none col-sm-12')
+                                            div(class='d-flex justify-content-center')
+                                                img(src="/css/logo.png", alt="logo", height="60%", width='60%', class='img-responsive mb-2 rounded-circle ml-5 mr-5')
+                                            h5.mt-2.mb-4 ¡Coloque su usuario y contraseña!
+                                        div(class='d-none d-lg-block col-lg-12')
+                                            div(class='d-flex justify-content-center')
+                                                img(src="/css/logo.png", alt="logo", height="250px", width='60%', class='img-responsive mb-2 rounded-circle ml-5 mr-5')
+                                            h4.mt-2.mb-4 ¡Coloque su usuario y contraseña!
+                                    if hasErrors
+                                        .alert.alert-danger
+                                                each lista in messages
+                                                    p #{lista}
+                                    .row
+                                        .col-sm-12
+                                            .form-group
+                                                form.login(action="/login", method='post')
+                                                    h5 Correo:
+                                                    input(type="email", name='email',class='form-control', placeholder='Ejemplo: usuario@gmail.com', class='mb-3')
+                                                    h5 Contraseña:
+                                                    input(type="password", name='password', class='form-control', placeholder='Coloque su contraseña', class='mb-3')                            
+                                                    input(class='btn btn-primary w-100' type='submit', value='Iniciar Sesion')
 block scripts 
     script(src="/js/acciones.js")

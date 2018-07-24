@@ -26,7 +26,7 @@ block content
                                             each lista in messages
                                              p #{lista}
                                 .container
-                                    form(action="/registrar-compania", method='post')
+                                    form(action="/registrar-compania", method='post', enctype="multipart/form-data")
                                         h5 Logo de la compañia:
                                             div(class='form-group row')
                                                 .col-sm-7 
@@ -35,6 +35,34 @@ block content
                                                     input#subirimagen(type='file', name='imagen')
                                                     p.text-success(id='buenArchivo')
                                                     p.text-danger(id='malArchivo')
+                                        hr.divisor
+                                        h5 Información Personal del dueño de la empresa:
+                                        div(class='form-group row') 
+                                            label(class='col-sm-2 col-form-label', for='nombrePersona') Nombre:
+                                            .col-sm-10
+                                                input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque su nombre', name='nombre')
+                                        hr
+                                        div(class='form-group row') 
+                                            label(class='col-sm-2 col-form-label', for='apellidoPersona') Apellido:
+                                            .col-sm-10
+                                                input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque su apellido', name='apellido')
+                                        hr
+                                        div(class='form-group row') 
+                                            label(class='col-sm-2 col-form-label', for='provinciaPersona') Provincia:
+                                            .col-sm-10
+                                                select(class='form-control', name='provincia')
+                                                    option(value='Bocas del toro') Bocas del Toro
+                                                    option(value='Cocle') Coclé
+                                                    option(value='Colon') Colón
+                                                    option(value='Chiriqui') Chiriquí
+                                                    option(value='Darien') Darién
+                                                    option(value='Herrera') Herrera
+                                                    option(value='Los Santos') Los Santos 
+                                                    option(value='Panama') Panamá
+                                                    option(value='Veraguas') Veraguas
+                                                    option(value='Comarcas') Comarcas
+                                                    option(value='-') Prefiero no decir
+                                                    option(value='Extranjero') Extranjero
                                         hr.divisor
                                         h5 Información Básica de la empresa:
                                         div(class='form-group row') 

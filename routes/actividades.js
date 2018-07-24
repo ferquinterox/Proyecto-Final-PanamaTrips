@@ -96,13 +96,6 @@ router.get('/provincias', function(req, res){
     res.render("provincias");
 });
 
-//Pagina de ver actividades por provincias
-/* router.get('/actividades', function(req, res){
-    res.render("actividades");
-}); */
-
-
-
 //Pagina de pago (PAYPAL)
 router.post('/pago', isLoggedIn,function(req, res) {
     var reserva = new Reservas({
@@ -131,8 +124,6 @@ router.get('/sobreNosotros', function(req, res){
     res.render("sobreNosotros");
 });
 
-
-
 router.get('/registro', function(req, res){
 	let messages = req.flash('error');
 	res.render('registro',{messages: messages, hasErrors: messages.length > 0 });
@@ -158,7 +149,9 @@ router.post('/registrar-compania', file.single('imagen'), passport.authenticate(
     successRedirect: '/login',
     failureRedirect: '/registro-compania',
     failureFlash: true
-}));
+}
+)  
+);
 
 //LOGIN
 router.get('/login', function(req, res) {
@@ -171,7 +164,6 @@ router.get('/login', function(req, res) {
 
 //PERFIL DEL USUARIO
 router.get('/perfil', isLoggedIn, function(req, res, next) {
-    var id = req.params.personaID;
     var info_per = {"nombre": req.user.nombre, "apellido": req.user.apellido, "provincia": req.user.provincia, "email": req.user.email, "imagenperfil": req.user.imagenperfil};
     console.log(req.user._id);
     Reservas.find({
@@ -193,11 +185,6 @@ router.get('/perfil', isLoggedIn, function(req, res, next) {
         });
 });
 
-/* router.post('/login', passport.authenticate('local.signin', {
-    successRedirect: '/admin/control',
-    failureRedirect: '/login',
-    failureFlash: true
-})); */
 
 //CERRAR SESION
 router.get('/logout', function(req,res,next){

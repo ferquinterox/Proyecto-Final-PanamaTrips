@@ -1,4 +1,4 @@
-// Helper functions
+
     function getElements(el) {
         return Array.prototype.slice.call(document.querySelectorAll(el));
     }
@@ -11,19 +11,19 @@
         document.body.querySelector(el).style.display = 'block';
     }
 
-    // Listen for changes to the radio fields
+    // Busca cambios en los radio button
 
     getElements('input[name=payment-option]').forEach(function(el) {
         el.addEventListener('change', function(event) {
 
-            // If PayPal is selected, show the PayPal button
+            // Si escoge paypal muestra paypal
 
             if (event.target.value === 'paypal') {
                 hideElement('#card-button-container');
                 showElement('#paypal-button-container');
             }
 
-            // If Card is selected, show the standard continue button
+            // Si escoge tarjeta sale tarjeta
 
             if (event.target.value === 'card') {
                 showElement('#card-button-container');
@@ -32,21 +32,21 @@
         });
     });
 
-    // Hide Non-PayPal button by default
+    // Esconde el boton por tarjetas por default
 
     hideElement('#card-button-container');
 
-    // Render the PayPal button
+    // Renderizado del boton de paypal
 
     paypal.Button.render({
 
         env: 'sandbox',
-
+        //Cuentas de prueba y Produccion de Paypal
         client: {
             sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
             production: '<insert production client id>'
         },
-
+        //Estilo del boton
         style: {
             label: 'pay',
             size:  'small',
@@ -56,9 +56,12 @@
 
         commit: true,
 
+        //Configuracion de lo que se va a comprar
         payment: function (data, actions) {
+            var nombre_act = $('#nombre').val();
+            var descripcion = $('#descripcion').val();
             var precio = parseFloat(document.getElementById('precio').innerHTML).toFixed(2);;
-            var cantidad = document.getElementById('cantidadper').value;
+            var cantidad =$('#cantidadper').val();
             console.log("precio: " + precio + "cantidad: " + cantidad);
             var impuesto = (precio * cantidad) * 0.07;
             impuesto = +impuesto.toFixed(2);
@@ -83,12 +86,11 @@
                 item_list: {
                   items: [
                     {
-                      name: 'hat',
-                      description: 'Brown hat.',
+                      name: nombre_act,
+                      description: descripcion,
                       quantity: cantidad,
                       price: precio,
                       tax: '0',
-                      sku: '1',
                       currency: 'USD'
                     }
                   ]
@@ -98,7 +100,7 @@
             });
           },
           
-
+        //Lo que retorna al comprar la oferta
         onAuthorize: function(data, actions) {
             return actions.payment.execute().then(function() {
                 window.alert('Pago completado!');
