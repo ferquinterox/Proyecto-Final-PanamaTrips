@@ -1,0 +1,67 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/control.css")
+block content
+    .container.mb-4
+        .row
+            .col-sm-12 
+                h3.mt-3 ¡Bienvenido #{rol}!
+        .col-sm-12
+        .row
+            .col-sm-12
+                div(class="card bg-dark text-white")
+                    img(class="card-img", src="/css/bocas-toro-panama.jpg", alt="Card image")
+                    div(class="card-img-overlay")
+                        h4.card-title Control de solicitudes de compañias:
+                        .card-body
+                            div(class='pre-scrollable')
+                                table.table.table-hover.table-light.mb-0
+                                        thead.thead-dark
+                                            tr
+                                                th(scope="col") N°
+                                                th(scope="col") Logo-compañia
+                                                th(scope="col") Nombre del jefe
+                                                th(scope="col") Nombre de la compañia
+                                                th(scope="col") Tipo de compañia
+                                                th(scope="col") Estado
+                                                th(scope="col") Correo
+                                                th(scope="col") Facebook
+                                                th(scope="col") Twitter
+                                                th(scope="col") Instagram
+                                                th(scope="col") Aceptar
+                                                th(scope="col") Rechazar
+                                        tbody
+                                            for lista, n in compania
+                                                if (lista.activo == 'Inactivo')
+                                                    tr
+                                                        form(action='/admin/aceptar_sol', method='post')
+                                                            td.bg-secondary.text-light= n+1
+                                                            td 
+                                                               img(src="/"+lista.usuario.imagenperfil, alt="Logo de la compania", srcset="", class='img-thumbnail')
+                                                            td #{lista.usuario.nombre} #{lista.usuario.apellido}
+                                                            td #{lista.nombre_comp}
+                                                            td #{lista.tipo_comp}
+                                                            td #{lista.activo}
+                                                            td #{lista.email}
+                                                            td 
+                                                                if lista.facebook
+                                                                    a(href=lista.facebook) Facebook
+                                                                else
+                                                                    p Información no dada
+                                                            td 
+                                                                if lista.twitter
+                                                                    a(href=lista.twitter) Twitter
+                                                                else
+                                                                    p Información no dada
+                                                            td 
+                                                                if lista.instagram
+                                                                    a(href=lista.instagram) Instagram
+                                                                else
+                                                                    p Información no dada
+                                                            td
+                                                                input(type='hidden', value=lista._id, name='id')
+                                                                input(type='submit',value='Aceptar').btn.btn-success
+                                                        form(action='/admin/rechazar_sol', method='POST')
+                                                            td
+                                                                input(type='hidden', value=lista._id, name='id')
+                                                                input(type='submit',value='Rechazar').btn.btn-danger

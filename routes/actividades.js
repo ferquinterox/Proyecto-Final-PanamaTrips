@@ -172,12 +172,16 @@ router.get('/perfil', isLoggedIn, function(req, res, next) {
         .populate('actividad', 'imagenes nombreact descripcion')
         .exec()
         .then(resultado => {
+            Compania.find({usuario: req.user._id})
+                .exec()
+                .then(resultado2 => {
                 res.render('profile', {
                     actividades: resultado,
-                    perfil: info_per
+                    perfil: info_per,
+                    compania: resultado2
                 })
-            }
-
+            })
+            }   
         ).catch(err => {
             res.status(500).json({
                 error: err

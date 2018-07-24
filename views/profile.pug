@@ -11,6 +11,8 @@ block content
                     img(src="/css/default_profile.jpg", alt="Imagen de perfil", class='rounded-circle perfil')   
             .col-sm-12.d-flex.justify-content-center
                 h2.mt-2 #{perfil.nombre} #{perfil.apellido}
+            .col-sm-12.d-flex.justify-content-center    
+                h3.mt-2 Estado-Actual: #{compania.estado}
         .row.mb-4.mt-2
             .col-sm-12.w-100
                     ul.nav.nav-tabs
@@ -35,11 +37,36 @@ block content
                                         h5 Correo:
                                         p.info #{perfil.email}
                                     div(class='col-sm-12 col-md-12 col-lg-6')
-                                        h5 Fecha de nacimiento:
-                                        p.info informa
-                                    div(class='col-sm-12 col-md-12 col-lg-6')
                                         h5 Rol:
-                                        p.info informa
+                                        p.info #{rol}
+                                    if (rol === 'compania')
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Nombre Compañia:
+                                            p.info #{compania.nombre_comp}
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Tipo de Compañia:
+                                            p.info #{compania.tipo_comp}
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Facebook
+                                            span(class='fa fa-facebook')
+                                                if compania.facebook
+                                                    a(href=compania.facebook).info #{compania.nombre_comp} gggg
+                                                else
+                                                    p.info Información no dada.
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Twitter
+                                            span(class='fa fa-twitter')
+                                                if compania.twitter
+                                                    a(href=compania.twitter).info #{compania.nombre_comp} gggg
+                                                else
+                                                    p.info Información no dada.
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Instagram
+                                            span(class='fa fa-instagram')
+                                                if compania.instagram
+                                                    a(href=compania.instagram).info #{compania.nombre_comp} gggg
+                                                else
+                                                    p.info Información no dada.
                         div(id="actividades" role="tabpanel" class="tab-pane fade")
                             .container
                                 .row

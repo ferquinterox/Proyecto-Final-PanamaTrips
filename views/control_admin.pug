@@ -5,7 +5,7 @@ block content
     .container.mb-4
         .row
             .col-sm-12 
-                h3.mt-3 ¡Bienvenido administrador, #{email}!
+                h3.mt-3 ¡Bienvenido #{rol}!
         .col-sm-12
         .row
             .col-sm-12
@@ -20,9 +20,9 @@ block content
                                         thead.thead-dark
                                             tr
                                                 th(scope="col") N°
+                                                th(scope="col") Imagen-Actividad
                                                 th(scope="col") Actividad
-                                                th(scope="col") Compañia
-                                                th(scope="col") Descripcion
+                                                th(scope="col") Descripcion-Actividad
                                                 th(scope="col") Provincia
                                                 th(scope="col") Contacto
                                                 th(scope="col") Correo
@@ -37,37 +37,48 @@ block content
                                                     tr
                                                         form(action='admin/control/actualizar', method='POST')
                                                             td.bg-secondary.text-light= n+1
+                                                            td
+                                                                if (lista.imagenes || !lista.imagenes[0]=="") 
+                                                                    img(src="/"+lista.imagenes[0], alt="Imagen actividad", srcset="", class='img-thumbnail')
+                                                                else
+                                                                    img(src="/css/logo.png", alt="Imagen actividad", srcset="", class='img-thumbnail')
                                                             td #{lista.nombreact}
-                                                                input#actividad(type='text' name='actividad')
-                                                            td #{lista.compania}
-                                                                input#compania(type='text' name='compania')
+                                                                if (rol === 'compania')
+                                                                    input#actividad(type='text' name='actividad')
                                                             td #{lista.descripcion}
-                                                                input#descrip(type='text' name='descrip')
+                                                                if (rol === 'compania')
+                                                                    input#descrip(type='text' name='descrip')
                                                             td #{lista.provincia}
-                                                                select(class='form-control', name='provincias')
-                                                                    option(value='bocas') Bocas del Toro
-                                                                    option(value='cocle') Coclé
-                                                                    option(value='colon') Colón
-                                                                    option(value='chiriqui') Chiriquí
-                                                                    option(value='darien') Darién
-                                                                    option(value='herrera') Herrera
-                                                                    option(value='lossantos') Los Santos 
-                                                                    option(value='panama') Panamá
-                                                                    option(value='veraguas') Veraguas
-                                                                    option(value='comarcas') Comarcas     
+                                                                if (rol === 'compania')
+                                                                    select(class='form-control', name='provincias')
+                                                                        option(value='bocas') Bocas del Toro
+                                                                        option(value='cocle') Coclé
+                                                                        option(value='colon') Colón
+                                                                        option(value='chiriqui') Chiriquí
+                                                                        option(value='darien') Darién
+                                                                        option(value='herrera') Herrera
+                                                                        option(value='lossantos') Los Santos 
+                                                                        option(value='panama') Panamá
+                                                                        option(value='veraguas') Veraguas
+                                                                        option(value='comarcas') Comarcas     
                                                             td #{lista.contacto}
-                                                                input#contacto(type='text' name='contacto')
+                                                                if (rol === 'compania')
+                                                                    input#contacto(type='text' name='contacto')
                                                             td #{lista.correo}
-                                                                input#correo(type='text' name='correo')
+                                                                if (rol === 'compania')
+                                                                    input#correo(type='text' name='correo')
                                                             td #{lista.fecha_pub}
                                                             td #{lista.estado}
-                                                                select#sexo(name="activo")
-                                                                    option(value="active") Activo
-                                                                    option(value="inactive") Inactivo
+                                                                if (rol === 'compania')
+                                                                    select#sexo(name="activo")
+                                                                        option(value="active") Activo
+                                                                        option(value="inactive") Inactivo
                                                             td #{lista.habdescripcion}
-                                                                input#habdescripcion(type='text' name='hab') 
+                                                                if (rol === 'compania')
+                                                                    input#habdescripcion(type='text' name='hab') 
                                                             td #{lista.precio}
-                                                                input#precio(type='text' name='precio') 
+                                                                if (rol === 'compania')
+                                                                    input#precio(type='text' name='precio') 
                                                             td
                                                                 input(type='hidden', value=lista._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success

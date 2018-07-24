@@ -5,7 +5,7 @@ block content
     .container.mb-4
         .row
             .col-sm-12 
-                h3.mt-3 ¡Bienvenido administrador, #{email}!
+                h3.mt-3 ¡Bienvenido #{rol}!
         .col-sm-12
         .row
             .col-sm-12
@@ -20,6 +20,7 @@ block content
                                         thead.thead-dark
                                             tr
                                                 th(scope="col") N°
+                                                th(scope="col") Imagen-Oferta
                                                 th(scope="col") Oferta
                                                 th(scope="col") Compañia
                                                 th(scope="col") Descripcion
@@ -37,37 +38,50 @@ block content
                                                     tr
                                                         form(action='admin/controlof/actualizarof', method='POST')
                                                             td.bg-secondary.text-light= i+1
+                                                            td
+                                                                if (lofert.imagenes || !lofert.imagenes[0]=="") 
+                                                                    img(src="/"+lofert.imagenes[0], alt="Imagen actividad", srcset="", class='img-thumbnail')
+                                                                else
+                                                                    img(src="/css/logo.png", alt="Imagen actividad", srcset="", class='img-thumbnail')
                                                             td #{lofert.nombreofer}
-                                                                input#oferta(type='text' name='oferta')
+                                                                if (rol === 'compania')
+                                                                    input#oferta(type='text' name='oferta')
                                                             td #{lofert.compania}
-                                                                input#compania(type='text' name='compania')
+                                                                if (rol === 'compania')
+                                                                    input#compania(type='text' name='compania')
                                                             td #{lofert.descripcion}
-                                                                input#descrip(type='text' name='descrip')
+                                                                if (rol === 'compania')
+                                                                    input#descrip(type='text' name='descrip')
                                                             td #{lofert.provincia}
-                                                                select(class='form-control', name='provincias')
-                                                                    option(value='bocas') Bocas del Toro
-                                                                    option(value='cocle') Coclé
-                                                                    option(value='colon') Colón
-                                                                    option(value='chiriqui') Chiriquí
-                                                                    option(value='darien') Darién
-                                                                    option(value='herrera') Herrera
-                                                                    option(value='lossantos') Los Santos 
-                                                                    option(value='panama') Panamá
-                                                                    option(value='veraguas') Veraguas
-                                                                    option(value='comarcas') Comarcas     
+                                                                if (rol === 'compania')
+                                                                    select(class='form-control', name='provincias')
+                                                                        option(value='bocas') Bocas del Toro
+                                                                        option(value='cocle') Coclé
+                                                                        option(value='colon') Colón
+                                                                        option(value='chiriqui') Chiriquí
+                                                                        option(value='darien') Darién
+                                                                        option(value='herrera') Herrera
+                                                                        option(value='lossantos') Los Santos 
+                                                                        option(value='panama') Panamá
+                                                                        option(value='veraguas') Veraguas
+                                                                        option(value='comarcas') Comarcas     
                                                             td #{lofert.telefono}
-                                                                input#telefono(type='text' name='telefono')
+                                                                if (rol === 'compania')
+                                                                    input#telefono(type='text' name='telefono')
                                                             td #{lofert.correo}
-                                                                input#correo(type='text' name='correo')
+                                                                if (rol === 'compania')
+                                                                    input#correo(type='text' name='correo')
                                                             td #{lofert.fecha_pub}
                                                             td #{lofert.estado}
                                                                 select#sexo(name="activo")
                                                                     option(value="active") Activo
                                                                     option(value="inactive") Inactivo
                                                             td #{lofert.tiempo}
-                                                                input#tiempo(type='text' name='tiempo') 
+                                                                if (rol === 'compania')
+                                                                    input#tiempo(type='text' name='tiempo') 
                                                             td #{lofert.precio}
-                                                                input#precio(type='text' name='precio') 
+                                                                if (rol === 'compania')
+                                                                    input#precio(type='text' name='precio') 
                                                             td
                                                                 input(type='hidden', value=lofert._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success

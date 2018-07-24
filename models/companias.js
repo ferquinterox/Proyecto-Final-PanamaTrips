@@ -7,6 +7,7 @@ var companySchema = new mongoose.Schema({
     nombre_comp: { type: String, unique: false, required: true, trim: true },
     tipo_comp: { type: String, unique: false, required: true, trim: true },
     email: {type: String, unique: false, required: true},
+    activo: {type: String, unique: false, default: 'Inactivo'},
     facebook: {type: String, required: false},
     twitter: {type: String, required: false},
     instagram: {type: String, required:false}
