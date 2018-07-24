@@ -90,15 +90,15 @@ block content
                             each simi, i in similares
                                 div(class="col-sm-12 col-md-4 no-padding")
                                     .card
-                                        if (oferta.imagenes && !oferta.imagenes[0]=="")
-                                            img(src='/'+oferta.imagenes[0], alt="Imagen"+ i, class="card-img-top")
+                                        if (simi.imagenes && !simi.imagenes[0]=="")
+                                            img(src='/'+simi.imagenes[0], alt="Imagen"+ i, class="card-img-top")
                                         else
                                             img(src='/css/logo.png', alt="Imagen"+ i, class="card-img-top")
                                         .card-body
-                                            h4.card-title #{oferta.nombreofer}
-                                            h6.card-text Provincia: #{oferta.provincia}
-                                            p.card-text #{oferta.descripcion}
-                                            a(href="/ofertas/"+oferta._id, class="black-text d-flex justify-content-end")
+                                            h4.card-title #{simi.nombreofer}
+                                            h6.card-text Provincia: #{simi.provincia}
+                                            p.card-text #{simi.descripcion}
+                                            a(href="/ofertas/"+simi._id, class="black-text d-flex justify-content-end")
                                                 h6 Ver una Oferta
                                                 i(class="fa fa-angle-double-right")
 
