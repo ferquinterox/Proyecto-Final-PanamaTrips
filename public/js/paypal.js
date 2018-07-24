@@ -43,7 +43,7 @@
         env: 'sandbox',
         //Cuentas de prueba y Produccion de Paypal
         client: {
-            sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+            sandbox:    'AdSYvzKtXA9eeIw1ny-hdbDbK2wiT7TZPWKE2JorHta-ZtBb_zXs6HzQw6W76IotkH1GGeD9Zi8J9a8C',
             production: '<insert production client id>'
         },
         //Estilo del boton
@@ -58,11 +58,11 @@
 
         //Configuracion de lo que se va a comprar
         payment: function (data, actions) {
-            var nombre_act = $('#nombre').val();
-            var descripcion = $('#descripcion').val();
+            var nombre_act = $('#nombre').text();
+            var descripcion = $('#descripcion').text();
             var precio = parseFloat(document.getElementById('precio').innerHTML).toFixed(2);;
             var cantidad =$('#cantidadper').val();
-            console.log("precio: " + precio + "cantidad: " + cantidad);
+            console.log("precio: " + precio + "cantidad: " + cantidad + "Nombre: " + nombre_act + "Descripcion: " + descripcion);
             var impuesto = (precio * cantidad) * 0.07;
             impuesto = +impuesto.toFixed(2);
             var total_price = (precio * cantidad) + impuesto;
@@ -88,7 +88,6 @@
                     {
                       name: nombre_act,
                       description: descripcion,
-                      quantity: cantidad,
                       price: precio,
                       tax: '0',
                       currency: 'USD'
