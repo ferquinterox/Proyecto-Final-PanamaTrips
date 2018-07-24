@@ -37,8 +37,8 @@ router.get('/control',isLoggedIn, function(req, res){
 //actualizar user
 router.post('/admin/control/actualizaruser', function(req, res, next){
     users.findOneAndUpdate({
-        _id: req.body.id,},{ $set: {
-            provincia:req.body.provincia, rol: req.body.rol}}).exec().then(result => {
+        _id:req.body.id},{ $set: {
+            rol:req.body.rol}}).exec().then(result => {
         res.redirect('/admin/controluser');
     })
     .catch(err => {
