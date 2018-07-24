@@ -29,13 +29,13 @@ block content
                         p Provincia: #{unaofer.provincia}
                         p Descripcion: #{unaofer.descripcion}
                         span(class="border border-danger") $ #{unaofer.precio}
-                        p
+                        p Provincia: #{unaofer.provincia}
                         
                         form(action='/pago', method='GET')
                             input(type='hidden', value=unaofer._id, name='id')
                             td
                                 input(type='submit',value='COMPRAAAA').btn.btn-danger
-                        
+                        p
     //Carousel de imagenes
     .container-fluid(class="padding-bottom($spacer * .5)")
         div(class="col-sm-12 no-padding pt-4")
