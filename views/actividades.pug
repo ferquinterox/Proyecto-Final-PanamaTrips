@@ -14,7 +14,7 @@ block content
                         div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
                             .row(class="mt-8 ")    
                             div(class="col-sm-12  col-xl-12 no-padding" ) 
-                    if (lista.imagenes && !lista.imagenes[0]=="")  
+                   
                                 div(id="carouselcito2", class="carousel slide carousel-fade", data-ride="carousel")
                                     
                                     div(class="carousel-inner")
@@ -30,8 +30,7 @@ block content
                                     //- a(class="carousel-control-next" href="#carouselcito2" role="button" data-slide="next")
                                     //-     span(class="carousel-control-next-icon" aria-hidden="true")
                                     //-     span(class="sr-only") Next
-                    else
-                        img.img-responsive(src='/css/logo.png')     
+                      
                         div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
                             
                             h4.mt-2 Actividad: #{lista.nombreact}

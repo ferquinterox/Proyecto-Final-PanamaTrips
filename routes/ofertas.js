@@ -12,7 +12,7 @@ var file = require('../public/js/files')
 mongoose.Promise = global.Promise; 
 //Inicio
 router.get("/", (req, res) => {
-    ofertas.find().select('nombreofer imagenes').limit(3)
+    ofertas.find().select('id nombreofer imagenes').limit(3)
         .exec()
         .then(doc => {
             console.log(doc)
@@ -28,7 +28,39 @@ router.get("/", (req, res) => {
 
 });
 
-
+//oferta especifica con todo de la pag. unaoferta.pug
+router.get('/', function(req, res) {
+    var id = req.params.ofertaId;
+    var info_ofert = {};
+    ofertas.findById(id)
+        .exec()
+        .then(result => {
+            info_ofert = {
+                info: result
+            };
+            ofertas.aggregate([{
+                    $sample: {
+                        size: 3
+                    }
+                }])
+                .exec()
+                .then(result => {
+                    res.status(200).render("index", {
+                        similares: result,
+                        oferta: info_ofert.info
+                    });
+                    console.log(info_ofert.info);
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        error: err.message
+                    })
+                });
+        })
+        .catch(err => {
+            console.log(err)
+        });
+});
 
 //lleva todas las ofertas a pag. de ofertas.pug
 router.get('/ofertas',function(req, res){
