@@ -10,6 +10,10 @@ router.get("/", (req, res) => {
 });
 //send es una respuesta
 var actividad = require('../models/actividades');
+var Compania = require('../models/companias');
+
+var file = require('../public/js/files');
+//Pagina de actividades
 var ofertas = require('../models/ofertas');
 var users=require('../models/users');
 
@@ -77,6 +81,22 @@ router.get('/adminActividades',isLoggedIn, function(req, res){
     res.render("adminActividades");
 });
 
+router.get('/solicitudes', function(req, res, next){
+    Compania.find()
+    .select('imagencompania nombre_comp tipo_comp email facebook twitter instagram rol')
+    .exec()
+    .then(doc => {
+        res.render('adminSolicitudes', {
+            solicitudes: doc
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
+});
+
+
 //actualizar actividades
 router.post('/admin/control/actualizar', function(req, res, next){
     actividad.findOneAndUpdate({
@@ -123,7 +143,7 @@ router.get('/adminOfertas',isLoggedIn, function(req, res){
 //Pagina de Ofertas
 router.get('/controlof',isLoggedIn, function(req, res){
      ofertas.find()
-    .select('nombreofer compania descripcion provincia telefono correo tiempo precio fecha_pub estado') 
+    .select('_id nombreofer compania descripcion provincia telefono correo tiempo precio fecha_pub estado') 
     .exec()
     .then(doc => {
         console.log(doc)
@@ -135,7 +155,6 @@ router.get('/controlof',isLoggedIn, function(req, res){
         res.status(500).json({error: err});
     }); 
 });
-
 
 //ACTUALIZAR OFERTAS
 router.post('/admin/controlof/actualizarof',isLoggedIn, function(req, res, next){

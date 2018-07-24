@@ -10,6 +10,7 @@ var userSchema = new mongoose.Schema({
     provincia: {type: String, unique: false, required: true},
     password: { type: String, unique: false, required: true, trim: true },
     passConfirm: { type: String, unique: false, required: true, trim: true },
+    imagenperfil: {type: String, required: false},
     rol:{type: String, unique: false, required: true, trim: true, default:'usuario'}
 },{collection:'users'});
 

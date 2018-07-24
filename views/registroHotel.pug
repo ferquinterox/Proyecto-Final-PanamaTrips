@@ -1,0 +1,106 @@
+extends basic.pug
+block header
+    link(rel="stylesheet", href="/css/registro.css")
+block content
+    .container.mt-3
+        .row
+            div(class='d-none d-lg-block col-lg-12')
+                h3 ¡Se parte de nuestra comunidad de viajeros!
+            div(class='d-block d-lg-none d-xl-none col-sm-12')
+                h5 ¡Se parte de nuestra comunidad de viajeros!
+            div(class='col-sm-12')
+                .card.shadow-lg.mb-3
+                    .card-header 
+                        span(class='fa fa-users fa-1x')  ¡Registrate y promocionate de PanamaTrips!
+                    .card-body
+                        .container
+                            .row
+                                div(class='d-none d-lg-block col-lg-12')
+                                    h3 ¡PanamaTrips-Company!
+                                    hr.divisor
+                                div(class='d-block d-lg-none d-xl-none col-sm-12')
+                                    h6 ¡PanamaTrips-Company!
+                                    hr.divisor
+                                if hasErrors
+                                    .alert.alert-danger
+                                            each lista in messages
+                                             p #{lista}
+                                .container
+                                    form(action="/registrar-compania", method='post')
+                                        h5 Logo de la compañia:
+                                            div(class='form-group row')
+                                                .col-sm-7 
+                                                    label(class='col-form-label') Seleccione su logo de compañia:
+                                                .col-sm-5
+                                                    input#subirimagen(type='file', name='imagen')
+                                                    p.text-success(id='buenArchivo')
+                                                    p.text-danger(id='malArchivo')
+                                        hr.divisor
+                                        h5 Información Básica de la empresa:
+                                        div(class='form-group row') 
+                                            .col-sm-2
+                                                label(class='col-form-label', for='nombreCompania') Nombre de la compañia:
+                                            .col-sm-10
+                                                input(type="text", class='form-control', pattern='^[a-zA-Z]+', placeholder='Coloque el nombre de su compañia', name='nombre_comp')
+                                        hr
+                                        div(class='form-group row') 
+                                            .col-sm-2
+                                                label(class='col-form-label', for='apellidoPersona') Tipo de Compañia:
+                                            .col-sm-10
+                                                .form-check.form-check-inline
+                                                    input#inlineCheckbox1.form-check-input(type="radio", name='tipo_comp', value="hotel")
+                                                    label.form-check-label(for="inlineCheckbox1") Hotel
+                                                .form-check.form-check-inline
+                                                    input#inlineCheckbox2.form-check-input(type="radio", name='tipo_comp', value="agencia")
+                                                    label.form-check-label(for="inlineCheckbox2") Agencia de actividades
+                                                .form-check.form-check-inline
+                                                    input#inlineCheckbox3.form-check-input(type="radio", name='tipo_comp', value="promotor")
+                                                    label.form-check-label(for="inlineCheckbox3") Promotor de actividades
+                                                .form-check.form-check-inline
+                                                    input#inlineCheckbox3.form-check-input(type="radio", name='tipo_comp', value="otro")
+                                                    label.form-check-label(for="inlineCheckbox3") Otro tipo de compañia
+                                        hr
+                                        div(class='form-group row') 
+                                            .col-sm-2
+                                                label(class='col-form-label', for='correoPersona') Correo de la empresa:
+                                            .col-sm-10
+                                                input(type='email', class='form-control', placeholder='example@gmail.com', name='email')
+                                        hr.divisor
+                                        h5 Redes Sociales de la empresa:
+                                        div(class='form-group row')
+                                            .col-sm-2
+                                                label(class='col-form-label fa fa-facebook-square', for='facebookComp')  Facebook de la empresa (opcional):
+                                            .col-sm-10
+                                                input(type='text', class='form-control', placeholder='Ejemplo: https://www.facebook.com/Microsoft/', name='facebook')
+                                        hr
+                                        div(class='form-group row')
+                                            label(class='fa fa-twitter col-sm-2 col-form-label', for='twitterComp') Twitter de la empresa (opcional):
+                                            .col-sm-10
+                                                input(type='text', class='form-control', placeholder='Ejemplo: https://www.twitter.com/Microsoft/', name='twitter')
+                                        hr
+                                        div(class='form-group row')
+                                            label(class='fa fa-instagram col-sm-2 col-form-label', for='instaComp') Instagram de la empresa (opcional):
+                                            .col-sm-10
+                                                input(type='text', class='form-control', placeholder='Ejemplo: https://www.instagram.com/Microsoft/', name='instagram')
+                                        hr.divisor
+                                        h5 Establezca su contraseña:
+                                        div(class='form-group row has-feedback') 
+                                            label(class='col-sm-3 col-form-label', for='contrasena') Contraseña de su cuenta:
+                                            .col-sm-7
+                                                input(type='password', id='pass1', class='form-control pass', placeholder='Escriba su contraseña', name='password')
+                                            .col-sm-2
+                                                span(toggle="#pass1" class="fa fa-fw fa-eye toggle-password") 
+                                        hr
+                                        div(class='form-group row has-feedback')
+                                            label(class='col-sm-3 col-form-label', for='contrasena2') Reescriba la contraseña:
+                                            .col-sm-7
+                                                input(type='password', id='pass2', class='form-control pass', placeholder='Reescriba su contraseña', name='passwordagain')
+                                            .col-sm-2
+                                                span(toggle="#pass2" class="fa fa-fw fa-eye toggle-password") 
+                                        hr
+                                        div(class='form-group row')
+                                            .col-sm-12.d-flex.justify-content-end
+                                                input(class='btn btn-primary', type='submit', value='Registrarme')
+block scripts 
+    script(src="/js/acciones.js")
+    script(src="/js/archivos.js")

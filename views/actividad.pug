@@ -5,36 +5,39 @@ block content
        .container
         .row(class="mt-2")
             div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4")
-              a(href="#", class='btn btn-info w-100') 
+               a(href="/actividad/"+actividad.provincia , class='btn btn-info w-100') 
                 i(class="fa fa-arrow-circle-left") 
                   span Regresar a las actividades
         .row(class="mt-1 mb-4")    
             div(id='slider', class="col-sm-12 col-md-12 col-lg-4 col-xl-4 mb-2")
+              if (actividad.imagenes && !actividad.imagenes[0]=="")
                 #carousel.carousel
                   .carousel-inner
-                    each imag, n in actividad.imagenes
-                      if n == 0
-                        .active.item.carousel-item(data-slide-number=n)
-                          img.img-responsive.visual(src='/'+imag)
-                      else
-                        .item.carousel-item(data-slide-number=n)
-                          img.img-responsive.visual(src='/'+imag)
-                    div(class='d-flex justify-content-center')
-                      a.carousel-control.left.pt-3(href="#carousel", data-slide="prev")
-                        i.fa.fa-chevron-left.fa-2x
-                      a.carousel-control.right.pt-3(href="#carousel", data-slide="next")
-                        i.fa.fa-chevron-right.fa-2x
+                      each imag, n in actividad.imagenes
+                        if n == 0
+                          .active.item.carousel-item(data-slide-number=n)
+                            img.img-responsive.visual(src='/'+imag)
+                        else
+                          .item.carousel-item(data-slide-number=n)
+                            img.img-responsive.visual(src='/'+imag)
+                          div(class='d-flex justify-content-center')
+                            a.carousel-control.left.pt-3(href="#carousel", data-slide="prev")
+                              i.fa.fa-chevron-left.fa-2x
+                            a.carousel-control.right.pt-3(href="#carousel", data-slide="next")
+                              i.fa.fa-chevron-right.fa-2x
                       
-                  ul.carousel-indicators.list-inline
-                    each imag2, n in actividad.imagenes
-                      if n == 0
-                        li.list-inline-item.active
-                          a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
-                            img.img-responsive.miniatura(src='/'+imag2)
-                      else
-                        li.list-inline-item
-                          a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
-                            img.img-responsive.miniatura(src='/'+imag2)
+                      ul.carousel-indicators.list-inline
+                        each imag2, n in actividad.imagenes
+                          if n == 0
+                            li.list-inline-item.active
+                              a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                img.img-responsive.miniatura(src='/'+imag2)
+                          else
+                            li.list-inline-item
+                              a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                img.img-responsive.miniatura(src='/'+imag2)
+              else
+                img.img-responsive(src='/css/logo.png', class='visual')
             div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8")
                 .card.info
                   .card-header
@@ -47,10 +50,11 @@ block content
                           h6 Fecha de publicación: 
                             small #{actividad.fecha_pub}
                         div(class='col-sm-12 col-md-12 col-lg-5 col-xl-5')
-                          form(action="/pago", method="post")
-                            input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
-                            input(name="actividad" type="hidden" value=actividad._id)
-                            input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
+                            form(action="/pago", method="post")
+                              input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
+                              input(name="actividad" type="hidden" value=actividad._id)
+                              //input(name="compania" type="hidden" value=actividad.compania)
+                              input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
                   .card-body
                         h5 Compañia:
                         p.ml-2 #{actividad.compania}
@@ -89,60 +93,23 @@ block content
         .row
           div(class="col-sm-12 no-padding")
             .d-flex.justify-content-center.similares-top
-              h3.mt-2.mb-2 Más actividades disponibles
-        .row.mb-3
-<<<<<<< HEAD
-          div(class="col-sm-12")
+              h3.mt-2.mb
             .card-group
-              .card
-                img(src="/css/tucan.jpg", alt="Imagen1", class="card-img-top")
-                .card-body
-                  h4.card-title Actividad Extra
-                  p.card-text Descripcion de la actividad
-                  a(href="#", class="black-text d-flex justify-content-end")
-                    h6 Ver actividad
-                      i(class="fa fa-angle-double-right")
-              .card
-                img(src="/css/tucan.jpg", alt="Imagen1", class="card-img-top")
-                .card-body
-                  h4.card-title Actividad Extra
-                  p.card-text Descripcion de la actividad
-                  a(href="#", class="black-text d-flex justify-content-end")
-                    h6 Ver actividad
-                      i(class="fa fa-angle-double-right")
-              .card
-                img(src="/css/tucan.jpg", alt="Imagen3", class="card-img-top")
-                .card-body
-                  h4.card-title Actividad Extra
-                  p.card-text Descripcion de la actividad
-                  a(href="#", class="black-text d-flex justify-content-end")
-                    h6 Ver actividad
-                      i(class="fa fa-angle-double-right")                
-//-  for lista, n in actividad
-//-                 td.bg-secondary.text-light= n+1
-//-                     row(class="mt-4 info")    
-//-                         div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
-//-                             img(class="img-fluid imagen", src='/'+lista.imagenAct)
-//-                         div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
-//-                             h4.mt-2 #{lista.nombreact}
-//-                             p #{lista.descripcion} 
-//-                             h5 #{lista.precio}
-//-                             a(href='/registro', class="btn btn-info rounded") Ver Actividad  
-            
-=======
-          .card-group
-            each simi, i in similares
-               div(class="col-sm-12 col-md-4 no-padding")
-                .card
-                  img(src='/'+simi.imagenes[0], alt="Imagen1", class="card-img-top")
-                  .card-body
-                    h4.card-title #{simi.nombreact}
-                    h6.card-text Provincia: #{simi.provincia}
-                    p.card-text #{simi.descripcion}
-                    a(href="/actividades/"+simi._id, class="black-text d-flex justify-content-end")
-                      h6 Ver actividad
-                        i(class="fa fa-angle-double-right")
-              
-              
+              each simi, i in similares
+                div(class="col-sm-12 col-md-4 no-padding")
+                  .card
+                    if (actividad.imagenes && !actividad.imagenes[0]=="")
+                      img(src='/'+actividad.imagenes[0], alt="Imagen"+ i, class="card-img-top")
+                    else
+                      img(src='/css/logo.png', alt="Imagen"+ i, class="card-img-top")
+                    .card-body
+                      h4.card-title #{actividad.nombreact}
+                      h6.card-text Provincia: #{actividad.provincia}
+                      p.card-text #{actividad.descripcion}
+                      a(href="/actividades/"+actividad._id, class="black-text d-flex justify-content-end")
+                        h6 Ver actividad
+                          i(class="fa fa-angle-double-right")
+                    
 
->>>>>>> e30b4f6b7f60ad372fbc709c07289b0dfc848942
+              
+              
