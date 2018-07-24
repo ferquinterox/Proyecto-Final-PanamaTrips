@@ -35,7 +35,7 @@ block content
                                         tbody
                                             for lista, n in actividad
                                                     tr
-                                                        form(action='admin/control/actualizar', method='post')
+                                                        form(action='admin/control/actualizar', method='POST')
                                                             td.bg-secondary.text-light= n+1
                                                             td
                                                                 if (lista.imagenes || !lista.imagenes[0]=="") 

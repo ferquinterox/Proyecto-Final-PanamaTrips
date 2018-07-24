@@ -6,10 +6,27 @@ var passport = require('passport');
 
 var User = require('../models/users');
 var ofertas = require('../models/ofertas');
-var Reservas = require('../models/reservas')
+var Reservasof = require('../models/reservasof')
 var file = require('../public/js/files')    
 
 mongoose.Promise = global.Promise; 
+//Inicio
+router.get("/", (req, res) => {
+    ofertas.find().select('id nombreofer imagenes').limit(3)
+        .exec()
+        .then(doc => {
+            console.log(doc)
+            res.render("index", {
+                ofertaex: doc
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
+
+});
 
 //lleva todas las ofertas a pag. de ofertas.pug
 router.get('/ofertas',function(req, res){
@@ -28,53 +45,37 @@ router.get('/ofertas',function(req, res){
 });
 
 //oferta especifica con todo de la pag. unaoferta.pug
-/* router.get('/ofertas/:ofertasId', function(req, res){
-    var id = req.params.ofertasId;
-    var info_ofer = {};
+router.get('/ofertas/:ofertaId', function(req, res) {
+    var id = req.params.ofertaId;
+    var info_ofert = {};
     ofertas.findById(id)
-    .exec()
-    .then(result => {
-        info_ofer = {info: result};
-        ofertas.aggregate([{ $sample: { size:3 } }])
         .exec()
-        .then(result =>{
-            res.status(200).render("unaoferta", {
-                similares: result,
-                unaoferta: info_ofer.info
-            });
-            console.log(info_ofer.info);
+        .then(result => {
+            info_ofert = {
+                info: result
+            };
+            ofertas.aggregate([{
+                    $sample: {
+                        size: 3
+                    }
+                }])
+                .exec()
+                .then(result => {
+                    res.status(200).render("unaoferta", {
+                        similares: result,
+                        oferta: info_ofert.info
+                    });
+                    console.log(info_ofert.info);
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        error: err.message
+                    })
+                });
         })
         .catch(err => {
-            res.status(500).json({
-                error: err.message
-            })
+            console.log(err)
         });
-    })
-    .catch(err => {
-        console.log(err)
-    });
-   
-}); */
-
-
-//Pagina de Ofertas
-router.get('/ofertas/:_id', function(req, res){
-    var id= req.params.id;
-    ofertas.find({'_id':id})
-    .exec()
-    .then(result => {
-        res.render('unaoferta', {
-            unao: result
-        });
-    })
-    .catch(err =>{
-        res.render(500).json({error: err.message});
-    })
-});
-
-//Pagina de ofertas
-router.get('/unaoferta', function(req, res){
-    res.render("unaoferta");
 });
 
 //INSERTAR OFERTAS  
@@ -106,42 +107,29 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
     });     
 });
 
-
-
-/* //mostrar actividades por cada provincia 
-router.get('/actividad/:provincia', function(req, res){
-    var provincia= req.params.provincia;
-    actividades.find({'provincia':provincia})
-    .exec()
-    .then(result => {
-        res.render('actividades', {
-            actividad: result
-        });
-    })
-    .catch(err =>{
-        res.render(500).json({error: err.message});
-    })
-}); */
-
-
 //Pagina de pago (PAYPAL)
-router.post('/pago', function(req, res){
-    var reserva = new Reservas({
+router.post('/pagof', isLoggedIn,function(req, res) {
+    var reserva = new Reservasof({
         _id: mongoose.Types.ObjectId(),
-        usuario: req.body.usuario,
-        actividad: req.body.actividad,
+        usuario: req.user._id,
+        oferta: req.body.oferta,
         fecha_res: moment().toISOString()
     });
     reserva.save().then(result => {
-        console.log(result);
-        res.render("pago");
-    }).catch(err => {
-        res.status(500).json({
-            error: err
-        })
-    });     
-    
+        ofertas.findById(req.body.oferta)
+            .exec()
+            .then(result => {
+                res.render("pagof", {
+                    oferta: result
+                });
+            }).catch(err => {
+                res.status(500).json({
+                    error: err
+                })
+            })
+    });
 });
+
 
 
 //REGISTRO
@@ -149,6 +137,33 @@ router.post('/pago', function(req, res){
 router.get('/sobreNosotros', function(req, res){
     res.render("sobreNosotros");
 });
+
+//LOGIN
+router.get('/login', function(req, res){
+	let messages = req.flash('error');
+	res.render('login',{messages: messages, hasErrors: messages.length > 0 });
+});
+
+//CERRAR SESION
+router.get('/logout', function(req,res,next){
+	req.logout();
+	res.redirect('/')
+});
+
+router.post('/login', passport.authenticate('local.signin',{
+    successRedirect: '/admin/control',
+    successRedirect: '/admin/controlof',
+	failureRedirect: '/login',
+	failureFlash: true
+}));
+
+//Para saber si esta logiado o no
+function isLoggedIn (req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/login')
+}
 
 //LOGIN
 router.get('/login', function(req, res){

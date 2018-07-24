@@ -11,23 +11,6 @@ var Reservas = require('../models/reservas')
 var file = require('../public/js/files')    
 
 mongoose.Promise = global.Promise;
-//Inicio
-router.get("/", (req, res) => {
-    actividades.find().select('nombreact imagenes').limit(3)
-        .exec()
-        .then(doc => {
-            console.log(doc)
-            res.render("index", {
-                actividad: doc
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            })
-        })
-
-});
 
 //ACTIVIDAD ESPECIFICA
 router.get('/actividades/:actividadId', function(req, res) {
@@ -108,44 +91,10 @@ router.get('/actividad/:provincia', function(req, res){
     })
 });
 
-//INSERTAR OFERTAS  
-router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
-    var paths = req.files.map(function(file) {
-        return file.path; // or file.originalname
-      });
-    var oferta = new ofertas({
-        id: mongoose.Types.ObjectId(),
-        nombreofer: req.body.nombreof,
-        descripcion: req.body.descrip,
-        provincia: req.body.provincias,
-        telefono: req.body.tel,
-        correo: req.body.correo,
-        precio: req.body.precio,
-        prexpers: req.body.prexper,
-        tiempo: req.body.tiempo,
-        compania:req.body.compa,
-        fecha_pub: moment().toISOString(),
-        imagenes: paths
-    });
-    oferta.save().then(result => {
-        console.log(result);
-        res.redirect('/admin/controlof');    
-    }).catch(err => {
-        res.status(500).json({
-            error: err
-        })
-    });     
-});
-
 //Pagina de ver provincias
 router.get('/provincias', function(req, res){
     res.render("provincias");
 });
-
-//Pagina de ver actividades por provincias
-/* router.get('/actividades', function(req, res){
-    res.render("actividades");
-}); */
 
 //Pagina de pago (PAYPAL)
 router.post('/pago', isLoggedIn,function(req, res) {
@@ -240,11 +189,6 @@ router.get('/perfil', isLoggedIn, function(req, res, next) {
         });
 });
 
-/* router.post('/login', passport.authenticate('local.signin', {
-    successRedirect: '/admin/control',
-    failureRedirect: '/login',
-    failureFlash: true
-})); */
 
 //CERRAR SESION
 router.get('/logout', function(req,res,next){

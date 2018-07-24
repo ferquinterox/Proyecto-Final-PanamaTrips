@@ -37,8 +37,8 @@ router.get('/control',isLoggedIn, function(req, res){
 //actualizar user
 router.post('/admin/control/actualizaruser', function(req, res, next){
     users.findOneAndUpdate({
-        _id: req.body.id,},{ $set: {
-            provincia:req.body.provincia, rol: req.body.rol}}).exec().then(result => {
+        _id:req.body.id},{ $set: {
+            rol:req.body.rol}}).exec().then(result => {
         res.redirect('/admin/controluser');
     })
     .catch(err => {
@@ -158,7 +158,7 @@ router.post('/admin/control/eliminar', function(req, res, next){
 
 
 //Rederizado a la pag. de adminOfertas
-router.get('/adminOfertas',isLoggedIn, isAdmin, function(req, res){
+router.get('/adminOfertas',isLoggedIn, function(req, res){
     res.render("adminOfertas");
 });
 
@@ -201,9 +201,9 @@ router.post('/admin/controlof/actualizarof',isLoggedIn, function(req, res, next)
     });
 });
 
-//ELIMINAR
+//ELIMINAR OFERTAS
 router.post('/admin/controlof/eliminarof', function(req, res, next){
-	oferta.remove({
+	ofertas.remove({
         _id: req.body.id
     }).exec()
     .then(result => {

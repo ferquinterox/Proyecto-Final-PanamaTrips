@@ -29,45 +29,49 @@ block content
                                     //- a(class="carousel-control-next" href="#carouselcito2" role="button" data-slide="next")
                                     //-     span(class="carousel-control-next-icon" aria-hidden="true")
                                     //-     span(class="sr-only") Next
-                                
                         div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
                             
                             h4.mt-2 Oferta: #{lista.nombreofer}
-                                
                             p Provincia: #{lista.provincia}
                             p Descripcion: #{lista.descripcion}
                             span(class="border border-danger") $ #{lista.precio}
                             p
-                            a(href='/unaoferta', class="btn btn-info rounded ") Más Información
+                            a(href="/ofertas/"+lista._id, class="btn btn-info rounded ") Más Información
+                            //- form(action='/ofertas/:ofertaId', method='GET')
+                            //-     input(type='hidden', value=lista._id, name='id')
+                            //-     td
+                            //-         input(type='submit',value='Más Información').btn-info.rounded
                             p
                         
-        //Carousel de imagenes
-        .container-fluid(class="padding-bottom($spacer * .5)")
-            div(class="col-sm-12 no-padding pt-4")
-                div(id="controles", class="carousel slide", data-ride="carousel")
-                    ol(class="carousel-indicators")
-                        li(data-target="#indicadores", data-slide-to="0", class="active")
-                        li(data-target="#indicadores", data-slide-to="1")
-                        li(data-target="#indicadores", data-slide-to="2")
-                    div(class="carousel-inner")
-                        div(class="carousel-item active")
-                            .carousel-caption
-                                h2 TOP del mes
-                                a(href="#", class='btn btn-info') Pamama
-                            img(src="/css/bocas-toro-panama.jpg", alt="Primera Oferta", class="d-block w-100 ")
-                        div(class="carousel-item")
-                            .carousel-caption
-                                h2 TOP del mes
-                                a(href="#", class='btn btn-info') Veraguas
-                            img(src="/css/bocas-toro-panama.jpg", alt="Segunda Oferta", class="d-block w-100")
-                        div(class="carousel-item")
-                            .carousel-caption
-                                h2 TOP del mes
-                                a(href="#", class='btn btn-info') Chiriqui
-                            img(src="/css/bocas-toro-panama.jpg", alt="Tercera Oferta", class="d-block w-100")
-                    a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
-                        span(class="carousel-control-prev-icon" aria-hidden="true")
-                        span(class="sr-only") Anterior
-                    a(class="carousel-control-next" href="#controles" role="button" data-slide="next")
-                        span(class="carousel-control-next-icon" aria-hidden="true")
-                        span(class="sr-only") Siguiente
+                        
+    //Carousel de imagenes
+    .container-fluid(class="padding-bottom($spacer * .5)")
+        div(class="col-sm-12 no-padding pt-4")
+            div(id="controles", class="carousel slide", data-ride="carousel")
+                ol(class="carousel-indicators")
+                    li(data-target="#indicadores", data-slide-to="0", class="active")
+                    li(data-target="#indicadores", data-slide-to="1")
+                    li(data-target="#indicadores", data-slide-to="2")
+                div(class="carousel-inner")
+                    div(class="carousel-item active")
+                        .carousel-caption
+                            h2 TOP del mes
+                            a(href="#", class='btn btn-info') Pamama
+                        img(src="/css/bocas-toro-panama.jpg", alt="Primera Oferta", class="d-block w-100 ")
+                    div(class="carousel-item")
+                        .carousel-caption
+                            h2 TOP del mes
+                            a(href="#", class='btn btn-info') Veraguas
+                        img(src="/css/bocas-toro-panama.jpg", alt="Segunda Oferta", class="d-block w-100")
+                    div(class="carousel-item")
+                        .carousel-caption
+                            h2 TOP del mes
+                            a(href="#", class='btn btn-info') Chiriqui
+                        img(src="/css/bocas-toro-panama.jpg", alt="Tercera Oferta", class="d-block w-100")
+                a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
+                    span(class="carousel-control-prev-icon" aria-hidden="true")
+                    span(class="sr-only") Anterior
+                a(class="carousel-control-next" href="#controles" role="button" data-slide="next")
+                    span(class="carousel-control-next-icon" aria-hidden="true")
+                    span(class="sr-only") Siguiente
+                p
