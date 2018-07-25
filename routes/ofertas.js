@@ -134,6 +134,41 @@ router.post('/pagof', isLoggedIn,function(req, res) {
             })
     });
 });
+//Pagina de pago (PAYPAL)
+router.post('/pagof', isLoggedIn,function(req, res) {
+    ofertas.findById(req.body.oferta)
+        .exec()
+        .then(result => {
+            res.render("pagof", {
+                usuario: req.user._id,
+                idoferta: req.body.oferta,
+                fechaI:req.body.finicio,
+                personas:req.body.cantidad,
+                oferta: result
+            });
+        }).catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
+});
+router.post('/pagof_reserva',function(req, res) {
+    console.log(req.body);
+    var reserva = new Reservasof({
+        _id: mongoose.Types.ObjectId(),
+        usuario: req.body.usuario,
+        oferta: req.body.oferta,
+        fechaI: req.body.fechaI,
+        personas: req.body.personas,
+        fecha_res: moment().toISOString()});
+    reserva.save().then(reservas => {res.end('Pago registrado satisfactriamente')}).catch(err => {
+        res.status(500).json({
+            error: err
+        })
+        console.log(err.message)
+    });
+});
+
 
 //PERFIL DEL USUARIO
 router.get('/perfil', isLoggedIn, function(req, res, next) {
