@@ -31,8 +31,11 @@ block content
                     p#descripcion #{oferta.descripcion}
                     h5 Precio:
                     p#precio #{oferta.precio}
-                    h5 Para cuantas personas:
-                    input(id='cantidadper', type="number", name="cantidad", min='1', value='1')
+                    h5 Cantidad de Personas:
+                    p #{reservas.personas}
+                    h5 Fecha Escogida:
+                    p #{reservas.fechaI}
+                    //input(id='cantidadper', type="number", name="cantidad", min='1', value='1')
                   div(class='col-sm-12 d-flex justify-content-center mt-4 mb-1')
                         input(type="radio" name="payment-option" value="paypal" checked="true")
                         img(src="/css/paypal-mark.jpg" alt="Pague con PayPal")
