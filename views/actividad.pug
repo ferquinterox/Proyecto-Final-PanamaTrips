@@ -56,21 +56,18 @@ block content
                               //input(name="compania" type="hidden" value=actividad.compania)
                               input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
                   .card-body
-                        h5 Compañia:
-                        p.ml-2 #{actividad.compania}
-                        hr
                         h5 Descripción:
                         p.ml-2 #{actividad.descripcion}
                         hr
                         h5 Escoga sus fecha:
                         p.ml-2 Inicio:
-                        input(name='finicio' , type='date')
+                        input(name='finicio' , type='date', required)
                         hr
                         p.ml-2 Salida:
-                        input(name='fsalida', type='date')
+                        input(name='fsalida', type='date', required)
                         hr
                         p.ml-2 Personas:
-                        input(type="number", name="cantidad", min='1', value='1')
+                        input(type="number", name="cantidad", min='1', value='1', required)
                         hr
                         if (actividad.habdescripcion)
                             h5 Habitaciones:

@@ -41,6 +41,7 @@ const mongoose = require('mongoose');
         newUser.nombre = req.body.nombre;
         newUser.apellido = req.body.apellido;
         newUser.provincia = req.body.provincia;
+        newUser.rol = 'compania';
         newUser.passConfirm = req.body.passwordagain;
         newUser.password = newUser.encryptPassword(password);
         newUser.imagenperfil = req.file.path;

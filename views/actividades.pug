@@ -6,11 +6,11 @@ block content
         .row
             div(class="col-sm-12")
                 .d-flex.justify-content-center
-                    h3 ¡Actividades en los mejores destinos de 
+                    h3 ¡Actividades en los mejores destinos de Panamá
             .container
                 for lista, n in actividad     
                     .row(class="mt-4 info")
-                    
+                 
                         div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
                             .row(class="mt-8 ")    
                             div(class="col-sm-12  col-xl-12 no-padding" ) 
@@ -31,7 +31,7 @@ block content
                                     //-     span(class="carousel-control-next-icon" aria-hidden="true")
                                     //-     span(class="sr-only") Next
                       
-                        div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
+                        div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2 mb-5")
                             
                             h4.mt-2 Actividad: #{lista.nombreact}
                                 
@@ -41,35 +41,3 @@ block content
                             a(href='/actividades/'+lista._id , class='btn btn-info rounded') Mas información
                         //form(action='/actividades/'+lista._id, method='GET')
                             input(type='hidden', value=lista._id, name='id')
-                            
-                        
-        //Carousel de imagenes
-        .container-fluid(class="padding-bottom($spacer * .5)")
-            div(class="col-sm-12 no-padding pt-4")
-                div(id="controles", class="carousel slide", data-ride="carousel")
-                    ol(class="carousel-indicators")
-                        li(data-target="#indicadores", data-slide-to="0", class="active")
-                        li(data-target="#indicadores", data-slide-to="1")
-                        li(data-target="#indicadores", data-slide-to="2")
-                    div(class="carousel-inner")
-                        div(class="carousel-item active")
-                            .carousel-caption
-                                h2 TOP del mes
-                                a(href="#", class='btn btn-info') Pamama
-                            img(src="/css/bocas-toro-panama.jpg", alt="Primera Actividad", class="d-block w-100 ")
-                        div(class="carousel-item")
-                            .carousel-caption
-                                h2 TOP del mes
-                                a(href="#", class='btn btn-info') Veraguas
-                            img(src="/css/bocas-toro-panama.jpg", alt="Segunda Actividad", class="d-block w-100")
-                        div(class="carousel-item")
-                            .carousel-caption
-                                h2 TOP del mes
-                                a(href="#", class='btn btn-info') Chiriqui
-                            img(src="/css/bocas-toro-panama.jpg", alt="Tercera Actividad", class="d-block w-100")
-                    a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
-                        span(class="carousel-control-prev-icon" aria-hidden="true")
-                        span(class="sr-only") Anterior
-                    a(class="carousel-control-next" href="#controles" role="button" data-slide="next")
-                        span(class="carousel-control-next-icon" aria-hidden="true")
-                        span(class="sr-only") Siguiente                               

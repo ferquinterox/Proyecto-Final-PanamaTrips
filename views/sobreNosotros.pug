@@ -6,10 +6,10 @@ block header
 block content
     .container.mt-3
         .row
-            div(class='col-sm-12')
+            div(class='col-sm-12 mb-2')
                 h3 ¡Se parte de nuestra comunidad de viajeros!
         .row
-            .col-sm-12.d-flex.justify-content-center
+            .col-sm-12.d-flex.justify-content-center.mb-4
                 img.img-responsive(src='/css/logo.png', class='visual rounded-circle perfil')
                               
             div(class='col-sm-12 col-md-12 col-lg-8 col-xl-12')
@@ -18,8 +18,6 @@ block content
                         span(class='fa fa-users fa-1x') ¿Quienes Somos?
                     .card-body
                         .container
-                            
-                            form.login(action="/autenticar", method='post')
                             .row.mt-4
                                 h3.col-sm-10 PanamaTrips!
                                 h6.col-sm-10 Descubre Panamá
@@ -31,43 +29,17 @@ block content
                                 h3.col-sm-10 Visión:
                                 p
                                 h6.col-sm-20 liderar el mercado del turismo interno en Panamá, teniendo la mejor calidad de otros servicios empresariales de turismo, en el que nuestros clientes se sientan cómodos al navegar en nuestro sitio.
+                            .row.mt-4
+                                .col-sm-12.d-flex.justify-content-center
+                                     img(src="/css/IMG_5906.JPG", alt="Foto de grupo", srcset="", class='nosotros', width='350px', height='300px')
                     .card-header
                         .row
                             .col-sm-12.d-flex.justify-content-center
                                 h6 Por: Nicole Quintero, Fernando Quintero y Maureth Samudio
+                               
 
                                 
-    //Carousel de imagenes
-    .container-fluid(class="padding-bottom($spacer * .5)")
-        div(class="col-sm-12 no-padding pt-4")
-            div(id="controles", class="carousel slide", data-ride="carousel")
-                ol(class="carousel-indicators")
-                    li(data-target="#indicadores", data-slide-to="0", class="active")
-                    li(data-target="#indicadores", data-slide-to="1")
-                    li(data-target="#indicadores", data-slide-to="2")
-                div(class="carousel-inner")
-                    div(class="carousel-item active")
-                        .carousel-caption
-                            h2 TOP del mes
-                            a(href="#", class='btn btn-info') Pamama
-                        img(src="/css/bocas-toro-panama.jpg", alt="Primera Oferta", class="d-block w-100")
-                    div(class="carousel-item")
-                        .carousel-caption
-                            h2 TOP del mes
-                            a(href="#", class='btn btn-info') Veraguas
-                        img(src="/css/bocas-toro-panama.jpg", alt="Segunda Oferta", class="d-block w-100")
-                    div(class="carousel-item")
-                        .carousel-caption
-                            h2 TOP del mes
-                            a(href="#", class='btn btn-info') Chiriqui
-                        img(src="/css/bocas-toro-panama.jpg", alt="Tercera Oferta", class="d-block w-100")
-                a(class="carousel-control-prev" href="#controles" role="button" data-slide="prev")
-                    span(class="carousel-control-prev-icon" aria-hidden="true")
-                    span(class="sr-only") Anterior
-                a(class="carousel-control-next" href="#controles" role="button" data-slide="next")
-                    span(class="carousel-control-next-icon" aria-hidden="true")
-                    span(class="sr-only") Siguiente
-            p
+    
                                 
 block scripts 
     script(src="/js/acciones.js")

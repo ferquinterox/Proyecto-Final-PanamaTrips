@@ -22,14 +22,12 @@ block content
                                                 th(scope="col") N°
                                                 th(scope="col") Imagen-Oferta
                                                 th(scope="col") Oferta
-                                                th(scope="col") Compañia
                                                 th(scope="col") Descripcion
                                                 th(scope="col") Provincia
                                                 th(scope="col") Telefono
                                                 th(scope="col") Correo
                                                 th(scope="col") Fecha de Publicación
                                                 th(scope="col") Estado
-                                                th(scope="col") Tiempo en Horas
                                                 th(scope="col") Precio
                                                 th(scope="col") Actualizar
                                                 th(scope="col") Eliminar
@@ -45,16 +43,14 @@ block content
                                                                     img(src="/css/logo.png", alt="Imagen actividad", srcset="", class='img-thumbnail')
                                                             td #{lofert.nombreofer}
                                                                 if (rol === 'compania')
-                                                                    input#oferta(type='text' name='oferta' value=lista.nombreofer)
-                                                            td #{lofert.compania}
-                                                                if (rol === 'compania')
-                                                                    input#compania(type='text' name='compania' value=lista.compania, readonly)
+                                                                    input#oferta(type='text' name='oferta' value=lofert.nombreofer)
+                                                            
                                                             td #{lofert.descripcion}
                                                                 if (rol === 'compania')
-                                                                    input#descrip(type='text' name='descrip' value=lista.compania)
+                                                                    input#descrip(type='text' name='descrip' value=lofert.descripcion)
                                                             td #{lofert.provincia}
                                                                 if (rol === 'compania')
-                                                                    select(class='form-control', name='provincias' value=lista.provincia)
+                                                                    select(class='form-control', name='provincias' value=lofert.provincia)
                                                                         option(value='bocas') Bocas del Toro
                                                                         option(value='cocle') Coclé
                                                                         option(value='colon') Colón
@@ -64,24 +60,22 @@ block content
                                                                         option(value='lossantos') Los Santos 
                                                                         option(value='panama') Panamá
                                                                         option(value='veraguas') Veraguas
-                                                                        option(value='comarcas') Comarcas     
+                                                                        option(value='gunayala') Guna Yala     
                                                             td #{lofert.telefono}
                                                                 if (rol === 'compania')
-                                                                    input#telefono(type='text' name='telefono' value=lista.telefono)
+                                                                    input#telefono(type='text' name='telefono' value=lofert.telefono)
                                                             td #{lofert.correo}
                                                                 if (rol === 'compania')
-                                                                    input#correo(type='text' name='correo' value=lista.correo)
+                                                                    input#correo(type='text' name='correo' value=lofert.correo)
                                                             td #{lofert.fecha_pub}
                                                             td #{lofert.estado}
                                                                 select#sexo(name="activo")
                                                                     option(value="active") Activo
                                                                     option(value="inactive") Inactivo
-                                                            td #{lofert.tiempo}
-                                                                if (rol === 'compania')
-                                                                    input#tiempo(type='text' name='tiempo' value=lista.tiempo) 
+                                                            
                                                             td #{lofert.precio}
                                                                 if (rol === 'compania')
-                                                                    input#precio(type='text' name='precio' value=lista.precio ) 
+                                                                    input#precio(type='text' name='precio', required) 
                                                             td
                                                                 input(type='hidden', value=lofert._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success

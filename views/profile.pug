@@ -81,9 +81,10 @@ block content
                                         each act, i in actividades
                                             div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
                                                 .actividad
-                                                    img(src='/'+act.actividad.imagenes[0], alt="Foto actividad", class='img-thumbnail')
-                                                    p  #{act.actividad.nombreact}
-                                                    p #{act.fecha_res}
+                                                    if act.actividad
+                                                        img(src='/'+act.actividad.imagenes[0], alt="Foto actividad", class='img-thumbnail')
+                                                        p  #{act.actividad.nombreact}
+                                                        p #{act.fecha_res}
                                     else 
                                         h3 No ha solicitado ninguna actividad antes!
                         div(id="configuracion" role="tabpanel" class="tab-pane fade")

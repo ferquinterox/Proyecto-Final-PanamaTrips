@@ -202,6 +202,7 @@ router.get('/perfil', isLoggedIn, function(req, res, next) {
         .populate('actividad', 'imagenes nombreact descripcion')
         .exec()
         .then(resultado => {
+            console.log(resultado);
             Compania.find({usuario: req.user._id})
                 .exec()
                 .then(resultado2 => {
