@@ -26,19 +26,20 @@ block content
                                                 a.carousel-control.right.pt-3(href="#carousel", data-slide="next")
                                                     i.fa.fa-chevron-right.fa-2x
                                     
-                                    //- ul.carousel-indicators.list-inline
-                                    //-     each imag2, n in oferta.imagenes
-                                    //-         if n == 0
-                                    //-             li.list-inline-item.active
-                                    //-                 a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
-                                    //-                     img.img-responsive.miniatura(src='/'+imag2)
-                                    //-         else
-                                    //-             li.list-inline-item
-                                    //-                 a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
-                                    //-                     img.img-responsive.miniatura(src='/'+imag2)
+                                    ul.carousel-indicators.list-inline
+                                        each imag2, n in oferta.imagenes
+                                            if n == 0
+                                                li.list-inline-item.active
+                                                    a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                                        img.img-responsive.miniatura(src='/'+imag2)
+                                            else
+                                                li.list-inline-item
+                                                    a#carousel-selector-0.selected(data-slide-to=n, data-target="#carousel")
+                                                        img.img-responsive.miniatura(src='/'+imag2)
                         else
                             img.img-responsive(src='/css/logo.png', class='visual')
                     div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8")
+                        form(action="/pagof", method="post")    
                             .card.info
                                 .card-header
                                     .container 
@@ -50,8 +51,7 @@ block content
                                                 h6 Fecha de publicación: 
                                                     small #{oferta.fecha_pub}
                                             div(class='col-sm-12 col-md-12 col-lg-5 col-xl-5')
-                                                    form(action="/pagof", method="post")
-                                                        input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
+                                                        input(name="usuario" type="hidden" value=id)
                                                         input(name="oferta" type="hidden" value=oferta._id)
                                                         //input(name="compania" type="hidden" value=oferta.compania)
                                                         input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
@@ -62,23 +62,29 @@ block content
                                         h5 Descripción:
                                         p.ml-2 #{oferta.descripcion}
                                         hr
+                                        h5 Escoga sus fecha:
+                                        p.ml-2 Inicio:
+                                        input(name='finicio' , type='date')
+                                        p.ml-2 Personas:
+                                        input(type="number", name="cantidad", min='1', value='1')
+                                        hr
                                         h5 Precio:
                                         p.ml-2 #{oferta.precio}, Por Persona
                                         hr
                                         if (oferta.telefono || oferta.correo)
                                             if (!oferta.telefono)
-                                                h5 Telefono:
-                                                p.ml-2 Número de telefono: No proporcionado por el autor
+                                                h5 Contacto:
+                                                p.ml-2 Número de Contacto: No proporcionado por el autor
                                                 p.ml-2 Correo: #{oferta.correo}
                                                 hr
                                             else if (!oferta.correo)
-                                                h5 Telefono:
-                                                p.ml-2 Número de telefono: #{oferta.telefono} 
+                                                h5 telefono:
+                                                p.ml-2 Número de Contacto: #{oferta.telefono} 
                                                 p.ml-2 Correo: No proporcionado por el autor
                                                 hr
                                             else
-                                                h5 Telefono:
-                                                p.ml-2 Número de telefono: #{oferta.telefono}
+                                                h5 telefono:
+                                                p.ml-2 Número de Contacto: #{oferta.telefono}
                                                 p.ml-2 Correo: #{oferta.correo}
                                                 hr
                     //imagenes de ofertas que estan abajo                    

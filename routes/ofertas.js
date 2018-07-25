@@ -5,6 +5,7 @@ var moment = require('moment');
 var passport = require('passport');
 
 var User = require('../models/users');
+var Compania = require('../models/companias');
 var ofertas = require('../models/ofertas');
 var Reservasof = require('../models/reservasof')
 var file = require('../public/js/files')    
@@ -109,27 +110,66 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
 
 //Pagina de pago (PAYPAL)
 router.post('/pagof', isLoggedIn,function(req, res) {
+    ofertas.findById(req.body.oferta)
+        .exec()
+        .then(result => {
+            res.render("pagof", {
+                usuario: req.user._id,
+                idoferta: req.body.oferta,
+                fechaI:req.body.finicio,
+                personas:req.body.cantidad,
+                oferta: result
+            });
+        }).catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
+});
+router.post('/pagof_reserva',function(req, res) {
+    console.log(req.body);
     var reserva = new Reservasof({
         _id: mongoose.Types.ObjectId(),
-        usuario: req.user._id,
+        usuario: req.body.usuario,
         oferta: req.body.oferta,
-        fecha_res: moment().toISOString()
-    });
-    reserva.save().then(result => {
-        ofertas.findById(req.body.oferta)
-            .exec()
-            .then(result => {
-                res.render("pagof", {
-                    oferta: result
-                });
-            }).catch(err => {
-                res.status(500).json({
-                    error: err
-                })
-            })
+        fechaI: req.body.fechaI,
+        personas: req.body.personas,
+        fecha_res: moment().toISOString()});
+    reserva.save().then(reservas => {res.end('Pago registrado satisfactriamente')}).catch(err => {
+        res.status(500).json({
+            error: err
+        })
+        console.log(err.message)
     });
 });
 
+
+//PERFIL DEL USUARIO
+router.get('/perfil', isLoggedIn, function(req, res, next) {
+    var info_per = {"nombre": req.user.nombre, "apellido": req.user.apellido, "provincia": req.user.provincia, "email": req.user.email, "imagenperfil": req.user.imagenperfil};
+    console.log(req.user._id);
+    Reservasof.find({
+            "usuario": req.user._id
+        })
+        .populate('oferta', 'imagenes nombreofer descripcion')
+        .exec()
+        .then(resultado => {
+            Compania.find({usuario: req.user._id})
+                .exec()
+                .then(resultado2 => {
+                res.render('profile', {
+                    ofertas: resultado,
+                    perfil: info_per,
+                    compania: resultado2
+                })
+            })
+            }   
+        ).catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        });
+});
 
 
 //REGISTRO
