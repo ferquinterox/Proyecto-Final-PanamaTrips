@@ -47,14 +47,17 @@ html
                                     a(class='dropdown-item', href='/actividad/gunayala') Guna Yala
                             
                             if login
+                                if (rol === 'admin' || rol === 'compania')
                                     li(class="nav-item dropdown")
                                         a(href="#", class="nav-link dropdown-toggle", id="navbarDropdownMenuLink", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
                                             i(class="fa fa-list-alt") 
                                                 span.ml-1 Control
                                         div(class='dropdown-menu', aria-labelledby="navbarDropdownMenuLink")
-                                            a(class='dropdown-item', href='/admin/control') Control de Actividades
-                                            a(class='dropdown-item', href='/admin/controluser') Control de Usuarios
-                                            a(class='dropdown-item', href='/admin/solicitudes') Control de solicitudes
+                                            if (rol === 'admin')
+                                                a(class='dropdown-item', href='/admin/control') Control de Actividades
+                                                a(class='dropdown-item', href='/admin/controlof') Control de Ofertas 
+                                                a(class='dropdown-item', href='/admin/controluser') Control de Usuarios
+                                                a(class='dropdown-item', href='/admin/solicitudes') Control de solicitudes
                                             if (rol === 'compania')
                                                 a(class='dropdown-item', href='/admin/controlof') Control de Ofertas       
                                                 a(class='dropdown-item', href='/admin/control') Control de Actividades

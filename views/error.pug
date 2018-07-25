@@ -1,0 +1,17 @@
+extends basic.pug
+block header
+
+block content
+    .container
+        div(class='col-sm-12 col-md-6')
+            img(src="/css/error.png", alt="Error", srcset="", class='img-responsive w-100')
+        div(class='col-sm-12 col-md-6')
+            jumbotron
+                h1.display-4.text-danger Hello, world!
+                p.lead
+                | This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+                hr.my-4
+                p
+                | It uses utility classes for typography and spacing to space content out within the larger container.
+                p.lead
+                a.btn.btn-primary.btn-lg(href='#', role='button') Learn more

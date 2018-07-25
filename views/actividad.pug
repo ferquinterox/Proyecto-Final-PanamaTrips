@@ -51,7 +51,7 @@ block content
                           h6 Fecha de publicación: 
                             small #{actividad.fecha_pub}
                         div(class='col-sm-12 col-md-12 col-lg-5 col-xl-5')
-                              input(name="usuario" type="hidden" value="5b3da5f29076b85a706fdde3")
+                              input(name="usuario" type="hidden" value=id)
                               input(name="actividad" type="hidden" value=actividad._id)
                               //input(name="compania" type="hidden" value=actividad.compania)
                               input.float-right.btn.btn-primary.btn-lg.active(type="submit",value='¡Reserva Ya!', aria-pressed='true')
@@ -65,8 +65,10 @@ block content
                         h5 Escoga sus fecha:
                         p.ml-2 Inicio:
                         input(name='finicio' , type='date')
+                        hr
                         p.ml-2 Salida:
                         input(name='fsalida', type='date')
+                        hr
                         p.ml-2 Personas:
                         input(type="number", name="cantidad", min='1', value='1')
                         hr

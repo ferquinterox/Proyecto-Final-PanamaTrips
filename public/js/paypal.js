@@ -1,15 +1,14 @@
-
     function getElements(el) {
         return Array.prototype.slice.call(document.querySelectorAll(el));
-    }
+    };
 
     function hideElement(el) {
         document.body.querySelector(el).style.display = 'none';
-    }
+    };
 
     function showElement(el) {
         document.body.querySelector(el).style.display = 'block';
-    }
+    };
 
     // Busca cambios en los radio button
 
@@ -37,13 +36,13 @@
     hideElement('#card-button-container');
 
     // Renderizado del boton de paypal
-
+    
     paypal.Button.render({
 
         env: 'sandbox',
         //Cuentas de prueba y Produccion de Paypal
         client: {
-            sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+            sandbox:    'AdSYvzKtXA9eeIw1ny-hdbDbK2wiT7TZPWKE2JorHta-ZtBb_zXs6HzQw6W76IotkH1GGeD9Zi8J9a8C',
             production: '<insert production client id>'
         },
         //Estilo del boton
@@ -58,11 +57,15 @@
 
         //Configuracion de lo que se va a comprar
         payment: function (data, actions) {
-            var nombre_act = $('#nombre').val();
-            var descripcion = $('#descripcion').val();
-            var precio = parseFloat(document.getElementById('precio').innerHTML).toFixed(2);;
-            var cantidad =$('#cantidadper').val();
-            console.log("precio: " + precio + "cantidad: " + cantidad);
+            var nombre_act = $('#nombre').text();
+            var descripcion = $('#descripcion').text();
+            var idactividad = $('#actividad').val();
+            var idusuario = $('#usuario').val();
+            var fechaingreso = $('#fechaI').text();
+            var fechasalida = $('#fechaS').text();
+            var precio = parseFloat(document.getElementById('precio').innerHTML).toFixed(2);
+            var cantidad = parseInt(document.getElementById('cantidadper').innerHTML);
+            console.log("precio: " + precio + "cantidad: " + cantidad + "Nombre: " + nombre_act + "Descripcion: " + descripcion);
             var impuesto = (precio * cantidad) * 0.07;
             impuesto = +impuesto.toFixed(2);
             var total_price = (precio * cantidad) + impuesto;
@@ -88,8 +91,8 @@
                     {
                       name: nombre_act,
                       description: descripcion,
-                      quantity: cantidad,
                       price: precio,
+                      quantity: cantidad,
                       tax: '0',
                       currency: 'USD'
                     }
@@ -100,11 +103,30 @@
             });
           },
           
-        //Lo que retorna al comprar la oferta
-        onAuthorize: function(data, actions) {
+          onAuthorize: function(data, actions) {
             return actions.payment.execute().then(function() {
-                window.alert('Pago completado!');
+            var idactividad = $('#actividad').val();
+            var idusuario = $('#idusuario').val();
+            var fechaingreso = $('#fechaI').text();
+            var fechasalida = $('#fechaS').text();
+            var cantidad = parseInt(document.getElementById('cantidadper').innerHTML);
+                var reserva ={
+                    usuario: idusuario,
+                    actividad: idactividad,
+                    fechaI: fechaingreso,
+                    fechaS: fechasalida,
+                    personas: cantidad
+                };
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(reserva),
+                    contentType: 'application/json',
+                    url: 'http://localhost:3000/pago_reserva',						
+                    success: function(data) {
+                        window.alert('Pago registrado satisfactoriamente');
+                    }
+                });
             });
-        }
+}
 
     }, '#paypal-button-container');

@@ -62,6 +62,8 @@ app.use(session({
 	res.locals.login = req.isAuthenticated();
 	if (req.user){
 	res.locals.rol = req.user.rol;
+	res.locals.id = req.user._id;
+	res.locals.nombre = req.user.nombre;
 	}
 	next();
 })

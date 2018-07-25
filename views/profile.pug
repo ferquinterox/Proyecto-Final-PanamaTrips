@@ -11,8 +11,9 @@ block content
                     img(src="/css/default_profile.jpg", alt="Imagen de perfil", class='rounded-circle perfil')   
             .col-sm-12.d-flex.justify-content-center
                 h2.mt-2 #{perfil.nombre} #{perfil.apellido}
-            .col-sm-12.d-flex.justify-content-center    
-                h3.mt-2 Estado-Actual: #{compania.estado}
+            if (rol === 'compania')
+                .col-sm-12.d-flex.justify-content-center    
+                    h3.mt-2 Estado-Actual: #{compania.estado}
         .row.mb-4.mt-2
             .col-sm-12.w-100
                     ul.nav.nav-tabs
