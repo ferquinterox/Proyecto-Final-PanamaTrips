@@ -51,39 +51,10 @@ block content
                 p Desde aquí podras reservar un puesto en la actividad o establecimiento que ofrece la actividad. 
                 h5 Uneté y caza las mejores ofertas.
                 a(href='/registro', class="btn btn-info rounded") Registrate
-        .row(class="info info-sec mt-5")
+        .row(class="info info-sec mt-5 mb-5")
             div(class="col-sm-12 col-md-12 col-lg-8 col-xl-8 pt-2")
                 h4.mt-2 ¿Deseas promocionarte con nosotros?
                 p ¡Si eres un hotel puedes afiliarte con nosotros y subir tus promociones y actividades para atraer mas personas!
                 a(href='/registro-compania', class="btn btn-info rounded") Mas Información
             div(class="col-sm-12 col-md-12 col-lg-4 col-xl-4 no-padding")
-                img(class="img-fluid w-100 ", src="/css/hoteleria.jpg", alt="Imagen descriptiva")
-    
-    //Cuadro de imagenes de abajo 
-    .container-fluid      
-        .row(class="mt-5")
-            div(class="col-sm-12 col-md-12 col-lg-7 col-xl-7 no-padding")
-                div(class="card bd-dark text-whiter")
-                    img(class="card-img banner1" src="/css/panama.jpg" alt="Card image")    
-                    div(class="card-img-overlay")
-                        -var numero =  Math.floor(Math.random() * 10); 
-                        h2.card-title  #{provincias[numero]}
-                        p Descubre las ofertas disponibles en esta provincia 
-                        button(class="btn btn-success") Ofertas de #{provincias[numero]}
-
-            div(class="col-sm-12 col-md-12 col-lg-5 col-xl-5 no-padding")
-                div(class="card bd-dark text-whiter")
-                    img(class="card-img banner2" src="/css/canotaje.jpg" alt="Card image")    
-                    div(class="card-img-overlay")
-                        -numero =  Math.floor(Math.random() * 10); 
-                        h2.card-title  #{provincias[numero]} 
-                        p Descubre las ofertas disponibles en esta provincia 
-                        button(class="btn btn-info") Ofertas de #{provincias[numero]}
-
-                div(class="card bd-dark text-whiter")
-                    img(class="card-img banner2" src="/css/tucan.jpg" alt="Card image")    
-                    div(class="card-img-overlay")
-                        -numero =  Math.floor(Math.random() * 10); 
-                        h2.card-title  #{provincias[numero]} 
-                        p Descubre las ofertas disponibles en esta provincia 
-                        button(class="btn btn-primary") Ofertas de #{provincias[numero]}
+                img(class="img-fluid w-100 ", src="/css/hoteleria.jpg", alt="Imagen descriptiva")        

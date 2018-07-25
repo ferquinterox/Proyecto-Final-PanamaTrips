@@ -15,7 +15,7 @@ var ofertasSchema = new Schema({
     estado: { type: String, required: false, trim: true, default: 'Activo'},
     fecha_pub: { type: Date, required: false, trim: true },
     correo: { type: String, required: false, trim: true },
-    imagenAct: {type: String, required: false},
+    compania: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: false}, 
     imagenes : { type : Array , required:false, default : [] }
 },{collection:'ofertas'});
 

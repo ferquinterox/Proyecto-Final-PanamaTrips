@@ -45,16 +45,16 @@ block content
                                                                     img(src="/css/logo.png", alt="Imagen actividad", srcset="", class='img-thumbnail')
                                                             td #{lofert.nombreofer}
                                                                 if (rol === 'compania')
-                                                                    input#oferta(type='text' name='oferta')
+                                                                    input#oferta(type='text' name='oferta' value=lista.nombreofer)
                                                             td #{lofert.compania}
                                                                 if (rol === 'compania')
-                                                                    input#compania(type='text' name='compania')
+                                                                    input#compania(type='text' name='compania' value=lista.compania, readonly)
                                                             td #{lofert.descripcion}
                                                                 if (rol === 'compania')
-                                                                    input#descrip(type='text' name='descrip')
+                                                                    input#descrip(type='text' name='descrip' value=lista.compania)
                                                             td #{lofert.provincia}
                                                                 if (rol === 'compania')
-                                                                    select(class='form-control', name='provincias')
+                                                                    select(class='form-control', name='provincias' value=lista.provincia)
                                                                         option(value='bocas') Bocas del Toro
                                                                         option(value='cocle') Coclé
                                                                         option(value='colon') Colón
@@ -67,10 +67,10 @@ block content
                                                                         option(value='comarcas') Comarcas     
                                                             td #{lofert.telefono}
                                                                 if (rol === 'compania')
-                                                                    input#telefono(type='text' name='telefono')
+                                                                    input#telefono(type='text' name='telefono' value=lista.telefono)
                                                             td #{lofert.correo}
                                                                 if (rol === 'compania')
-                                                                    input#correo(type='text' name='correo')
+                                                                    input#correo(type='text' name='correo' value=lista.correo)
                                                             td #{lofert.fecha_pub}
                                                             td #{lofert.estado}
                                                                 select#sexo(name="activo")
@@ -78,10 +78,10 @@ block content
                                                                     option(value="inactive") Inactivo
                                                             td #{lofert.tiempo}
                                                                 if (rol === 'compania')
-                                                                    input#tiempo(type='text' name='tiempo') 
+                                                                    input#tiempo(type='text' name='tiempo' value=lista.tiempo) 
                                                             td #{lofert.precio}
                                                                 if (rol === 'compania')
-                                                                    input#precio(type='text' name='precio') 
+                                                                    input#precio(type='text' name='precio' value=lista.precio ) 
                                                             td
                                                                 input(type='hidden', value=lofert._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success

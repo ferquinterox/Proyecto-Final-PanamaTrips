@@ -80,7 +80,7 @@ router.get('/ofertas/:ofertaId', function(req, res) {
 });
 
 //INSERTAR OFERTAS  
-router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
+router.post('/insertar_ofert', file.any('imagen'), isLoggedIn, function(req, res, next){
     var paths = req.files.map(function(file) {
         return file.path; // or file.originalname
       });
@@ -93,8 +93,7 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
         correo: req.body.correo,
         precio: req.body.precio,
         prexpers: req.body.prexper,
-        tiempo: req.body.tiempo,
-        compania:req.body.compa,
+        compania:req.user._id,
         fecha_pub: moment().toISOString(),
         imagenes: paths
     });

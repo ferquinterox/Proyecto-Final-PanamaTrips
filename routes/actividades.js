@@ -54,7 +54,7 @@ router.get('/actividades/:actividadId', function(req, res) {
 });
 
 //INSERTAR ACTIVIDADES
-router.post('/insertar_act', file.any('imagen'), function(req, res, next){
+router.post('/insertar_act', file.any('imagen'),isLoggedIn, function(req, res, next){
         var paths = req.files.map(function(file) {
             return file.path; // or file.originalname
           });
@@ -70,6 +70,7 @@ router.post('/insertar_act', file.any('imagen'), function(req, res, next){
             secprecio: req.body.sec,
             indoadicional: req.body.infomas,
             fecha_pub: moment().toISOString(),
+            compania:req.user._id,
             imagenes: paths
         });
         actividad.save().then(result => {

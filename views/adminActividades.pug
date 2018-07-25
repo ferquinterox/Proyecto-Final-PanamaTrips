@@ -5,7 +5,7 @@ block content
             div(class='col-sm-12')
                 h3 ¡Agrega tu actividad!
             div(class='d-none d-lg-block col-lg-4 col-xl-3')                
-                img(src="/css/panamatrips.png", alt="logo", height="250", width='100%', class='rounded-circle shadow')
+                img(src="/css/logo.png", alt="logo", height="250", width='100%')
             div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
                 .card.shadow-lg.mb-3
                     .card-header 
@@ -18,21 +18,21 @@ block content
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Seleccione las imagenes:
                                     .col-sm-10
-                                        input#subirimagen(type='file', name='imagen[]', multiple, onchange='archivos()')
+                                        input#subirimagen(type='file', name='imagen[]', multiple, onchange='archivos()', required)
                                         p.text-success(id='buenArchivo')
                                         p.text-danger(id='malArchivo')
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Nombre de la actividad:
                                     .col-sm-10
-                                        input(type="text", class='form-control', name='nombreact', placeholder='Coloque el nombre')
+                                        input(type="text", class='form-control', name='nombreact', placeholder='Coloque el nombre', required)
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Descripcion:
                                     .col-sm-10
-                                        textarea#exampleFormControlTextarea1.form-control(rows='3', name="descrip")
+                                        textarea#exampleFormControlTextarea1.form-control(rows='3', name="descrip", required)
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='provincias') Provincia:
                                     .col-sm-10
-                                        select(class='form-control', name='provincias')
+                                        select(class='form-control', name='provincias', required)
                                             option(value='bocas') Bocas del Toro
                                             option(value='cocle') Coclé
                                             option(value='colon') Colón
@@ -46,20 +46,20 @@ block content
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='correoPersona') Correo:
                                     .col-sm-10
-                                        input(type='text', class='form-control', name="correo")
+                                        input(type='text', class='form-control', name="correo", required)
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='telefonoPersona') Telefonos:
                                     .col-sm-10
-                                        input(type='text', class='form-control', name="contacto")
+                                        input(type='text', class='form-control', name="contacto", required)
                                 div(class='form-group row') 
-                                    label(class='col-sm-3 col-form-label', for='contrasena') Habitaciones:
+                                    label(class='col-sm-3 col-form-label', for='contrasena') ¿Qué Incluye?:
                                     .col-sm-10
                                         textarea#exampleFormControlTextarea1.form-control(rows='3', name='hab')
                                 div(class='form-group row has-feedback')
                                     label(class='col-sm-2 col-form-label', for='contrasena') Precios:
                                     .col-sm-5
-                                        input(type='text', name='precio', class='form-control pass')
-                                    select(class='col-sm-5 form-control', name='sec')
+                                        input(type='text', name='precio', class='form-control pass', required)
+                                    select(class='col-sm-5 form-control', name='sec', required)
                                                 option(value='Precio por persona') Precio por persona
                                                 option(value='Precio por habitacion') Precio por habitación        
                                 div(class='form-group row has-feedback')

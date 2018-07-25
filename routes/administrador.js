@@ -37,6 +37,27 @@ router.get('/control',isLoggedIn, function(req, res){
    }); 
 });
 
+//Pagina para traer las actividades por provincias
+router.get('/controlcompania',isLoggedIn, function(req, res){
+    actividad.find({compania:req.user._id})
+   .select('_id imagenes nombreact compania descripcion provincia contacto correo fecha_pub estado habdescripcion precio')
+   .exec()
+   .then(doc => {
+       console.log(doc)
+       res.render("control_admin", {
+         actividad: doc
+         
+       });
+   }).catch(err => {
+       res.render("error", {
+           code: err.status,
+           causa: 'Hubo un error en el servidor',
+           message: err.message
+       })
+   }); 
+});
+
+
 //actualizar user
 router.post('/admin/control/actualizaruser', function(req, res, next){
     users.findOneAndUpdate({
@@ -213,6 +234,28 @@ message: err.message
         })
     }); 
 });
+
+//Pagina de Ofertas
+router.get('/controlofcompania',isLoggedIn, function(req, res){
+    ofertas.find({compania:req.user._id})
+   .select('_id imagenes nombreofer compania descripcion provincia telefono correo tiempo precio fecha_pub estado') 
+   .exec()
+   .then(doc => {
+       console.log(doc)
+       res.render("control_adminof", {
+           oferta: doc
+           
+       });
+   }).catch(err => {
+       console.log(err);
+       res.render("error", {
+           code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+       })
+   }); 
+}); 
+
 
 //ACTUALIZAR OFERTAS
 router.post('/admin/controlof/actualizarof',isLoggedIn, function(req, res, next){

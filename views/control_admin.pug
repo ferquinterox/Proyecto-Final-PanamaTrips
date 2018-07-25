@@ -44,13 +44,13 @@ block content
                                                                     img(src="/css/logo.png", alt="Imagen actividad", srcset="", class='img-thumbnail')
                                                             td #{lista.nombreact}
                                                                 if (rol === 'compania')
-                                                                    input#actividad(type='text' name='actividad')
+                                                                    input#actividad(type='text' name='actividad', required, value=lista.nombreact)
                                                             td #{lista.descripcion}
                                                                 if (rol === 'compania')
-                                                                    input#descrip(type='text' name='descrip')
+                                                                    input#descrip(type='text' name='descrip' value=lista.descripcion)
                                                             td #{lista.provincia}
                                                                 if (rol === 'compania')
-                                                                    select(class='form-control', name='provincias')
+                                                                    select(class='form-control', name='provincias' value=lista.provincia)
                                                                         option(value='bocas') Bocas del Toro
                                                                         option(value='cocle') Coclé
                                                                         option(value='colon') Colón
@@ -63,10 +63,10 @@ block content
                                                                         option(value='comarcas') Comarcas     
                                                             td #{lista.contacto}
                                                                 if (rol === 'compania')
-                                                                    input#contacto(type='text' name='contacto')
+                                                                    input#contacto(type='text' name='contacto' value=lista.contacto)
                                                             td #{lista.correo}
                                                                 if (rol === 'compania')
-                                                                    input#correo(type='text' name='correo')
+                                                                    input#correo(type='text' name='correo' value=lista.correo)
                                                             td #{lista.fecha_pub}
                                                             td #{lista.estado}
                                                                 if (rol === 'compania')
@@ -75,10 +75,10 @@ block content
                                                                         option(value="inactive") Inactivo
                                                             td #{lista.habdescripcion}
                                                                 if (rol === 'compania')
-                                                                    input#habdescripcion(type='text' name='hab') 
+                                                                    input#habdescripcion(type='text' name='hab' value=lista.habdescripcion) 
                                                             td #{lista.precio}
                                                                 if (rol === 'compania')
-                                                                    input#precio(type='text' name='precio') 
+                                                                    input#precio(type='text' name='precio' , required) 
                                                             td
                                                                 input(type='hidden', value=lista._id, name='id')
                                                                 input(type='submit',value='Actualizar').btn.btn-success

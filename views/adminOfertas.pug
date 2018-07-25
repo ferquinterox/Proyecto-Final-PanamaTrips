@@ -5,7 +5,7 @@ block content
             div(class='col-sm-12')
                 h3 ¡Agrega tu Oferta!
             div(class='d-none d-lg-block col-lg-4 col-xl-3')                
-                img(src="/css/panamatrips.png", alt="logo", height="250", width='100%', class='rounded-circle shadow')
+                img(src="/css/logo.png", alt="logo", height="250", width='100%')
             div(class='col-sm-12 col-md-12 col-lg-8 col-xl-9')
                 .card.shadow-lg.mb-3
                     .card-header 
@@ -18,21 +18,21 @@ block content
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Seleccione las imagenes:
                                     .col-sm-10
-                                        input#subirimagen(type='file', name='imagen[]', multiple, onchange='archivos()')
+                                        input#subirimagen(type='file', name='imagen[]', multiple, onchange='archivos()', required)
                                         p.text-success(id='buenArchivo')
                                         p.text-danger(id='malArchivo')
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Oferta:
                                     .col-sm-10
-                                        input(type="text", class='form-control', name='nombreof', placeholder='Nombre de su Oferta')
+                                        input(type="text", class='form-control', name='nombreof', placeholder='Nombre de su Oferta', required)
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Descripción:
                                     .col-sm-10
-                                        textarea#exampleFormControlTextarea1.form-control(rows='1', name="descrip")
+                                        textarea#exampleFormControlTextarea1.form-control(rows='1', name="descrip", required)
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='provincias') Provincia:
                                     .col-sm-10
-                                        select(class='form-control', name='provincias')
+                                        select(class='form-control', name='provincias', required)
                                             option(value='bocas') Bocas del Toro
                                             option(value='cocle') Coclé
                                             option(value='colon') Colón
@@ -47,33 +47,24 @@ block content
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Tel. de Contacto:
                                     .col-sm-10
-                                        input(type="text", class='form-control', name='tel', placeholder='8556677')
+                                        input(type="text", class='form-control', name='tel', placeholder='8556677', required)
                                 
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label', for='correoc') Correo:
                                     .col-sm-10
-                                        input(type='text', class='form-control', name="correo")
+                                        input(type='text', class='form-control', name="correo", required)
                                 
                                 div(class='form-group row has-feedback')
                                     label(class='col-sm-2 col-form-label', for='contrasena') Precios:
                                     .col-sm-5
-                                        input(type='text', name='precio', class='form-control pass', placeholder='00.00')
+                                        input(type='text', name='precio', class='form-control pass', placeholder='00.00', required)
                                     input(type='text ',value='Precio por Persona',readonly ,name='prexper', class='col-sm-5 form-control pass')
                                 
-                                div(class='form-group row') 
-                                    label(class='col-sm-2 col-form-label', for='tiempo') Tiempo de la Oferta:
-                                    .col-sm-10
-                                        select(class='form-control', name='tiempo')
-                                            option(value='24') 1 Día
-                                            option(value='48') 2 Días
-                                            option(value='72') 3 Días
-                                            option(value='96') 4 Días
-                                            option(value='120') 5 Días
-                                
+                            
                                 div(class='form-group row') 
                                     label(class='col-sm-2 col-form-label') Compañía:
                                     .col-sm-10
-                                        input(type="text", class='form-control', name='compa')
+                                        input(type="text", class='form-control', name='compa', required)
                                 
                                 div(class='form-group row')
                                     .col-sm-12.d-flex.justify-content-end
