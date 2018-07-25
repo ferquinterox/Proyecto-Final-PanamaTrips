@@ -1,15 +1,14 @@
-
     function getElements(el) {
         return Array.prototype.slice.call(document.querySelectorAll(el));
-    }
+    };
 
     function hideElement(el) {
         document.body.querySelector(el).style.display = 'none';
-    }
+    };
 
     function showElement(el) {
         document.body.querySelector(el).style.display = 'block';
-    }
+    };
 
     // Busca cambios en los radio button
 
@@ -37,7 +36,7 @@
     hideElement('#card-button-container');
 
     // Renderizado del boton de paypal
-
+    
     paypal.Button.render({
 
         env: 'sandbox',
@@ -60,8 +59,12 @@
         payment: function (data, actions) {
             var nombre_act = $('#nombre').text();
             var descripcion = $('#descripcion').text();
-            var precio = parseFloat(document.getElementById('precio').innerHTML).toFixed(2);;
-            var cantidad =$('#cantidadper').val();
+            var idactividad = $('#actividad').val();
+            var idusuario = $('#usuario').val();
+            var fechaingreso = $('#fechaI').text();
+            var fechasalida = $('#fechaS').text();
+            var precio = parseFloat(document.getElementById('precio').innerHTML).toFixed(2);
+            var cantidad = parseInt(document.getElementById('cantidadper').innerHTML);
             console.log("precio: " + precio + "cantidad: " + cantidad + "Nombre: " + nombre_act + "Descripcion: " + descripcion);
             var impuesto = (precio * cantidad) * 0.07;
             impuesto = +impuesto.toFixed(2);
@@ -89,6 +92,7 @@
                       name: nombre_act,
                       description: descripcion,
                       price: precio,
+                      quantity: cantidad,
                       tax: '0',
                       currency: 'USD'
                     }
@@ -99,11 +103,30 @@
             });
           },
           
-        //Lo que retorna al comprar la oferta
-        onAuthorize: function(data, actions) {
+          onAuthorize: function(data, actions) {
             return actions.payment.execute().then(function() {
-                window.alert('Pago completado!');
+            var idactividad = $('#actividad').val();
+            var idusuario = $('#idusuario').val();
+            var fechaingreso = $('#fechaI').text();
+            var fechasalida = $('#fechaS').text();
+            var cantidad = parseInt(document.getElementById('cantidadper').innerHTML);
+                var reserva ={
+                    usuario: idusuario,
+                    actividad: idactividad,
+                    fechaI: fechaingreso,
+                    fechaS: fechasalida,
+                    personas: cantidad
+                };
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(reserva),
+                    contentType: 'application/json',
+                    url: 'http://localhost:3000/pago_reserva',						
+                    success: function(data) {
+                        window.alert('Pago registrado satisfactoriamente');
+                    }
+                });
             });
-        }
+}
 
     }, '#paypal-button-container');

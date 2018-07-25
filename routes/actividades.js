@@ -7,8 +7,8 @@ var passport = require('passport');
 var User = require('../models/users');
 var Compania = require('../models/companias');
 var actividades = require('../models/actividades');
-var Reservas = require('../models/reservas')
-var file = require('../public/js/files')    
+var Reservas = require('../models/reservas');
+var file = require('../public/js/files');
 
 mongoose.Promise = global.Promise;
 
@@ -98,22 +98,15 @@ router.get('/provincias', function(req, res){
 
 //Pagina de pago (PAYPAL)
 router.post('/pago', isLoggedIn,function(req, res) {
-    var reserva = new Reservas({
-        _id: mongoose.Types.ObjectId(),
-        usuario: req.user._id,
-        actividad: req.body.actividad,
-        fechaI:req.body.finicio,
-        fechaS:req.body.fsalida,
-        personas:req.body.cantidad,
-        fecha_res: moment().toISOString()
-    });
-    reserva.save().then(reservas => {
-        console.log(reservas);
         actividades.findById(req.body.actividad)
             .exec()
             .then(result => {
                 res.render("pago", {
-                    reservas:reservas,
+                    usuario: req.user._id,
+                    idactividad: req.body.actividad,
+                    fechaI:req.body.finicio,
+                    fechaS:req.body.fsalida,
+                    personas:req.body.cantidad,
                     actividad: result
                 });
             }).catch(err => {
@@ -121,6 +114,22 @@ router.post('/pago', isLoggedIn,function(req, res) {
                     error: err
                 })
             })
+});
+router.post('/pago_reserva', function(req, res){
+    console.log(req.body);
+    var reserva = new Reservas({
+        _id: mongoose.Types.ObjectId(),
+        usuario: req.body.usuario,
+        actividad: req.body.actividad,
+        fechaI: req.body.fechaI,
+        fechaS: req.body.fechaS,
+        personas: req.body.personas,
+        fecha_res: moment().toISOString()});
+    reserva.save().then(reservas => {res.end('Pago registrado satisfactriamente')}).catch(err => {
+        res.status(500).json({
+            error: err
+        })
+        console.log(err.message)
     });
 });
 
