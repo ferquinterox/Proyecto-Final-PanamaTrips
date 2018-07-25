@@ -29,8 +29,11 @@ router.get('/control',isLoggedIn, function(req, res){
          
        });
    }).catch(err => {
-       console.log(err);
-       res.status(500).json({error: err});
+       res.render("error", {
+           code: err.status,
+           causa: 'Hubo un error en el servidor',
+           message: err.message
+       })
    }); 
 });
 
@@ -43,7 +46,11 @@ router.post('/admin/control/actualizaruser', function(req, res, next){
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+        })
     });
 });
 
@@ -59,7 +66,11 @@ router.get('/controluser',isLoggedIn, function(req, res){
         });
     }).catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+        })
     }); 
 });
 
@@ -73,7 +84,11 @@ router.post('/admin/control/eliminaruser', function(req, res, next){
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+        })
     });
 });
 
@@ -94,7 +109,7 @@ router.get('/solicitudes',isLoggedIn, function(req, res, next){
             })
             }
         ).catch(err => {
-            res.status(500).json({
+            res.json({
                 error: err
             })
         });
@@ -105,7 +120,11 @@ router.post('/aceptar_sol',function(req, res){
         _id:req.body.id},{ $set: { activo: 'Activo'}}).exec().then(result => { 
             res.redirect('/admin/solicitudes')
         }).catch(err => {
-            res.status(500).json({error: err});
+            res.render("error", {
+                code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+            })
         });
 });
 //Para cuando rechaza una solicitud
@@ -115,7 +134,11 @@ router.post('/rechazar_sol',function(req, res){
         }).exec().then(result => { 
             res.redirect('/admin/solicitudes')
         }).catch(err => {
-            res.status(500).json({error: err});
+            res.render("error", {
+                code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+            })
         });
 });
 
@@ -137,7 +160,11 @@ router.post('/admin/control/actualizar', function(req, res, next){
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+        })
     });
 });
 
@@ -151,7 +178,11 @@ router.post('/admin/control/eliminar', function(req, res, next){
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+        })
     });
 });
 
@@ -175,7 +206,11 @@ router.get('/controlof',isLoggedIn, function(req, res){
         });
     }).catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+        })
     }); 
 });
 
@@ -197,7 +232,11 @@ router.post('/admin/controlof/actualizarof',isLoggedIn, function(req, res, next)
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+causa: 'Hubo un error en el servidor',
+message: err.message
+        })
     });
 });
 
@@ -211,7 +250,11 @@ router.post('/admin/controlof/eliminarof', function(req, res, next){
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json({error: err});
+        res.render("error", {
+            code: err.status,
+        causa: 'Hubo un error en el servidor',
+        message: err.message
+        })
     });
 });
 

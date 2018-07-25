@@ -36,13 +36,19 @@ router.get('/actividades/:actividadId', function(req, res) {
                     console.log(info_act.info);
                 })
                 .catch(err => {
-                    res.status(500).json({
-                        error: err.message
-                    })
+                    res.render("error", {
+                        code: err.status,
+                        causa: 'Hubo un error en el servidor',
+                        message: err.message
+                })
                 });
         })
         .catch(err => {
-            console.log(err)
+            res.render("error", {
+                code: err.status,
+                causa: 'Hubo un error en el servidor',
+                message: err.message
+            })
         });
 
 });
@@ -70,8 +76,10 @@ router.post('/insertar_act', file.any('imagen'), function(req, res, next){
             console.log(result);
             res.redirect('/admin/control');    
         }).catch(err => {
-            res.status(500).json({
-                error: err
+            res.render("error", {
+                code: err.status,
+                causa: 'Hubo un error en el servidor',
+                message: err.message
             })
         });     
 });
@@ -87,7 +95,11 @@ router.get('/actividad/:provincia', function(req, res){
         });
     })
     .catch(err =>{
-        res.render(500).json({error: err.message});
+        res.render("error", {
+            code: err.status,
+            causa: 'Hubo un error en el servidor',
+            message: err.message
+        })
     })
 });
 
@@ -110,8 +122,10 @@ router.post('/pago', isLoggedIn,function(req, res) {
                     actividad: result
                 });
             }).catch(err => {
-                res.status(500).json({
-                    error: err
+                res.render("error", {
+                    code: err.status,
+                    causa: 'Hubo un error en el servidor',
+                    message: err.message
                 })
             })
 });
@@ -126,10 +140,11 @@ router.post('/pago_reserva', function(req, res){
         personas: req.body.personas,
         fecha_res: moment().toISOString()});
     reserva.save().then(reservas => {res.end('Pago registrado satisfactriamente')}).catch(err => {
-        res.status(500).json({
-            error: err
+        res.render("error", {
+            code: err.status,
+            causa: 'Hubo un error en el servidor',
+            message: err.message
         })
-        console.log(err.message)
     });
 });
 
@@ -179,7 +194,7 @@ router.get('/login', function(req, res) {
 //PERFIL DEL USUARIO
 router.get('/perfil', isLoggedIn, function(req, res, next) {
     var info_per = {"nombre": req.user.nombre, "apellido": req.user.apellido, "provincia": req.user.provincia, "email": req.user.email, "imagenperfil": req.user.imagenperfil};
-    console.log(req.user._id);
+    
     Reservas.find({
             "usuario": req.user._id
         })
@@ -197,13 +212,39 @@ router.get('/perfil', isLoggedIn, function(req, res, next) {
             })
             }   
         ).catch(err => {
-            res.status(500).json({
-                error: err
+            res.render("error", {
+                code: err.status,
+                causa: 'Hubo un error en el servidor',
+                message: err.message
             })
         });
 });
 
-
+router.post('/actualizar_perfil', isLoggedIn, function(req, res){
+    User.findOneAndUpdate({
+        _id:req.user._id},{ $set: { nombre: req.body.nombre, apellido: req.body.apellido, provincia: req.body.provincia, email: req.body.email}}).exec().then(result => {
+        if (req.user.rol == 'compania'){
+            Compania.findOneAndUpdate({
+                usuario:req.user._id},{ $set: { facebook: req.body.facebook, twitter: req.body.twitter, instagram: req.body.instagram}}).exec().then(result => {
+                res.redirect('/perfil');
+                }).catch(err => {
+                    res.render("error", {
+                        code: err.status,
+                        causa: 'Hubo un error en el servidor',
+                        message: err.message
+                    })
+                });
+        }else{
+            res.redirect('/perfil');
+        }
+        }).catch(err => {
+            res.render("error", {
+                code: err.status,
+                causa: 'Hubo un error en el servidor',
+                message: err.message
+            })
+        });
+});
 //CERRAR SESION
 router.get('/logout', function(req,res,next){
 	req.logout();
@@ -211,7 +252,7 @@ router.get('/logout', function(req,res,next){
 });
 
 router.post('/login', passport.authenticate('local.signin',{
-    successRedirect: '/admin/control',
+    successRedirect: '/',
 	failureRedirect: '/login',
 	failureFlash: true
 }));

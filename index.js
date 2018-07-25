@@ -64,6 +64,7 @@ app.use(session({
 	res.locals.rol = req.user.rol;
 	res.locals.id = req.user._id;
 	res.locals.nombre = req.user.nombre;
+	res.locals.imagen = req.user.imagenperfil;
 	}
 	next();
 })
@@ -71,7 +72,13 @@ app.use(session({
 app.use('/',actividades);
 app.use('/',ofertas);
 app.use('/admin',administrador);
-
+app.use(function(req, res, next) {
+	res.status(404).render('error',{
+		code: '404',
+        causa: 'Esa pagina no existe',
+        message: '404 Page doesnt exist'	
+	});
+  });
 //separa un puerto
 app.listen(port, function(){
 console.log(`Escuchando en el puerto ${port}...`);

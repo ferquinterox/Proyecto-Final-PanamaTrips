@@ -21,10 +21,14 @@ block content
                             a(class='tabs btn', data-toggle="tab" role="tab" aria-controls="datos_principales" aria-selected="true" href="#datos_principales") Informacion Basica
                         li.nav-item
                             a(class='tabs btn', data-toggle="tab" role="tab" aria-controls="actividades" aria-selected="false" href="#actividades") Actividades
+                        li.nav-item
+                            a(class='tabs btn', data-toggle="tab" role="tab" aria-controls="configuracion" aria-selected="false" href="#configuracion") Editar datos
                     .tab-content.panel
                         div(id="datos_principales" role="tabpanel" class="active tab-pane fade show")
                             .container
                                 .row
+                                    div(class='col-sm-12')
+                                        h5 Datos principales del usuario:
                                     div(class='col-sm-12 col-md-12 col-lg-6')
                                         h5 Nombre:
                                         p.info #{perfil.nombre}
@@ -71,6 +75,8 @@ block content
                         div(id="actividades" role="tabpanel" class="tab-pane fade")
                             .container
                                 .row
+                                    div(class='col-sm-12')
+                                        h5 Actividades Reservadas:
                                     if actividades
                                         each act, i in actividades
                                             div(class='col-sm-12 col-md-6 col-lg-3 col-xl-3')
@@ -80,5 +86,78 @@ block content
                                                     p #{act.fecha_res}
                                     else 
                                         h3 No ha solicitado ninguna actividad antes!
-
+                        div(id="configuracion" role="tabpanel" class="tab-pane fade")
+                            form(action="/actualizar_perfil", method="post")
+                                .container
+                                    .row
+                                        div(class='col-sm-12')
+                                            h4 Edite solo las que desee actualizar:
+                                                small (Los cambios apareceran la proxima vez que se logue)
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Nombre:
+                                            p.info 
+                                            input(class='mb-2', type="text", name="nombre", value=perfil.nombre, placeholder='Escriba su nuevo nombre')
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Apellido:
+                                            p.info 
+                                            input(class='mb-2', type="text", name="apellido", value=perfil.apellido, placeholder='Escriba su nuevo apellido')
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Provincia:
+                                            p.info 
+                                            select(class='form-control', name='provincia')
+                                                        option(value='Bocas del toro') Bocas del Toro
+                                                        option(value='Cocle') Coclé
+                                                        option(value='Colon') Colón
+                                                        option(value='Chiriqui') Chiriquí
+                                                        option(value='Darien') Darién
+                                                        option(value='Herrera') Herrera
+                                                        option(value='Los Santos') Los Santos 
+                                                        option(value='Panama') Panamá
+                                                        option(value='Veraguas') Veraguas
+                                                        option(value='Comarcas') Comarcas
+                                                        option(value='-') Prefiero no decir
+                                                        option(value='Extranjero') Extranjero
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Correo:
+                                            p.info 
+                                            input(class='mb-2', type="text", name="email", value=perfil.email, placeholder='Escriba su nuevo apellido')
+                                        div(class='col-sm-12 col-md-12 col-lg-6')
+                                            h5 Rol (No editable):
+                                            p.info #{rol}
+                                        if (rol === 'compania')
+                                            div(class='col-sm-12 col-md-12 col-lg-6')
+                                                h5 Nombre Compañia (No editable):
+                                                p.info 
+                                            div(class='col-sm-12 col-md-12 col-lg-6')
+                                                h5 Tipo de Compañia (No editable):
+                                                p.info 
+                                            div(class='col-sm-12 col-md-12 col-lg-6')
+                                                h5 Facebook
+                                                span(class='fa fa-facebook')
+                                                    if compania.facebook
+                                                        a(href=compania.facebook).info 
+                                                        input(class='mb-2', type="text", name="facebook", value=perfil.compania, placeholder='Coloque el nuevo url de su facebook')
+                                                    else
+                                                        p.info Información no dada.
+                                                        input(class='mb-2', type="text", name="facebook", value=perfil.compania, placeholder='Coloque el nuevo url de su facebook')
+                                            div(class='col-sm-12 col-md-12 col-lg-6')
+                                                h5 Twitter
+                                                span(class='fa fa-twitter')
+                                                    if compania.twitter
+                                                        a(href=compania.twitter).info 
+                                                        input(class='mb-2', type="text", name="twitter", value=perfil.compania, placeholder='Coloque el nuevo url de su twitter')
+                                                    else
+                                                        p.info Información no dada.
+                                                        input(class='mb-2', type="text", name="twitter", value=perfil.compania, placeholder='Coloque el nuevo url de su twitter')
+                                            div(class='col-sm-12 col-md-12 col-lg-6')
+                                                h5 Instagram
+                                                span(class='fa fa-instagram')
+                                                    if compania.instagram
+                                                        a(href=compania.instagram).info 
+                                                        input(class='mb-2', type="text", name="instagram", value=perfil.compania, placeholder='Coloque el nuevo url de su instagram') 
+                                                    else
+                                                        p.info Información no dada.
+                                                        input(class='mb-2', type="text", name="instagram", value=perfil.compania, placeholder='Coloque el nuevo url de su instagram')
+                                        div(class='col-sm-12')
+                                            input(type="submit", value="Actualizar", class='btn btn-primary w-100')
 

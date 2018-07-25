@@ -1,17 +1,26 @@
 extends basic.pug
 block header
-
+    style.
+            .avion {margin: auto auto;display:block;}
 block content
-    .container
-        div(class='col-sm-12 col-md-6')
-            img(src="/css/error.png", alt="Error", srcset="", class='img-responsive w-100')
-        div(class='col-sm-12 col-md-6')
-            jumbotron
-                h1.display-4.text-danger Hello, world!
-                p.lead
-                | This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
-                hr.my-4
-                p
-                | It uses utility classes for typography and spacing to space content out within the larger container.
-                p.lead
-                a.btn.btn-primary.btn-lg(href='#', role='button') Learn more
+    .container.mt-5
+        .row
+            div(class='col-sm-12 col-md-6')
+                img(src="/css/error.png", alt="Error", srcset="", class='img-responsive avion w-75')
+            div(class='col-sm-12 col-md-6')
+                .jumbotron
+                    h1.display-4.text-danger.d-none.d-lg-block ¡Oh vaya, algo interrumpio la aventura! 
+                    h1.display-9.text-danger.d-block.d-lg-none ¡Oh vaya, algo interrumpio la aventura! 
+                    p.lead #{code}, #{causa}
+                    hr.my-4
+                    #accordion
+                        .card
+                            #headingOne.card-header
+                                h5.mb-0
+                                    button.btn.btn-link(data-toggle='collapse', data-target='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
+                                        | Causa del error (Desarrollador):
+                            #collapseOne.collapse(aria-labelledby='headingOne', data-parent='#accordion')
+                                .card-body
+                                    p.alert.alert-danger #{message}
+                    hr.my-4
+                    a.btn.btn-primary.btn-lg(href='/', role='button') Volver al inicio
