@@ -110,32 +110,6 @@ router.post('/insertar_ofert', file.any('imagen'), function(req, res, next){
 
 //Pagina de pago (PAYPAL)
 router.post('/pagof', isLoggedIn,function(req, res) {
-    var reserva = new Reservasof({
-        _id: mongoose.Types.ObjectId(),
-        usuario: req.user._id,
-        oferta: req.body.oferta,
-        fechaI:req.body.finicio,
-        personas:req.body.cantidad,
-        fecha_res: moment().toISOString()
-    });
-    reserva.save().then(reservas => {
-        console.log(reservas);
-        ofertas.findById(req.body.oferta)
-            .exec()
-            .then(result => {
-                res.render("pagof", {
-                    reservas:reservas,
-                    oferta: result
-                });
-            }).catch(err => {
-                res.status(500).json({
-                    error: err
-                })
-            })
-    });
-});
-//Pagina de pago (PAYPAL)
-router.post('/pagof', isLoggedIn,function(req, res) {
     ofertas.findById(req.body.oferta)
         .exec()
         .then(result => {
