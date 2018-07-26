@@ -42,7 +42,7 @@ const mongoose = require('mongoose');
         newUser.apellido = req.body.apellido;
         newUser.provincia = req.body.provincia;
         newUser.rol = 'compania';
-        newUser.passConfirm = req.body.passwordagain;
+        newUser.passConfirm =  newUser.encryptPassword(password);
         newUser.password = newUser.encryptPassword(password);
         newUser.imagenperfil = req.file.path;
         newUser.save(function (err) {
@@ -108,7 +108,7 @@ const mongoose = require('mongoose');
         newUser.nombre = req.param('nombre');
         newUser.apellido = req.param('apellido');
         newUser.provincia = req.param('provincia');
-        newUser.passConfirm = req.param('passwordagain');
+        newUser.passConfirm =  newUser.encryptPassword(password);
         newUser.password = newUser.encryptPassword(password);
         newUser.imagenperfil = req.file.path;
         newUser.save(function (err) {
